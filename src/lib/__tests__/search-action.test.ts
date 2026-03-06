@@ -9,6 +9,10 @@ vi.mock("nanoid", () => ({
 const mockInsertValues = vi.fn().mockResolvedValue(undefined);
 const mockUpdateSetWhere = vi.fn().mockResolvedValue(undefined);
 const mockUpdateSet = vi.fn(() => ({ where: mockUpdateSetWhere }));
+const mockSelectLimit = vi.fn().mockResolvedValue([]);
+const mockSelectWhere = vi.fn(() => ({ limit: mockSelectLimit }));
+const mockSelectFrom = vi.fn(() => ({ where: mockSelectWhere }));
+const mockDeleteWhere = vi.fn().mockResolvedValue(undefined);
 vi.mock("@/lib/db", () => ({
   db: {
     insert: vi.fn(() => ({
@@ -16,6 +20,12 @@ vi.mock("@/lib/db", () => ({
     })),
     update: vi.fn(() => ({
       set: mockUpdateSet,
+    })),
+    select: vi.fn(() => ({
+      from: mockSelectFrom,
+    })),
+    delete: vi.fn(() => ({
+      where: mockDeleteWhere,
     })),
   },
 }));

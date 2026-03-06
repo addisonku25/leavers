@@ -22,10 +22,28 @@ export async function searchAction(formData: FormData) {
   }
 
   const { company, role } = parsed.data;
-  const searchId = nanoid();
   const cacheKey = buildCacheKey({ company, role });
-  const provider = getProvider();
   const now = new Date();
+
+  // Reuse existing non-expired search if available
+  const existing = await db
+    .select()
+    .from(searches)
+    .where(eq(searches.cacheKey, cacheKey))
+    .limit(1);
+
+  if (existing.length > 0 && existing[0].status === "complete" && existing[0].expiresAt > now) {
+    return { searchId: existing[0].id };
+  }
+
+  // Delete stale entry if expired or errored, so we can re-insert with same cache key
+  if (existing.length > 0) {
+    await db.delete(migrationsTable).where(eq(migrationsTable.searchId, existing[0].id));
+    await db.delete(searches).where(eq(searches.id, existing[0].id));
+  }
+
+  const searchId = nanoid();
+  const provider = getProvider();
   const expiresAt = new Date(now.getTime() + CACHE_TTL_DAYS * 24 * 60 * 60 * 1000);
 
   // Create search record with "pending" status
