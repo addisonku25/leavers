@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: in-progress
-stopped_at: Plan 03-01 complete (Insights computation engine)
-last_updated: "2026-03-06T20:28:00Z"
-last_activity: 2026-03-06 -- Plan 03-01 complete (Insights computation engine)
+stopped_at: Plan 03-02 complete (InsightsCard component & dashboard integration)
+last_updated: "2026-03-06T20:35:00Z"
+last_activity: 2026-03-06 -- Plan 03-02 complete (InsightsCard component & dashboard integration)
 progress:
   total_phases: 4
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 8
-  completed_plans: 7
-  percent: 88
+  completed_plans: 8
+  percent: 100
 ---
 
 # Project State
@@ -21,22 +21,22 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-06)
 
 **Core value:** Show users concrete evidence of where people like them ended up -- turning career anxiety into actionable intelligence.
-**Current focus:** Phase 3: Insights -- Plan 03-01 complete, 03-02 next
+**Current focus:** Phase 3: Insights -- complete. Phase 4 next.
 
 ## Current Position
 
-Phase: 3 of 4 (Insights & Intelligence)
-Plan: 1 of 2 in current phase (03-01 complete)
-Status: In Progress
-Last activity: 2026-03-06 -- Plan 03-01 complete (Insights computation engine)
+Phase: 3 of 4 (Insights & Intelligence) -- COMPLETE
+Plan: 2 of 2 in current phase (03-02 complete)
+Status: Phase 3 Complete
+Last activity: 2026-03-06 -- Plan 03-02 complete (InsightsCard component & dashboard integration)
 
-Progress: [█████████░] 88%
+Progress: [██████████] 100%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 7
-- Average duration: 12 min
+- Total plans completed: 8
+- Average duration: 11 min
 - Total execution time: 1.5 hours
 
 **By Phase:**
@@ -45,10 +45,10 @@ Progress: [█████████░] 88%
 |-------|-------|-------|----------|
 | 1. Foundation & Data Pipeline | 3/3 | 53 min | 18 min |
 | 2. Results & Visualization | 3/3 | 29 min | 10 min |
-| 3. Insights & Intelligence | 1/2 | 4 min | 4 min |
+| 3. Insights & Intelligence | 2/2 | 8 min | 4 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-03 (25 min), 02-01 (3 min), 02-02 (2 min), 02-03 (24 min), 03-01 (4 min)
+- Last 5 plans: 02-01 (3 min), 02-02 (2 min), 02-03 (24 min), 03-01 (4 min), 03-02 (4 min)
 - Trend: TDD computation plans are fast; UI/visualization plans take longer
 
 *Updated after each plan completion*
@@ -85,6 +85,8 @@ Recent decisions affecting current work:
 - [03-01]: Business as default role category catch-all for unrecognized roles
 - [03-01]: Notability scoring for pattern summary sentence ordering
 - [03-01]: Seniority delta averaging across all migrations for trend detection
+- [03-02]: Compact card layout with text-xs and tight spacing for ~40% vertical reduction per user feedback
+- [03-02]: Career path grid uses 2-col mobile / 4-col desktop to fit all buckets in one row
 
 ### Pending Todos
 
@@ -97,6 +99,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-06T20:28:00Z
-Stopped at: Completed 03-01-PLAN.md
-Resume file: .planning/phases/03-insights/03-01-SUMMARY.md
+Last session: 2026-03-06T20:35:00Z
+Stopped at: Completed 03-02-PLAN.md (Phase 3 complete)
+Resume file: .planning/phases/03-insights/03-02-SUMMARY.md
