@@ -2,7 +2,7 @@
 phase: 3
 slug: insights
 status: draft
-nyquist_compliant: false
+nyquist_compliant: true
 wave_0_complete: false
 created: 2026-03-06
 ---
@@ -36,20 +36,23 @@ created: 2026-03-06
 
 ## Per-Task Verification Map
 
-| Task ID | Plan | Wave | Requirement | Test Type | Automated Command | File Exists | Status |
-|---------|------|------|-------------|-----------|-------------------|-------------|--------|
-| 03-01-01 | 01 | 1 | INSI-01 | unit | `npx vitest run src/lib/__tests__/insights.test.ts` | ❌ W0 | ⬜ pending |
-| 03-01-02 | 01 | 1 | INSI-02 | unit | `npx vitest run src/lib/__tests__/insights.test.ts` | ❌ W0 | ⬜ pending |
-| 03-01-03 | 01 | 1 | INSI-03 | unit | `npx vitest run src/lib/__tests__/insights.test.ts` | ❌ W0 | ⬜ pending |
+| Task ID | Plan | Wave | Requirement | Test Type | Automated Command | Status |
+|---------|------|------|-------------|-----------|-------------------|--------|
+| 03-01-T1 | 01 | 1 | INSI-01 | unit (TDD) | `npx vitest run src/lib/__tests__/insights.test.ts` | pending |
+| 03-01-T2 | 01 | 1 | INSI-02 | unit (TDD) | `npx vitest run src/lib/__tests__/insights.test.ts` | pending |
+| 03-01-T3 | 01 | 1 | INSI-03 | unit (TDD) | `npx vitest run src/lib/__tests__/insights.test.ts` | pending |
+| 03-02-T1 | 02 | 2 | INSI-01/02/03 | typecheck | `npx tsc --noEmit` | pending |
+| 03-02-T2 | 02 | 2 | INSI-01/02/03 | typecheck + test | `npx tsc --noEmit && npm test` | pending |
+| 03-02-T3 | 02 | 2 | INSI-01/02/03 | manual | Visual verification | pending |
 
-*Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
+*Status: pending / green / red / flaky*
 
 ---
 
 ## Wave 0 Requirements
 
-- [ ] `src/lib/__tests__/insights.test.ts` — stubs for INSI-01, INSI-02, INSI-03
-- No framework install needed — vitest already configured and working
+- No separate Wave 0 needed -- Plan 01 uses TDD (tests created as part of each task's RED phase)
+- vitest already configured and working
 
 ---
 
@@ -64,11 +67,11 @@ created: 2026-03-06
 
 ## Validation Sign-Off
 
-- [ ] All tasks have `<automated>` verify or Wave 0 dependencies
-- [ ] Sampling continuity: no 3 consecutive tasks without automated verify
-- [ ] Wave 0 covers all MISSING references
-- [ ] No watch-mode flags
-- [ ] Feedback latency < 5s
-- [ ] `nyquist_compliant: true` set in frontmatter
+- [x] All tasks have `<automated>` verify elements
+- [x] Sampling continuity: no 3 consecutive tasks without automated verify
+- [x] Wave 0 not needed (TDD tasks create their own tests)
+- [x] No watch-mode flags
+- [x] Feedback latency < 5s
+- [x] `nyquist_compliant: true` set in frontmatter
 
 **Approval:** pending
