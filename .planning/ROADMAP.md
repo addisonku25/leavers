@@ -29,12 +29,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. First search fetches data live from external API; repeating the same search returns cached results near-instantly
   4. User sees a loading/progress indicator while on-demand data is being fetched
   5. Data provider can be swapped without changing application code (abstracted behind interface)
-**Plans**: TBD
+**Plans:** 3 plans
 
 Plans:
-- [ ] 01-01: TBD
-- [ ] 01-02: TBD
-- [ ] 01-03: TBD
+- [ ] 01-01-PLAN.md — Scaffold project, build data pipeline core (types, providers, cache, fuzzy matching)
+- [ ] 01-02-PLAN.md — Validate ScrapIn API, implement ScrapIn provider, wire search server action
+- [ ] 01-03-PLAN.md — Build search UI (landing page, form, suggestions, results page, loading/error states)
 
 ### Phase 2: Results & Visualization
 **Goal**: User sees a clear, anonymized dashboard of where former employees went and what roles they took
