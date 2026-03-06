@@ -3,9 +3,12 @@ import {
   computeTopDestinations,
   classifyRole,
   computeRoleBuckets,
+  generatePatternSummary,
+  computeInsights,
   type TopDestination,
   type RoleCategory,
   type RoleBucket,
+  type InsightsData,
 } from "../insights";
 import type { MigrationRecord } from "../sankey-data";
 
@@ -218,5 +221,135 @@ describe("computeRoleBuckets", () => {
     for (const bucket of result) {
       expect(bucket.percentage).toBeGreaterThan(0);
     }
+  });
+});
+
+describe("generatePatternSummary", () => {
+  const searchedRole = "Solutions Engineer";
+
+  it("includes concentration sentence when top destination >= 25%", () => {
+    const topDestinations: TopDestination[] = [
+      { company: "Google", percentage: 40 },
+      { company: "Meta", percentage: 20 },
+    ];
+    const roleBuckets: RoleBucket[] = [
+      { category: "Technical", percentage: 60, topRoles: ["Software Engineer"] },
+      { category: "Business", percentage: 40, topRoles: ["PM"] },
+    ];
+    const migrations: MigrationRecord[] = [
+      { destinationCompany: "Google", destinationRole: "Software Engineer", sourceRole: "Solutions Engineer", count: 8 },
+      { destinationCompany: "Meta", destinationRole: "PM", sourceRole: "Solutions Engineer", count: 4 },
+    ];
+    const summary = generatePatternSummary(topDestinations, roleBuckets, migrations, searchedRole);
+    expect(summary).toContain("Google");
+    expect(summary).toContain("40%");
+  });
+
+  it("includes role change frequency when Same role bucket exists", () => {
+    const topDestinations: TopDestination[] = [{ company: "Google", percentage: 100 }];
+    const roleBuckets: RoleBucket[] = [
+      { category: "Same role", percentage: 70, topRoles: ["Solutions Engineer"] },
+      { category: "Technical", percentage: 30, topRoles: ["Software Engineer"] },
+    ];
+    const migrations: MigrationRecord[] = [
+      { destinationCompany: "Google", destinationRole: "Solutions Engineer", sourceRole: "Solutions Engineer", count: 7 },
+      { destinationCompany: "Google", destinationRole: "Software Engineer", sourceRole: "Solutions Engineer", count: 3 },
+    ];
+    const summary = generatePatternSummary(topDestinations, roleBuckets, migrations, searchedRole);
+    expect(summary).toContain("70%");
+    expect(summary).toContain("similar role");
+  });
+
+  it("always includes top transition highlight", () => {
+    const topDestinations: TopDestination[] = [{ company: "A", percentage: 15 }];
+    const roleBuckets: RoleBucket[] = [
+      { category: "Technical", percentage: 100, topRoles: ["Software Engineer"] },
+    ];
+    const migrations: MigrationRecord[] = [
+      { destinationCompany: "A", destinationRole: "Software Engineer", sourceRole: "Solutions Engineer", count: 10 },
+    ];
+    const summary = generatePatternSummary(topDestinations, roleBuckets, migrations, searchedRole);
+    expect(summary).toContain("Software Engineer");
+    expect(summary).toContain("most common");
+  });
+
+  it("returns empty string for empty migrations", () => {
+    const summary = generatePatternSummary([], [], [], searchedRole);
+    expect(summary).toBe("");
+  });
+
+  it("produces 2-3 sentences joined as a single string", () => {
+    const topDestinations: TopDestination[] = [
+      { company: "Google", percentage: 50 },
+    ];
+    const roleBuckets: RoleBucket[] = [
+      { category: "Technical", percentage: 60, topRoles: ["Software Engineer"] },
+      { category: "Same role", percentage: 40, topRoles: ["Solutions Engineer"] },
+    ];
+    const migrations: MigrationRecord[] = [
+      { destinationCompany: "Google", destinationRole: "Software Engineer", sourceRole: "Solutions Engineer", count: 6 },
+      { destinationCompany: "Google", destinationRole: "Solutions Engineer", sourceRole: "Solutions Engineer", count: 4 },
+    ];
+    const summary = generatePatternSummary(topDestinations, roleBuckets, migrations, searchedRole);
+    // Should be 2-3 sentences (split by period followed by space)
+    const sentences = summary.split(". ").filter((s) => s.length > 0);
+    expect(sentences.length).toBeGreaterThanOrEqual(2);
+    expect(sentences.length).toBeLessThanOrEqual(3);
+  });
+
+  it("includes seniority trend when seniority data is available", () => {
+    const topDestinations: TopDestination[] = [{ company: "A", percentage: 100 }];
+    const roleBuckets: RoleBucket[] = [
+      { category: "Technical", percentage: 100, topRoles: ["Senior Software Engineer"] },
+    ];
+    const migrations: MigrationRecord[] = [
+      { destinationCompany: "A", destinationRole: "Senior Software Engineer", sourceRole: "Software Engineer", count: 10 },
+    ];
+    const summary = generatePatternSummary(topDestinations, roleBuckets, migrations, searchedRole);
+    expect(summary).toMatch(/more senior|senior/i);
+  });
+});
+
+describe("computeInsights", () => {
+  it("returns empty InsightsData for empty migrations", () => {
+    const result = computeInsights([], "Solutions Engineer");
+    expect(result).toEqual({
+      topDestinations: [],
+      roleBuckets: [],
+      patternSummary: "",
+      totalMigrations: 0,
+    });
+  });
+
+  it("handles very small result sets (less than 3 migrations)", () => {
+    const migrations: MigrationRecord[] = [
+      { destinationCompany: "Google", destinationRole: "SWE", count: 1 },
+    ];
+    const result = computeInsights(migrations, "Solutions Engineer");
+    expect(result.totalMigrations).toBe(1);
+    expect(result.topDestinations).toHaveLength(1);
+  });
+
+  it("returns fully populated InsightsData for normal dataset", () => {
+    const migrations: MigrationRecord[] = [
+      { destinationCompany: "Google", destinationRole: "Software Engineer", sourceRole: "Solutions Engineer", count: 10 },
+      { destinationCompany: "Meta", destinationRole: "VP of Sales", sourceRole: "Solutions Engineer", count: 5 },
+      { destinationCompany: "Apple", destinationRole: "Account Executive", sourceRole: "Solutions Engineer", count: 3 },
+      { destinationCompany: "Amazon", destinationRole: "Solutions Engineer", sourceRole: "Solutions Engineer", count: 8 },
+    ];
+    const result = computeInsights(migrations, "Solutions Engineer");
+    expect(result.totalMigrations).toBe(26);
+    expect(result.topDestinations.length).toBeGreaterThan(0);
+    expect(result.roleBuckets.length).toBeGreaterThan(0);
+    expect(result.patternSummary.length).toBeGreaterThan(0);
+  });
+
+  it("computes correct totalMigrations from count sums", () => {
+    const migrations: MigrationRecord[] = [
+      { destinationCompany: "A", destinationRole: "R", count: 5 },
+      { destinationCompany: "B", destinationRole: "R", count: 3 },
+    ];
+    const result = computeInsights(migrations, "R");
+    expect(result.totalMigrations).toBe(8);
   });
 });
