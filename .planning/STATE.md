@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: in-progress
-stopped_at: Completed 04-02-PLAN.md
-last_updated: "2026-03-06T21:17:00Z"
-last_activity: 2026-03-06 -- Plan 04-02 complete (Legal pages & footer)
+stopped_at: Completed 04-01-PLAN.md
+last_updated: "2026-03-06T21:22:00Z"
+last_activity: 2026-03-06 -- Plan 04-01 complete (Auth foundation with Better Auth)
 progress:
   total_phases: 4
   completed_phases: 3
   total_plans: 13
-  completed_plans: 10
-  percent: 77
+  completed_plans: 11
+  percent: 85
 ---
 
 # Project State
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-03-06)
 ## Current Position
 
 Phase: 4 of 4 (Auth, Saved Searches & Compliance)
-Plan: 2 of 5 in current phase (04-02 complete)
+Plan: 3 of 5 in current phase (04-01 complete)
 Status: In Progress
-Last activity: 2026-03-06 -- Plan 04-02 complete (Legal pages & footer)
+Last activity: 2026-03-06 -- Plan 04-01 complete (Auth foundation with Better Auth)
 
-Progress: [████████░░] 77%
+Progress: [████████░░] 85%
 
 ## Performance Metrics
 
@@ -90,6 +90,10 @@ Recent decisions affecting current work:
 - [04-02]: Footer uses flex column layout with min-h-screen for sticky bottom positioning
 - [04-02]: Privacy policy uses generic "publicly available professional data" phrasing without naming sources
 - [04-00]: All test stubs use it.todo() for Vitest recognition without failure
+- [04-01]: Used Better Auth CLI-generated schema for exact column names and indexes
+- [04-01]: timestamp_ms mode for auth tables (Better Auth requirement) vs timestamp for existing tables
+- [04-01]: Suspense boundary wrapping SignupForm for useSearchParams SSR compatibility
+- [04-01]: Auth forms use react-hook-form + zod validation + authClient methods pattern
 
 ### Pending Todos
 
@@ -102,6 +106,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-06T21:17:00Z
-Stopped at: Completed 04-02-PLAN.md
-Resume file: .planning/phases/04-auth-saved-searches-compliance/04-02-SUMMARY.md
+Last session: 2026-03-06T21:22:00Z
+Stopped at: Completed 04-01-PLAN.md
+Resume file: .planning/phases/04-auth-saved-searches-compliance/04-01-SUMMARY.md

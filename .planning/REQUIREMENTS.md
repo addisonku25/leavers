@@ -33,7 +33,7 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Authentication
 
 - [x] **AUTH-01**: User can sign up with email and password
-- [ ] **AUTH-02**: User can log in and stay logged in across sessions
+- [x] **AUTH-02**: User can log in and stay logged in across sessions
 - [x] **AUTH-03**: User can log out
 
 ### Saved Searches
@@ -101,7 +101,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | INSI-02 | Phase 3 | Complete |
 | INSI-03 | Phase 3 | Complete |
 | AUTH-01 | Phase 4 | Complete |
-| AUTH-02 | Phase 4 | Pending |
+| AUTH-02 | Phase 4 | Complete |
 | AUTH-03 | Phase 4 | Complete |
 | SAVE-01 | Phase 4 | Complete |
 | SAVE-02 | Phase 4 | Complete |

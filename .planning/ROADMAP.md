@@ -77,7 +77,7 @@ Plans:
   3. Authenticated user can save a search, view their saved searches, and delete a saved search
   4. Unauthenticated users are rate-limited to prevent abuse of the search API
   5. App includes accessible terms of service and privacy policy pages
-**Plans:** 5 plans
+**Plans:** 3/5 plans executed
 
 Plans:
 - [ ] 04-00-PLAN.md — Wave 0: Test stubs for all Phase 4 verification targets (Nyquist contract)
@@ -96,4 +96,4 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 | 1. Foundation & Data Pipeline | 3/3 | Complete | 2026-03-06 |
 | 2. Results & Visualization | 3/3 | Complete   | 2026-03-06 |
 | 3. Insights | 2/2 | Complete | 2026-03-06 |
-| 4. Auth, Saved Searches & Compliance | 0/5 | Not started | - |
+| 4. Auth, Saved Searches & Compliance | 3/5 | In Progress|  |
