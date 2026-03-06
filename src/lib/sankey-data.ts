@@ -1,4 +1,4 @@
-import { compareSeniority, type SeniorityComparison } from "./seniority";
+import { compareSeniority, normalizeRoleTitle, type SeniorityComparison } from "./seniority";
 
 /** Migration record shape expected by data transformation functions. */
 export interface MigrationRecord {
@@ -161,6 +161,31 @@ export function buildSankeyData(
   return { nodes, links };
 }
 
+/** Merge roles with the same normalized title, using the highest-count variant as display name. */
+function mergeRolesByNormalizedTitle(
+  roles: { role: string; count: number }[],
+): { role: string; count: number }[] {
+  const groups = new Map<string, { displayName: string; maxCount: number; totalCount: number }>();
+
+  for (const { role, count } of roles) {
+    const key = normalizeRoleTitle(role).toLowerCase();
+    const existing = groups.get(key);
+    if (existing) {
+      existing.totalCount += count;
+      if (count > existing.maxCount) {
+        existing.displayName = role;
+        existing.maxCount = count;
+      }
+    } else {
+      groups.set(key, { displayName: role, maxCount: count, totalCount: count });
+    }
+  }
+
+  return [...groups.values()]
+    .map((g) => ({ role: g.displayName, count: g.totalCount }))
+    .sort((a, b) => b.count - a.count);
+}
+
 /** Add destination role nodes for a company, limiting to top N and grouping remainder. */
 function addRoleNodes(
   roles: { role: string; count: number }[],
@@ -168,9 +193,9 @@ function addRoleNodes(
   nodes: SankeyNode[],
   links: SankeyLink[],
 ): void {
-  const sorted = [...roles].sort((a, b) => b.count - a.count);
-  const topRoles = sorted.slice(0, MAX_ROLES_PER_COMPANY);
-  const otherRoles = sorted.slice(MAX_ROLES_PER_COMPANY);
+  const merged = mergeRolesByNormalizedTitle(roles);
+  const topRoles = merged.slice(0, MAX_ROLES_PER_COMPANY);
+  const otherRoles = merged.slice(MAX_ROLES_PER_COMPANY);
 
   for (const { role, count } of topRoles) {
     const roleIdx = nodes.length;

@@ -3,7 +3,8 @@ import {
   groupMigrationsForCards,
   buildSankeyData,
   type CompanyCardData,
-  type SankeyData,
+  type SankeyNode,
+  type SankeyLink,
 } from "../sankey-data";
 
 // Helper to create migration records
@@ -191,6 +192,33 @@ describe("buildSankeyData", () => {
     expect(googleToRoleLinks).toHaveLength(2);
     const totalValue = googleToRoleLinks.reduce((s, l) => s + l.value, 0);
     expect(totalValue).toBe(8);
+  });
+
+  it("merges roles with same base title (e.g. Senior SWE + SWE)", () => {
+    const migrations = [
+      migration("Google", "Software Engineer", 10),
+      migration("Google", "Senior Software Engineer", 8),
+      migration("Google", "Staff Software Engineer", 3),
+      migration("Google", "Junior Software Engineer", 2),
+    ];
+
+    const result = buildSankeyData(migrations, "Dev");
+    const destNodes = result.nodes.filter(
+      (n: SankeyNode) => n.category === "destination",
+    );
+
+    // All four should merge into one "Software Engineer" node
+    expect(destNodes).toHaveLength(1);
+    expect(destNodes[0].name).toBe("Software Engineer");
+
+    // Total value should be 10+8+3+2 = 23
+    const googleIdx = result.nodes.findIndex(
+      (n: SankeyNode) => n.name === "Google" && n.category === "company",
+    );
+    const link = result.links.find(
+      (l: SankeyLink) => l.source === googleIdx,
+    );
+    expect(link!.value).toBe(23);
   });
 
   it("contains no fields named name, email, linkedin, or profile (PRIV-01)", () => {

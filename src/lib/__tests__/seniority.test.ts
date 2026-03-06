@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   parseSeniorityLevel,
   compareSeniority,
+  normalizeRoleTitle,
   type SeniorityComparison,
 } from "../seniority";
 
@@ -108,5 +109,39 @@ describe("compareSeniority", () => {
     expect(compareSeniority("Engineer", null as unknown as string)).toBe(
       "same-or-lower",
     );
+  });
+});
+
+describe("normalizeRoleTitle", () => {
+  it("strips Senior prefix", () => {
+    expect(normalizeRoleTitle("Senior Software Engineer")).toBe("Software Engineer");
+  });
+
+  it("strips Junior prefix", () => {
+    expect(normalizeRoleTitle("Junior Analyst")).toBe("Analyst");
+  });
+
+  it("strips Staff prefix", () => {
+    expect(normalizeRoleTitle("Staff Engineer")).toBe("Engineer");
+  });
+
+  it("strips Lead prefix", () => {
+    expect(normalizeRoleTitle("Lead Designer")).toBe("Designer");
+  });
+
+  it("strips Principal prefix", () => {
+    expect(normalizeRoleTitle("Principal Engineer")).toBe("Engineer");
+  });
+
+  it("strips Director of prefix", () => {
+    expect(normalizeRoleTitle("Director of Engineering")).toBe("Engineering");
+  });
+
+  it("leaves plain role unchanged", () => {
+    expect(normalizeRoleTitle("Software Engineer")).toBe("Software Engineer");
+  });
+
+  it("strips Sr. abbreviation", () => {
+    expect(normalizeRoleTitle("Sr. Product Manager")).toBe("Product Manager");
   });
 });

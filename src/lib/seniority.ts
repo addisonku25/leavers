@@ -45,6 +45,18 @@ export function parseSeniorityLevel(roleTitle: string): number {
   return DEFAULT_LEVEL;
 }
 
+/** Seniority prefixes to strip when normalizing role titles for grouping. */
+const SENIORITY_PREFIXES =
+  /\b(senior|sr\.?\s*|junior|jr\.?\s*|associate|staff|lead|principal|intern|chief|director of|head of|vp of|vice president of|svp of)\b\s*/gi;
+
+/**
+ * Strip seniority prefixes from a role title to produce a base role for grouping.
+ * e.g. "Senior Software Engineer" → "Software Engineer"
+ */
+export function normalizeRoleTitle(roleTitle: string): string {
+  return roleTitle.replace(SENIORITY_PREFIXES, "").replace(/\s+/g, " ").trim();
+}
+
 /**
  * Compare the seniority of a source role against the searched role.
  * Returns "more-senior" if the source role is higher level,
