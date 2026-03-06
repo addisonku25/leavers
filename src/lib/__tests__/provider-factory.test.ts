@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { getProvider } from "../data/provider-factory";
+import { BrightDataProvider } from "../data/providers/brightdata";
 import { MockProvider } from "../data/providers/mock";
 import { ScrapInProvider } from "../data/providers/scrapin";
 
@@ -25,6 +26,13 @@ describe("getProvider", () => {
     process.env.DATA_PROVIDER = "mock";
     const provider = getProvider();
     expect(provider).toBeInstanceOf(MockProvider);
+  });
+
+  it("returns BrightDataProvider when DATA_PROVIDER is 'brightdata'", () => {
+    process.env.DATA_PROVIDER = "brightdata";
+    const provider = getProvider();
+    expect(provider).toBeInstanceOf(BrightDataProvider);
+    expect(provider.name).toBe("brightdata");
   });
 
   it("returns ScrapInProvider when DATA_PROVIDER is 'scrapin'", () => {

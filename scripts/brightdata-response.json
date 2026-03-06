@@ -1,0 +1,377 @@
+[
+  {
+    "id": "satyanadella",
+    "name": "Satya Nadella",
+    "city": "Redmond, Washington, United States",
+    "country_code": "US",
+    "position": "Chairman and CEO at Microsoft",
+    "about": "As chairman and CEO of Microsoft, I define my mission and that of my company as empowering every person and every organization on the planet to achieve more.",
+    "posts": [
+      {
+        "title": "A Positive-Sum Future",
+        "attribution": "I’ve been thinking a lot about what the net benefit of the AI platform wave is. The real question is how to empower…",
+        "link": "https://www.linkedin.com/pulse/positive-sum-future-satya-nadella-bjs7c",
+        "created_at": "2025-11-15T00:00:00.000Z",
+        "interaction": "7,31 - 523 Comments",
+        "id": "7395521848320585728"
+      },
+      {
+        "title": "My annual letter: Thinking in decades, executing in quarters",
+        "attribution": "Below is my annual letter, published today in our Annual Report 2025: Dear shareholders, colleagues, customers, and…",
+        "link": "https://www.linkedin.com/pulse/my-annual-letter-thinking-decades-executing-quarters-satya-nadella-7orpc",
+        "created_at": "2025-10-21T00:00:00.000Z",
+        "interaction": "6,30 - 294 Comments",
+        "id": "7386447357564895232"
+      },
+      {
+        "title": "Meet 5 Copilot agents from our partners changing how work gets done",
+        "attribution": "We've been hard at work advancing M365 Copilot, and so have our many partners who are building agents that integrate…",
+        "link": "https://www.linkedin.com/pulse/meet-5-copilot-agents-from-our-partners-changing-how-work-nadella-mzrsc",
+        "created_at": "2025-10-12T00:00:00.000Z",
+        "interaction": "5,66 - 237 Comments",
+        "id": "7383234438987640834"
+      },
+      {
+        "title": "All my favorite M365 Copilot agents (right now)",
+        "attribution": "Supercharged past few weeks as we push the bounds of model-forward innovation across Microsoft 365. A few highlights:…",
+        "link": "https://www.linkedin.com/pulse/all-my-favorite-m365-copilot-agents-right-now-satya-nadella-jb9nc",
+        "created_at": "2025-10-04T00:00:00.000Z",
+        "interaction": "1,47 - 81 Comments",
+        "id": "7380307114302509057"
+      },
+      {
+        "title": "5 prompts to supercharge your everyday workflow",
+        "attribution": "It’s been a few weeks since we brought GPT-5 to Microsoft 365 Copilot, and it’s quickly become part of my everyday…",
+        "link": "https://www.linkedin.com/pulse/5-prompts-supercharge-your-everyday-workflow-satya-nadella-ryv5c",
+        "created_at": "2025-08-27T00:00:00.000Z",
+        "interaction": "11,08 - 484 Comments",
+        "id": "7366531046609207298"
+      },
+      {
+        "title": "Delivering 3 trusted platforms for the AI age",
+        "attribution": "The following is adapted from my remarks at Microsoft Ignite this morning. With every platform shift, it is good to…",
+        "link": "https://www.linkedin.com/pulse/delivering-3-trusted-platforms-ai-age-satya-nadella-uijzc",
+        "created_at": "2024-11-20T00:00:00.000Z",
+        "interaction": "6,63 - 175 Comments",
+        "id": "7264742687822475266"
+      },
+      {
+        "title": "My annual letter: Relevance and reinvention",
+        "attribution": "Below is my annual letter, published today in our Annual Report 2024. Dear shareholders, colleagues, customers, and…",
+        "link": "https://www.linkedin.com/pulse/my-annual-letter-relevance-reinvention-satya-nadella-v91xc",
+        "created_at": "2024-10-24T00:00:00.000Z",
+        "interaction": "4,79 - 204 Comments",
+        "id": "7255307415930249217"
+      },
+      {
+        "title": "The age of AI transformation",
+        "attribution": "The following is adapted from my remarks at Microsoft Build this morning. We’ve always been a platform company, and our…",
+        "link": "https://www.linkedin.com/pulse/age-ai-transformation-satya-nadella-soocc",
+        "created_at": "2024-05-21T00:00:00.000Z",
+        "interaction": "10,04 - 172 Comments",
+        "id": "7198816567290130432"
+      },
+      {
+        "title": "The age of copilots",
+        "attribution": "The following is an excerpt from my keynote today at Microsoft Ignite. It’s hard to believe that it’s just been a year…",
+        "link": "https://www.linkedin.com/pulse/age-copilots-satya-nadella-2hllc",
+        "created_at": "2023-11-16T00:00:00.000Z",
+        "interaction": "7,40 - 107 Comments",
+        "id": "7130676111507689472"
+      },
+      {
+        "title": "My annual letter: Leading in a new era",
+        "attribution": "Below is my annual letter, published today in our Annual Report 2023. Dear shareholders, colleagues, customers, and…",
+        "link": "https://www.linkedin.com/pulse/my-annual-letter-leading-new-era-satya-nadella",
+        "created_at": "2023-10-19T00:00:00.000Z",
+        "interaction": "14,99 - 244 Comments",
+        "id": "7120862321169616896"
+      }
+    ],
+    "current_company": {
+      "name": "Microsoft",
+      "company_id": "microsoft",
+      "title": "Chairman and CEO",
+      "location": "Greater Seattle Area"
+    },
+    "experience": [
+      {
+        "title": "Chairman and CEO",
+        "location": "Greater Seattle Area",
+        "description_html": null,
+        "start_date": "Feb 2014",
+        "end_date": "Present",
+        "company": "Microsoft",
+        "company_id": "microsoft",
+        "url": "https://www.linkedin.com/company/microsoft",
+        "company_logo_url": "https://media.licdn.com/dms/image/v2/D560BAQH32RJQCl3dDQ/company-logo_100_100/B56ZYQ0mrGGoAU-/0/1744038948046/microsoft_logo?e=2147483647&v=beta&t=rr_7_bFRKp6umQxIHErPOZHtR8dMPIYeTjlKFdotJBY"
+      },
+      {
+        "title": "Member Board Of Trustees",
+        "description_html": null,
+        "start_date": "2018",
+        "end_date": "Present",
+        "company": "University of Chicago",
+        "url": "https://www.linkedin.com/school/uchicago/",
+        "company_logo_url": "https://media.licdn.com/dms/image/v2/C4D0BAQHbp_dv8CAlpQ/company-logo_100_100/company-logo_100_100/0/1630577480920/uchicago_logo?e=2147483647&v=beta&t=cAtlujPg_gTYAJEyaRAqq_mGt_-UR02Z7OGx9bpFBFI"
+      },
+      {
+        "title": "Board Member",
+        "description_html": null,
+        "start_date": "2017",
+        "end_date": "2024",
+        "company": "Starbucks",
+        "company_id": "starbucks",
+        "url": "https://www.linkedin.com/company/starbucks",
+        "company_logo_url": "https://media.licdn.com/dms/image/v2/C4D0BAQEQxk9y2rk7Hw/company-logo_100_100/company-logo_100_100/0/1631316692276?e=2147483647&v=beta&t=itdoVXP3gnqtQ7Grar4B3YoPyw-Ors9bKMZlZpb0QcY"
+      },
+      {
+        "title": "Chairman",
+        "description_html": null,
+        "start_date": "2021",
+        "end_date": "2023",
+        "company": "The Business Council U.S.",
+        "company_id": "the-business-council-us",
+        "url": "https://www.linkedin.com/company/the-business-council-us",
+        "company_logo_url": "https://media.licdn.com/dms/image/v2/C4D0BAQGcnaZNpjMvrw/company-logo_100_100/company-logo_100_100/0/1630557702704/the_business_council_us_logo?e=2147483647&v=beta&t=jMVaJBszh2OAHju51Wxo8lkraUvPnQW9PTJ_o1XTus0"
+      },
+      {
+        "title": "Board Member",
+        "description_html": null,
+        "start_date": "2016",
+        "end_date": "2022",
+        "company": "Fred Hutch",
+        "company_id": "fredhutch",
+        "url": "https://www.linkedin.com/company/fredhutch",
+        "company_logo_url": "https://media.licdn.com/dms/image/v2/D4D0BAQGF4eOou62nvQ/company-logo_100_100/company-logo_100_100/0/1664795263764/fredhutch_logo?e=2147483647&v=beta&t=vZYRCTo_jFF7soE3B-ivjfAjlkEjW8nXSsukKDK2Obg"
+      }
+    ],
+    "url": "https://co.linkedin.com/in/satyanadella",
+    "people_also_viewed": [
+      {
+        "profile_link": "https://www.linkedin.com/in/tony-bates-679227a5",
+        "name": "Tony Bates",
+        "about": "Genesys",
+        "location": "16K followers San Francisco Bay Area"
+      },
+      {
+        "profile_link": "https://www.linkedin.com/in/charlesphillips1",
+        "name": "Charles Phillips",
+        "about": "Bloomberg",
+        "location": "26K followers New York, NY"
+      },
+      {
+        "profile_link": "https://www.linkedin.com/in/neilbarua",
+        "name": "Neil Barua",
+        "about": "StreetWise Partners",
+        "location": "16K followers United States"
+      },
+      {
+        "profile_link": "https://www.linkedin.com/in/jackmulloy",
+        "name": "Jack Mulloy",
+        "about": "Jack is a seasoned enterprise software leader with over 20 years of experience in procurement and supply chain consulting and solutions. As the Managing Director at Nitor Partners, he oversees the strategy, operations, and growth of an SAP Gold Partner that delivers value to global clients across various industries. <br><br>Jack is also an active investor and board member at two SaaS companies, RELISH and CodeFluent, that leverage AI and SAP's BTP framework to create innovative applications that augment and extend the capabilities of enterprise software platforms. He is passionate about helping organizations optimize their processes, performance, and profitability through digital transformation and sustained growth.",
+        "location": "9K followers Greater Cleveland"
+      },
+      {
+        "profile_link": "https://www.linkedin.com/in/rickfaulk",
+        "name": "Rick Faulk",
+        "about": "Retrocausal",
+        "location": "17K followers Greater Boston"
+      },
+      {
+        "profile_link": "https://www.linkedin.com/in/toufisaliba",
+        "name": "Toufi Saliba",
+        "about": "HyperCycle.ai",
+        "location": "13K followers San Francisco, CA"
+      },
+      {
+        "profile_link": "https://www.linkedin.com/in/dpandey",
+        "name": "Dheeraj Pandey",
+        "about": "DevRev",
+        "location": "36K followers Los Gatos, CA"
+      },
+      {
+        "profile_link": "https://www.linkedin.com/in/ralphdangelmaier",
+        "name": "Ralph Dangelmaier",
+        "about": "Ralph Dangelmaier, a highly respected figure in the Fintech industry, brings over 30 years of experience in leading and growing public and private payments companies. As the Strategic Advisor at the Payments Advisory Team (PAT), Ralph works with companies to optimize their payment solutions, increase sales, and reduce costs. His extensive knowledge and insights have allowed him to collaborate with thousands of banks, payment processors, and businesses across 60 countries, consistently driving innovation and success in the global payments ecosystem.<br><br>Ralph is known for his passion for payments innovation and customer success. Over the course of his career, he has made significant strides in developing cutting-edge solutions that solve real-world problems and create meaningful impact on a global scale. His leadership has been recognized with numerous accolades, including being named one of the Top 50 SaaS CEOs, a two-time finalist in Ernst & Young’s Entrepreneur of the Year program, and the Boston Business Journal’s Innovator of the Year. Recently, Ralph was honored as a member of the Beta Gamma Sigma academic honor society by Stonehill College, a distinction awarded to top business professionals and educators.<br><br>A thought leader and mentor in the payments space, Ralph is also dedicated to developing the next generation of Fintech leaders. He has taught classes at institutions such as Brandeis, Babson, Harvard, and his alma mater, Stonehill College, where he shares his vast experience and encourages students to embrace innovation in financial technology. His commitment to fostering young talent is an extension of his vision to continuously push the boundaries of what’s possible in the payments industry.<br><br>Throughout his career, Ralph has worked with talented teams to deliver value-added solutions that not only meet business needs but also drive global economic growth. His contributions extend beyond corporate boardrooms and classrooms—he is passionate about using technology to make a difference, bringing a human element to Fintech innovation. Ralph enjoys working with creative and driven teams to build payment solutions that positively impact businesses and communities around the world.<br><br>Outside of his professional life, Ralph enjoys golf, tennis, travel, and winemaking, having established his own wine label, Patriot. He resides in Weston, Massachusetts, just outside of Boston.",
+        "location": "14K followers Waltham, MA"
+      },
+      {
+        "profile_link": "https://www.linkedin.com/in/linda-findley",
+        "name": "Linda Findley",
+        "about": null,
+        "location": "5K followers Minneapolis, MN"
+      },
+      {
+        "profile_link": "https://www.linkedin.com/in/mjones",
+        "name": "Michael Jones",
+        "about": "Science",
+        "location": "38K followers Aspen, CO"
+      }
+    ],
+    "educations_details": "The University of Chicago Booth School of Business",
+    "education": [
+      {
+        "title": "The University of Chicago Booth School of Business",
+        "url": "https://www.linkedin.com/school/universityofchicagoboothschoolofbusiness/?trk=public_profile_school_profile-section-card_image-click",
+        "start_year": "1994",
+        "end_year": "1996",
+        "description": null,
+        "description_html": null,
+        "institute_logo_url": "https://media.licdn.com/dms/image/v2/D560BAQFZO05jhYKSkw/company-logo_100_100/company-logo_100_100/0/1692627816910/universityofchicagoboothschoolofbusiness_logo?e=2147483647&v=beta&t=37ZvcegiFfRvQpXUnki5vv_2IaJ2d3Dk_jW4DGhPc0k"
+      },
+      {
+        "title": "Manipal Institute of Technology, Manipal",
+        "degree": "Bachelor’s Degree",
+        "field": "Electrical Engineering",
+        "url": "https://in.linkedin.com/school/manipal-institute-of-technology/?trk=public_profile_school_profile-section-card_image-click",
+        "description": null,
+        "description_html": null,
+        "institute_logo_url": "https://media.licdn.com/dms/image/v2/C510BAQH66KkTTZFJ2A/company-logo_100_100/company-logo_100_100/0/1630615963889/manipal_institute_of_technology_logo?e=2147483647&v=beta&t=icff0bWM7ff9bvPGIYo_TqKGTlWqRkNxC6vI_PqOzZo"
+      },
+      {
+        "title": "University of Wisconsin-Milwaukee",
+        "degree": "Master’s Degree",
+        "field": "Computer Science",
+        "url": "https://www.linkedin.com/school/uwmilwaukee/?trk=public_profile_school_profile-section-card_image-click",
+        "description": null,
+        "description_html": null,
+        "institute_logo_url": "https://media.licdn.com/dms/image/v2/D4D0BAQE47QlO_LG8SQ/company-logo_100_100/company-logo_100_100/0/1729615751602/uwmilwaukee_logo?e=2147483647&v=beta&t=az_WMUpjgtzqCDEHNPBwdRJzq3qHD4dyWy6KQJtDpm0"
+      }
+    ],
+    "avatar": "https://media.licdn.com/dms/image/v2/C5603AQHHUuOSlRVA1w/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1579726625398?e=2147483647&v=beta&t=Rr7WT9uBM0byOij0oT_KirejIMVE4HK4r8NGIp0zjdI",
+    "followers": 11884337,
+    "connections": 500,
+    "current_company_company_id": "microsoft",
+    "current_company_name": "Microsoft",
+    "location": "Redmond",
+    "input_url": "https://www.linkedin.com/in/satyanadella/",
+    "linkedin_id": "satyanadella",
+    "activity": [
+      {
+        "interaction": "Liked by Satya Nadella",
+        "link": "https://www.linkedin.com/posts/emboyd_introducing-gpt-54-in-microsoft-foundry-activity-7435418506269114368-ImVZ",
+        "title": "Excited to bring GPT 5.4 to Microsoft Foundry! Designed to improve agent workflows, GPT5.4 continues to push the state of the art in AI…",
+        "img": "https://media.licdn.com/dms/image/sync/v2/D5627AQHIO7z8GNmvdA/articleshare-shrink_800/B56ZzAALNQIAAI-/0/1772747818608?e=2147483647&v=beta&t=cqFLH000PNLuMR7M00SCx9b-PG4CavLhfbEu5Q0brxQ",
+        "id": "54"
+      },
+      {
+        "interaction": "Shared by Satya Nadella",
+        "link": "https://www.linkedin.com/posts/satyanadella_unify-simplify-scale-microsoft-dragon-activity-7435386394988130304-omL1",
+        "title": "Healthcare has never moved faster or asked more of clinicians. At HIMSS, we’re rolling out big updates to Dragon Copilot, including Work IQ to…",
+        "img": "https://media.licdn.com/dms/image/sync/v2/D5627AQFS3x8IISrkKg/articleshare-shrink_800/B56Zy.hTc_G4AI-/0/1772722928157?e=2147483647&v=beta&t=q1gZvUIJOWeLdQTXvIIM4KFFVYzYwsPrquCfJg3Q42I",
+        "id": "7435386394988130304"
+      },
+      {
+        "interaction": "Liked by Satya Nadella",
+        "link": "https://www.linkedin.com/posts/minisha-goel_what-do-you-ask-the-ceo-of-a-3-trillion-activity-7432757409749610496-8EKI",
+        "title": "What do you ask the CEO of a $3 trillion tech company if you only had two minutes? Of course it would only be right to ask Satya Nadella about the…",
+        "img": "https://media.licdn.com/dms/image/v2/D4E05AQGma-Ar9KM-3Q/videocover-high/B4EZyZ1aDLIQBc-/0/1772107445404?e=2147483647&v=beta&t=zU4UGCvh1gCNtHuABHb0aMWm_WcxMhmMfJJKoefJ99M",
+        "id": "3"
+      },
+      {
+        "interaction": "Liked by Satya Nadella",
+        "link": "https://www.linkedin.com/posts/alexander-klenner-bajaja-80781a13_microsoftaitour-activity-7432844001478823937-73Zv",
+        "title": "Just back from an incredible #MicrosoftAITour in Munich! It was an absolute whirlwind of AI innovation and energy. From presenting our EPO showcase…",
+        "img": "https://media.licdn.com/dms/image/v2/D4E22AQEgdzBUiyvu3w/feedshare-shrink_800/B4EZybEO2KHoAg-/0/1772128104185?e=2147483647&v=beta&t=2gSHVlaT-gj4ql7k9NGFF_-I7fAFZSmH-hICBjkZ53s",
+        "id": "7432844001478823937"
+      },
+      {
+        "interaction": "Liked by Satya Nadella",
+        "link": "https://www.linkedin.com/posts/gabastorga_if-you-had-the-opportunity-to-ask-one-question-activity-7432490792071352320-yYgX",
+        "title": "If you had the opportunity to ask one question to the CEO of Microsoft, Satya Nadella, one question about Artifical Intelligence, what would you ask?…",
+        "img": "https://media.licdn.com/dms/image/v2/D4D05AQGKCMR8KXED_A/videocover-high/B4DZyWC7LVIoBY-/0/1772043878649?e=2147483647&v=beta&t=S0K9Fzj1ZdgKayEtbUQwuHXc6QMThJUShj4U_WOkunk",
+        "id": "7432490792071352320"
+      },
+      {
+        "interaction": "Shared by Satya Nadella",
+        "link": "https://www.linkedin.com/posts/satyanadella_ive-been-trying-copilot-tasks-this-week-activity-7434963514328387584-DFfv",
+        "title": "I’ve been trying Copilot Tasks this week, and it’s awesome to assign tasks (even recurring) in this cowork mode and have them completed end to end…",
+        "img": "https://media.licdn.com/dms/image/v2/D5605AQFFU-73f82NDQ/videocover-high/B56Zy5L3QaG4BY-/0/1772633424719?e=2147483647&v=beta&t=Xmhhg8ohciZ1FD_LWazazC53ozkjDGwXUtmKUTpMd8c",
+        "id": "7434963514328387584"
+      },
+      {
+        "interaction": "Shared by Satya Nadella",
+        "link": "https://www.linkedin.com/posts/satyanadella_counting-down-to-a-new-build-in-san-francisco-activity-7434688896669560833-PqKW",
+        "title": "Counting down to a new Build in San Francisco. Hope you’ll join us! https://aka.ms/AA101fmo",
+        "img": "https://media.licdn.com/dms/image/v2/D5605AQFCSjziHyjj4A/videocover-high/B56Zy1SH3TJQBY-/0/1772567954973?e=2147483647&v=beta&t=hLHRu62oUXWN7qE7jE26QZozHyQGFFiAvZAKZi2rDDw",
+        "id": "7434688896669560833"
+      },
+      {
+        "interaction": "Liked by Satya Nadella",
+        "link": "https://www.linkedin.com/posts/weve-been-working-on-a-whole-new-way-to-activity-7432877374784024576-AjcR",
+        "title": "We've been working on a whole new way to get things done: Copilot Tasks. AI that talks less and does more, no complicated setup or coding skills…",
+        "img": "https://media.licdn.com/dms/image/v2/D5605AQF7-xIPfuVs9w/feedshare-thumbnail_720_1280/B56ZybihCrKkBA-/0/1772136045511?e=2147483647&v=beta&t=BXt7Rhl1M_1ukFnhDo_hTtKgDGwd2JwEMTOMoshlUqU",
+        "id": "7432877374784024576"
+      },
+      {
+        "interaction": "Shared by Satya Nadella",
+        "link": "https://www.linkedin.com/posts/satyanadella_how-the-munich-fire-departments-ai-operator-activity-7432465483335106560-x8Vj",
+        "title": "Great to meet with members of the Munich Fire Department in Germany today and see how they’re using our agent platform to help speed up patient…",
+        "img": "https://media.licdn.com/dms/image/sync/v2/D4E27AQHd2Or0EGoYVA/articleshare-shrink_800/B4EZyU8Y0BGYAI-/0/1772025384907?e=2147483647&v=beta&t=vje0MfgRcFFvL-ckQeu15u4a82mE8Hc2oSIpdJ_A4lU",
+        "id": "7432465483335106560"
+      },
+      {
+        "interaction": "Liked by Satya Nadella",
+        "link": "https://www.linkedin.com/posts/evan-boyle-107a1445_research-now-available-in-the-copilot-activity-7432224453364977664-64Ww",
+        "title": "`/research` now available in the Copilot CLI Deep research across any OSS repo on the planet using GitHub's advanced code search tools, and MCPs for…",
+        "img": "https://media.licdn.com/dms/image/v2/D5605AQHTLHYzHhnujQ/videocover-high/B56ZySQuNzGwBY-/0/1771980385100?e=2147483647&v=beta&t=feoE6OgwMdfd1ZQYYnHWGvo-Q0XQk56p2UqXHraZNeI",
+        "id": "7432224453364977664"
+      },
+      {
+        "interaction": "Shared by Satya Nadella",
+        "link": "https://www.linkedin.com/posts/satyanadella_how-an-ai-tool-is-helping-uk-clinicians-activity-7432070419723227136-JnAq",
+        "title": "Today, I saw firsthand how Dragon Copilot will help physicians across the NHS spend more time on patient care and less on paperwork. The work at…",
+        "img": "https://media.licdn.com/dms/image/sync/v2/D4E27AQFB7pi5An1zhg/articleshare-shrink_1280_800/B4EZyQT4s1IEAQ-/0/1771947658386?e=2147483647&v=beta&t=zakC2LXielxEWmeLGnfhSRXqck-mGwFm1_BzgWdZC8E",
+        "id": "7432070419723227136"
+      },
+      {
+        "interaction": "Shared by Satya Nadella",
+        "link": "https://www.linkedin.com/posts/satyanadella_microsoft-sovereign-cloud-adds-governance-activity-7432023992305319936-BGKK",
+        "title": "We’re building the most comprehensive digital sovereignty platform to help countries and organizations meet their regulatory, security, and…",
+        "img": "https://media.licdn.com/dms/image/sync/v2/D4D27AQEaLexdTqTpoA/articleshare-shrink_1280_800/B4DZyPLI7EIoAQ-/0/1771966597873?e=2147483647&v=beta&t=NCNdEeUJVGmBxKURVBO5hpwPSxIV7cjMd8aOnGU9Qjg",
+        "id": "7432023992305319936"
+      },
+      {
+        "interaction": "Liked by Satya Nadella",
+        "link": "https://www.linkedin.com/posts/noelle-walsh-b29356108_yesterday-i-was-proud-toinvite-journalists-activity-7429923819399614465-SWrX",
+        "title": "Yesterday, I was proud to invite journalists and others into our Dublin datacenters for a firsthand view of our day-to-day operations, and to…",
+        "img": "https://media.licdn.com/dms/image/v2/D5622AQFFEqRWsWpmdg/feedshare-shrink_2048_1536/B56ZxxkVniJ4Ak-/0/1771431878627?e=2147483647&v=beta&t=Mtn2ANY4gW5xGN1KKja1w2aONBzJYg5i4eRy44YDKKM",
+        "id": "7429923819399614465"
+      },
+      {
+        "interaction": "Shared by Satya Nadella",
+        "link": "https://www.linkedin.com/posts/satyanadella_project-silicas-advances-in-glass-storage-activity-7429928433381548032-lEHW",
+        "title": "Today in Nature Magazine, we shared new results from Project Silica—our work to encode data in glass—pushing toward durable, immutable archival…",
+        "img": "https://media.licdn.com/dms/image/sync/v2/D5627AQHLsXU8bFr0uQ/articleshare-shrink_1280_800/B56ZxxjeKzGoAY-/0/1771431650765?e=2147483647&v=beta&t=VWELrdEYKXYNFMZpNA8gpxIh2pGpA_bz7a02v_hrXAE",
+        "id": "7429928433381548032"
+      },
+      {
+        "interaction": "Liked by Satya Nadella",
+        "link": "https://www.linkedin.com/posts/rishi-sunak_in-1941-alan-turing-and-three-of-his-colleagues-activity-7428712504702189568-iSi8",
+        "title": "In 1941, Alan Turing and three of his colleagues wrote to Winston Churchill saying they needed more resources to crack Enigma. Churchill knew how key…",
+        "img": "https://media.licdn.com/dms/image/v2/D4E22AQGWS8xgKgwNCQ/feedshare-shrink_800/B4EZxgWp9VH4Ag-/0/1771143078297?e=2147483647&v=beta&t=AP8RuqTD_NliHd6cMZDDElnTLyY16iWu8P9h8r0qB7k",
+        "id": "1941"
+      }
+    ],
+    "linkedin_num_id": "19186432",
+    "banner_image": "https://media.licdn.com/dms/image/v2/D5616AQFuhBYf-ocZug/profile-displaybackgroundimage-shrink_200_800/B56ZeD5uqRGQAY-/0/1750264638752?e=2147483647&v=beta&t=DaHW2hhkqrbciCDeL7Am7SF60etaMxKtrEoZgSSONqY",
+    "honors_and_awards": null,
+    "similar_profiles": [],
+    "default_avatar": false,
+    "memorialized_account": false,
+    "bio_links": [
+      {
+        "title": "Company Website",
+        "link": "https://snscratchpad.com/"
+      }
+    ],
+    "first_name": "Satya",
+    "last_name": "Nadella",
+    "influencer": true,
+    "timestamp": "2026-03-06T16:56:58.604Z",
+    "input": {
+      "url": "https://www.linkedin.com/in/satyanadella/"
+    }
+  }
+]
