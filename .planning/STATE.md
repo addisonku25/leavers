@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: in-progress
-stopped_at: Completed 02-02-PLAN.md
-last_updated: "2026-03-06T18:52:39Z"
-last_activity: 2026-03-06 -- Plan 02-02 complete (results dashboard UI)
+stopped_at: Completed 02-03-PLAN.md
+last_updated: "2026-03-06T19:23:38Z"
+last_activity: 2026-03-06 -- Plan 02-03 complete (Sankey flow visualization) -- Phase 2 complete
 progress:
   total_phases: 4
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 10
-  completed_plans: 5
-  percent: 50
+  completed_plans: 6
+  percent: 60
 ---
 
 # Project State
@@ -21,34 +21,34 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-06)
 
 **Core value:** Show users concrete evidence of where people like them ended up -- turning career anxiety into actionable intelligence.
-**Current focus:** Phase 2: Results & Visualization
+**Current focus:** Phase 2 complete, ready for Phase 3: Insights
 
 ## Current Position
 
-Phase: 2 of 4 (Results & Visualization)
-Plan: 2 of 3 in current phase (02-02 complete)
-Status: In Progress
-Last activity: 2026-03-06 -- Plan 02-02 complete (results dashboard UI)
+Phase: 2 of 4 (Results & Visualization) -- COMPLETE
+Plan: 3 of 3 in current phase (02-03 complete)
+Status: Phase 2 Complete
+Last activity: 2026-03-06 -- Plan 02-03 complete (Sankey flow visualization)
 
-Progress: [#####.....] 50%
+Progress: [######....] 60%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 5
-- Average duration: 12 min
-- Total execution time: 1.0 hours
+- Total plans completed: 6
+- Average duration: 13 min
+- Total execution time: 1.4 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 1. Foundation & Data Pipeline | 3/3 | 53 min | 18 min |
-| 2. Results & Visualization | 2/3 | 5 min | 3 min |
+| 2. Results & Visualization | 3/3 | 29 min | 10 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (13 min), 01-02 (15 min), 01-03 (25 min), 02-01 (3 min), 02-02 (2 min)
-- Trend: accelerating
+- Last 5 plans: 01-02 (15 min), 01-03 (25 min), 02-01 (3 min), 02-02 (2 min), 02-03 (24 min)
+- Trend: variable (visualization plans take longer due to iterative refinement)
 
 *Updated after each plan completion*
 
@@ -77,6 +77,10 @@ Recent decisions affecting current work:
 - [02-02]: ResultsLayout simplified -- header now rendered inside ResultsDashboard, not layout wrapper
 - [02-02]: Layout widened from max-w-2xl to max-w-6xl for 3-column card grid
 - [02-02]: SeniorityDot uses native title attribute for tooltip (lightweight v1, no library)
+- [02-03]: Node-based hover highlighting instead of link-based for clearer visual feedback
+- [02-03]: Merge similar roles by stripping seniority prefixes for cleaner Sankey grouping
+- [02-03]: Share destination nodes across companies to show true flow patterns
+- [02-03]: Alphabetical sorting of company and role nodes for predictable layout
 
 ### Pending Todos
 
@@ -89,6 +93,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-06T18:52:39Z
-Stopped at: Completed 02-02-PLAN.md
-Resume file: .planning/phases/02-results-visualization/02-02-SUMMARY.md
+Last session: 2026-03-06T19:23:38Z
+Stopped at: Completed 02-03-PLAN.md
+Resume file: .planning/phases/02-results-visualization/02-03-SUMMARY.md
