@@ -221,6 +221,27 @@ describe("buildSankeyData", () => {
     expect(link!.value).toBe(23);
   });
 
+  it("shares destination role nodes across companies", () => {
+    const migrations = [
+      migration("Google", "Product Manager", 5),
+      migration("Meta", "Product Manager", 8),
+      migration("Apple", "Product Manager", 3),
+    ];
+
+    const result = buildSankeyData(migrations, "Dev");
+    const pmNodes = result.nodes.filter(
+      (n: SankeyNode) => n.name === "Product Manager" && n.category === "destination",
+    );
+
+    // Should be exactly one shared "Product Manager" node, not three
+    expect(pmNodes).toHaveLength(1);
+
+    // Three links should point to it (one from each company)
+    const pmIdx = result.nodes.indexOf(pmNodes[0]);
+    const linksTopm = result.links.filter((l: SankeyLink) => l.target === pmIdx);
+    expect(linksTopm).toHaveLength(3);
+  });
+
   it("contains no fields named name, email, linkedin, or profile (PRIV-01)", () => {
     const migrations = [
       migration("Google", "Engineer", 5, "Senior Engineer"),

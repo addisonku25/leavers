@@ -130,6 +130,9 @@ export function buildSankeyData(
   const topCompanies = sortedCompanies.slice(0, MAX_COMPANIES);
   const otherCompanies = sortedCompanies.slice(MAX_COMPANIES);
 
+  // Shared destination role node registry (normalized key -> node index)
+  const destNodeIndex = new Map<string, number>();
+
   // Add company nodes and source->company links
   for (const [company, total] of topCompanies) {
     const companyIdx = nodes.length;
@@ -137,7 +140,7 @@ export function buildSankeyData(
     links.push({ source: 0, target: companyIdx, value: total });
 
     // Add destination role nodes for this company
-    addRoleNodes(companyRoles.get(company) ?? [], companyIdx, nodes, links);
+    addRoleNodes(companyRoles.get(company) ?? [], companyIdx, nodes, links, destNodeIndex);
   }
 
   // Group remaining companies into "Other"
@@ -155,7 +158,7 @@ export function buildSankeyData(
     for (const [company] of otherCompanies) {
       mergedRoles.push(...(companyRoles.get(company) ?? []));
     }
-    addRoleNodes(mergedRoles, otherIdx, nodes, links);
+    addRoleNodes(mergedRoles, otherIdx, nodes, links, destNodeIndex);
   }
 
   return { nodes, links };
@@ -186,27 +189,37 @@ function mergeRolesByNormalizedTitle(
     .sort((a, b) => b.count - a.count);
 }
 
-/** Add destination role nodes for a company, limiting to top N and grouping remainder. */
+/** Add destination role nodes for a company, reusing shared destination nodes across companies. */
 function addRoleNodes(
   roles: { role: string; count: number }[],
   companyIdx: number,
   nodes: SankeyNode[],
   links: SankeyLink[],
+  destNodeIndex: Map<string, number>,
 ): void {
   const merged = mergeRolesByNormalizedTitle(roles);
   const topRoles = merged.slice(0, MAX_ROLES_PER_COMPANY);
   const otherRoles = merged.slice(MAX_ROLES_PER_COMPANY);
 
   for (const { role, count } of topRoles) {
-    const roleIdx = nodes.length;
-    nodes.push({ name: role, category: "destination" });
+    const key = normalizeRoleTitle(role).toLowerCase();
+    let roleIdx = destNodeIndex.get(key);
+    if (roleIdx === undefined) {
+      roleIdx = nodes.length;
+      nodes.push({ name: role, category: "destination" });
+      destNodeIndex.set(key, roleIdx);
+    }
     links.push({ source: companyIdx, target: roleIdx, value: count });
   }
 
   if (otherRoles.length > 0) {
     const otherTotal = otherRoles.reduce((sum, r) => sum + r.count, 0);
-    const otherIdx = nodes.length;
-    nodes.push({ name: "Other roles", category: "destination" });
+    let otherIdx = destNodeIndex.get("__other_roles__");
+    if (otherIdx === undefined) {
+      otherIdx = nodes.length;
+      nodes.push({ name: "Other roles", category: "destination" });
+      destNodeIndex.set("__other_roles__", otherIdx);
+    }
     links.push({ source: companyIdx, target: otherIdx, value: otherTotal });
   }
 }

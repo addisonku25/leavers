@@ -61,14 +61,12 @@ export class MockProvider implements DataProvider {
 
   async search(params: MigrationSearchParams): Promise<CareerMigration[]> {
     const seed = simpleHash(`${params.company}:${params.role}`);
-    const count = 5 + (seed % 11); // 5-15 results
+    const companyCount = 6 + (seed % 8); // 6-13 destination companies
 
     const migrations: CareerMigration[] = [];
 
-    for (let i = 0; i < count; i++) {
+    for (let i = 0; i < companyCount; i++) {
       const companyIndex = (seed + i * 7) % DESTINATION_COMPANIES.length;
-      const roleIndex = (seed + i * 13) % DESTINATION_ROLES.length;
-      const migrationCount = 1 + ((seed + i * 3) % 20);
 
       // Skip if destination is same as source
       let destCompany = DESTINATION_COMPANIES[companyIndex];
@@ -76,13 +74,20 @@ export class MockProvider implements DataProvider {
         destCompany = DESTINATION_COMPANIES[(companyIndex + 1) % DESTINATION_COMPANIES.length];
       }
 
-      migrations.push({
-        sourceCompany: params.company,
-        sourceRole: params.role,
-        destinationCompany: destCompany,
-        destinationRole: DESTINATION_ROLES[roleIndex],
-        count: migrationCount,
-      });
+      // Generate 1-5 roles per company
+      const rolesForCompany = 1 + ((seed + i * 11) % 5);
+      for (let j = 0; j < rolesForCompany; j++) {
+        const roleIndex = (seed + i * 13 + j * 3) % DESTINATION_ROLES.length;
+        const migrationCount = 1 + ((seed + i * 3 + j * 7) % 20);
+
+        migrations.push({
+          sourceCompany: params.company,
+          sourceRole: DESTINATION_ROLES[(seed + i * 5 + j * 2) % DESTINATION_ROLES.length],
+          destinationCompany: destCompany,
+          destinationRole: DESTINATION_ROLES[roleIndex],
+          count: migrationCount,
+        });
+      }
     }
 
     return migrations;
