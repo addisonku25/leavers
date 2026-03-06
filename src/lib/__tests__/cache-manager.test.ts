@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
-import type { CareerMigration, DataProvider } from "../data/types";
 import { buildCacheKey, getCachedOrFetch } from "../cache/cache-manager";
+import type { CareerMigration, DataProvider } from "../data/types";
 
 // Mock Redis
 vi.mock("../cache/redis", () => ({
@@ -69,7 +69,7 @@ describe("getCachedOrFetch", () => {
 
   it("returns Redis-cached result when available (no DB or provider calls)", async () => {
     const { redis } = await import("../cache/redis");
-    vi.mocked(redis!.get).mockResolvedValueOnce(mockMigrations);
+    vi.mocked(redis?.get).mockResolvedValueOnce(mockMigrations);
 
     const result = await getCachedOrFetch({ company: "Google", role: "SWE" }, mockProvider);
 
@@ -79,13 +79,13 @@ describe("getCachedOrFetch", () => {
 
   it("calls provider.search when both caches miss and stores in both", async () => {
     const { redis } = await import("../cache/redis");
-    vi.mocked(redis!.get).mockResolvedValueOnce(null);
+    vi.mocked(redis?.get).mockResolvedValueOnce(null);
     vi.mocked(mockProvider.search).mockResolvedValueOnce(mockMigrations);
 
     const result = await getCachedOrFetch({ company: "Google", role: "SWE" }, mockProvider);
 
     expect(result).toEqual(mockMigrations);
     expect(mockProvider.search).toHaveBeenCalled();
-    expect(redis!.set).toHaveBeenCalled();
+    expect(redis?.set).toHaveBeenCalled();
   });
 });

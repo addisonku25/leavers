@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import type { DataProvider } from "../data/types";
 import { MockProvider } from "../data/providers/mock";
+import type { DataProvider } from "../data/types";
 
 describe("MockProvider", () => {
   const provider = new MockProvider();
