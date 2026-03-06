@@ -46,7 +46,7 @@ Plans:
   3. User sees a Sankey/flow visualization of career migration paths
   4. User sees a helpful empty state with guidance when no results are found
   5. All displayed data is aggregated and anonymized -- no individual names or identifiable profiles appear anywhere
-**Plans:** 3 plans
+**Plans:** 2/3 plans executed
 
 Plans:
 - [x] 02-01-PLAN.md — Schema migration (add sourceRole), seniority parsing, data transformation layer (card grouping + Sankey data builder)
@@ -91,6 +91,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation & Data Pipeline | 3/3 | Complete | 2026-03-06 |
-| 2. Results & Visualization | 1/3 | In Progress | - |
+| 2. Results & Visualization | 2/3 | In Progress|  |
 | 3. Insights | 0/1 | Not started | - |
 | 4. Auth, Saved Searches & Compliance | 0/3 | Not started | - |

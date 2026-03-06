@@ -21,7 +21,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **SRCH-02**: User sees destination companies grouped with migration counts (e.g. "5 people went to Salesforce")
 - [x] **SRCH-03**: User sees what roles former employees moved into at each destination company
 - [x] **SRCH-04**: User sees a loading/processing state while on-demand data is being fetched
-- [ ] **SRCH-05**: User sees a helpful empty state when no results are found
+- [x] **SRCH-05**: User sees a helpful empty state when no results are found
 - [x] **SRCH-06**: User sees a Sankey/flow visualization of career migration paths
 
 ### Insights
@@ -95,7 +95,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SRCH-02 | Phase 2 | Complete |
 | SRCH-03 | Phase 2 | Complete |
 | SRCH-04 | Phase 1 | Complete |
-| SRCH-05 | Phase 2 | Pending |
+| SRCH-05 | Phase 2 | Complete |
 | SRCH-06 | Phase 2 | Complete |
 | INSI-01 | Phase 3 | Pending |
 | INSI-02 | Phase 3 | Pending |
