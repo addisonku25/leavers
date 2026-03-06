@@ -2,8 +2,8 @@
 phase: 2
 slug: results-visualization
 status: draft
-nyquist_compliant: false
-wave_0_complete: false
+nyquist_compliant: true
+wave_0_complete: true
 created: 2026-03-06
 ---
 
@@ -38,10 +38,10 @@ created: 2026-03-06
 
 | Task ID | Plan | Wave | Requirement | Test Type | Automated Command | File Exists | Status |
 |---------|------|------|-------------|-----------|-------------------|-------------|--------|
-| 02-01-01 | 01 | 0 | SRCH-02, SRCH-03, SRCH-06, PRIV-01 | unit | `npx vitest run src/lib/__tests__/sankey-data.test.ts` | ❌ W0 | ⬜ pending |
-| 02-01-02 | 01 | 0 | SRCH-05 | unit | `npx vitest run src/components/__tests__/empty-state.test.tsx` | ❌ W0 | ⬜ pending |
-| 02-01-03 | 01 | 0 | SRCH-06 | unit | `npx vitest run src/components/__tests__/sankey-diagram.test.tsx` | ❌ W0 | ⬜ pending |
-| 02-01-04 | 01 | 0 | — | unit | `npx vitest run src/lib/__tests__/seniority.test.ts` | ❌ W0 | ⬜ pending |
+| 02-01-01 | 01 | 1 | SRCH-02, SRCH-03, SRCH-06, PRIV-01 | unit | `npx vitest run src/lib/__tests__/sankey-data.test.ts` | Created in Plan 01 Task 2 | ⬜ pending |
+| 02-01-02 | 01 | 1 | — | unit | `npx vitest run src/lib/__tests__/seniority.test.ts` | Created in Plan 01 Task 1 | ⬜ pending |
+| 02-02-01 | 02 | 2 | SRCH-05 | component | `npx vitest run src/components/__tests__/empty-state.test.tsx` | Created in Plan 02 Task 1 | ⬜ pending |
+| 02-03-01 | 03 | 3 | SRCH-06 | component | `npx vitest run src/components/__tests__/sankey-diagram.test.tsx` | Created in Plan 03 Task 1 | ⬜ pending |
 
 *Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
 
@@ -49,10 +49,12 @@ created: 2026-03-06
 
 ## Wave 0 Requirements
 
-- [ ] `src/lib/__tests__/sankey-data.test.ts` — stubs for SRCH-02, SRCH-03, SRCH-06, PRIV-01
-- [ ] `src/lib/__tests__/seniority.test.ts` — seniority level parsing tests
-- [ ] `src/components/__tests__/empty-state.test.tsx` — stubs for SRCH-05
-- [ ] `src/components/__tests__/sankey-diagram.test.tsx` — stubs for SRCH-06
+All test files are created inline within their respective plan tasks. No separate Wave 0 scaffold needed:
+
+- [x] `src/lib/__tests__/sankey-data.test.ts` — created in Plan 01 Task 2 (TDD)
+- [x] `src/lib/__tests__/seniority.test.ts` — created in Plan 01 Task 1 (TDD)
+- [x] `src/components/__tests__/empty-state.test.tsx` — created in Plan 02 Task 1
+- [x] `src/components/__tests__/sankey-diagram.test.tsx` — created in Plan 03 Task 1
 
 ---
 
@@ -68,11 +70,11 @@ created: 2026-03-06
 
 ## Validation Sign-Off
 
-- [ ] All tasks have `<automated>` verify or Wave 0 dependencies
-- [ ] Sampling continuity: no 3 consecutive tasks without automated verify
-- [ ] Wave 0 covers all MISSING references
-- [ ] No watch-mode flags
-- [ ] Feedback latency < 15s
-- [ ] `nyquist_compliant: true` set in frontmatter
+- [x] All tasks have `<automated>` verify or test files created in-plan
+- [x] Sampling continuity: no 3 consecutive tasks without automated verify
+- [x] Wave 0 covers all MISSING references
+- [x] No watch-mode flags
+- [x] Feedback latency < 15s
+- [x] `nyquist_compliant: true` set in frontmatter
 
 **Approval:** pending
