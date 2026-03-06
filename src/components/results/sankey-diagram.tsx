@@ -13,6 +13,7 @@ import type { SankeyData, SankeyNode, SankeyLink } from "@/lib/sankey-data";
 
 interface SankeyDiagramProps {
   data: SankeyData;
+  sourceCompany?: string;
 }
 
 type LayoutNode = D3SankeyNode<SankeyNode, SankeyLink>;
@@ -37,10 +38,12 @@ function SankeySVG({
   data,
   width,
   height,
+  sourceCompany,
 }: {
   data: SankeyData;
   width: number;
   height: number;
+  sourceCompany?: string;
 }) {
   const [hoveredNode, setHoveredNode] = useState<number | null>(null);
 
@@ -203,22 +206,47 @@ function SankeySVG({
                 height={Math.max(y1 - y0, 1) + 4}
                 fill="transparent"
               />
-              <text
-                x={label.x}
-                y={
-                  category === "company"
-                    ? y0 - 4
-                    : (y0 + y1) / 2
-                }
-                textAnchor={label.anchor}
-                dominantBaseline={
-                  category === "company" ? "auto" : "central"
-                }
-                className="fill-foreground text-xs"
-                fontSize={11}
-              >
-                {truncateLabel(node.name)}
-              </text>
+              {category === "source" && sourceCompany ? (
+                <>
+                  <text
+                    x={label.x}
+                    y={(y0 + y1) / 2 - 8}
+                    textAnchor={label.anchor}
+                    dominantBaseline="central"
+                    className="fill-foreground font-semibold text-xs"
+                    fontSize={11}
+                  >
+                    {truncateLabel(sourceCompany)}
+                  </text>
+                  <text
+                    x={label.x}
+                    y={(y0 + y1) / 2 + 8}
+                    textAnchor={label.anchor}
+                    dominantBaseline="central"
+                    className="fill-muted-foreground text-xs"
+                    fontSize={11}
+                  >
+                    {truncateLabel(node.name)}
+                  </text>
+                </>
+              ) : (
+                <text
+                  x={label.x}
+                  y={
+                    category === "company"
+                      ? y0 - 4
+                      : (y0 + y1) / 2
+                  }
+                  textAnchor={label.anchor}
+                  dominantBaseline={
+                    category === "company" ? "auto" : "central"
+                  }
+                  className="fill-foreground text-xs"
+                  fontSize={11}
+                >
+                  {truncateLabel(node.name)}
+                </text>
+              )}
             </g>
           );
         })}
@@ -227,7 +255,7 @@ function SankeySVG({
   );
 }
 
-export function SankeyDiagram({ data }: SankeyDiagramProps) {
+export function SankeyDiagram({ data, sourceCompany }: SankeyDiagramProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(0);
 
@@ -250,7 +278,7 @@ export function SankeyDiagram({ data }: SankeyDiagramProps) {
   return (
     <div ref={containerRef} style={{ height: FIXED_HEIGHT }} data-testid="sankey-container">
       {width > 0 && (
-        <SankeySVG data={data} width={width} height={FIXED_HEIGHT} />
+        <SankeySVG data={data} width={width} height={FIXED_HEIGHT} sourceCompany={sourceCompany} />
       )}
     </div>
   );

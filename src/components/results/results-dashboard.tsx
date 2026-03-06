@@ -47,7 +47,7 @@ export function ResultsDashboard({
 
       {migrations.length > 0 && (
         <SankeyErrorBoundary>
-          <SankeyDiagram data={sankeyData} />
+          <SankeyDiagram data={sankeyData} sourceCompany={search.company} />
         </SankeyErrorBoundary>
       )}
 
