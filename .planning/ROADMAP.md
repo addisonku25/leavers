@@ -49,7 +49,7 @@ Plans:
 **Plans:** 3 plans
 
 Plans:
-- [ ] 02-01-PLAN.md — Schema migration (add sourceRole), seniority parsing, data transformation layer (card grouping + Sankey data builder)
+- [x] 02-01-PLAN.md — Schema migration (add sourceRole), seniority parsing, data transformation layer (card grouping + Sankey data builder)
 - [ ] 02-02-PLAN.md — Results dashboard UI (summary header, company cards grid, role list with seniority dots, polished empty state)
 - [ ] 02-03-PLAN.md — Sankey flow visualization (d3-sankey + React SVG, hover interactions, error boundary, responsive)
 
@@ -91,6 +91,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation & Data Pipeline | 3/3 | Complete | 2026-03-06 |
-| 2. Results & Visualization | 0/3 | Not started | - |
+| 2. Results & Visualization | 1/3 | In Progress | - |
 | 3. Insights | 0/1 | Not started | - |
 | 4. Auth, Saved Searches & Compliance | 0/3 | Not started | - |

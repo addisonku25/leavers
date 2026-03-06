@@ -18,11 +18,11 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Search & Results
 
 - [x] **SRCH-01**: User sees a search form with company and role input fields
-- [ ] **SRCH-02**: User sees destination companies grouped with migration counts (e.g. "5 people went to Salesforce")
-- [ ] **SRCH-03**: User sees what roles former employees moved into at each destination company
+- [x] **SRCH-02**: User sees destination companies grouped with migration counts (e.g. "5 people went to Salesforce")
+- [x] **SRCH-03**: User sees what roles former employees moved into at each destination company
 - [x] **SRCH-04**: User sees a loading/processing state while on-demand data is being fetched
 - [ ] **SRCH-05**: User sees a helpful empty state when no results are found
-- [ ] **SRCH-06**: User sees a Sankey/flow visualization of career migration paths
+- [x] **SRCH-06**: User sees a Sankey/flow visualization of career migration paths
 
 ### Insights
 
@@ -44,7 +44,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Privacy & Compliance
 
-- [ ] **PRIV-01**: App displays only aggregated/anonymized data -- no individual names or identifiable profiles
+- [x] **PRIV-01**: App displays only aggregated/anonymized data -- no individual names or identifiable profiles
 - [ ] **PRIV-02**: App rate-limits searches to prevent abuse
 - [ ] **PRIV-03**: App includes terms of service and privacy policy pages
 
@@ -92,11 +92,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DATA-04 | Phase 1 | Complete |
 | DATA-05 | Phase 1 | Complete |
 | SRCH-01 | Phase 1 | Complete |
-| SRCH-02 | Phase 2 | Pending |
-| SRCH-03 | Phase 2 | Pending |
+| SRCH-02 | Phase 2 | Complete |
+| SRCH-03 | Phase 2 | Complete |
 | SRCH-04 | Phase 1 | Complete |
 | SRCH-05 | Phase 2 | Pending |
-| SRCH-06 | Phase 2 | Pending |
+| SRCH-06 | Phase 2 | Complete |
 | INSI-01 | Phase 3 | Pending |
 | INSI-02 | Phase 3 | Pending |
 | INSI-03 | Phase 3 | Pending |
@@ -106,7 +106,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SAVE-01 | Phase 4 | Pending |
 | SAVE-02 | Phase 4 | Pending |
 | SAVE-03 | Phase 4 | Pending |
-| PRIV-01 | Phase 2 | Pending |
+| PRIV-01 | Phase 2 | Complete |
 | PRIV-02 | Phase 4 | Pending |
 | PRIV-03 | Phase 4 | Pending |
 
