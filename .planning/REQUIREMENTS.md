@@ -9,9 +9,9 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Data Pipeline
 
-- [ ] **DATA-01**: User can search by company name and role title
+- [x] **DATA-01**: User can search by company name and role title
 - [x] **DATA-02**: App fuzzy-matches role titles across abbreviations, synonyms, and seniority levels (e.g. "Sr. Solutions Engineer" matches "Solution Engineer", "SE", "Sales Engineer")
-- [ ] **DATA-03**: App fetches career migration data on-demand from external data APIs on first search
+- [x] **DATA-03**: App fetches career migration data on-demand from external data APIs on first search
 - [x] **DATA-04**: Results are cached with 30-day TTL so repeat queries return instantly
 - [x] **DATA-05**: Data provider is abstracted behind an interface so sources can be swapped without rewrite
 
@@ -86,9 +86,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| DATA-01 | Phase 1 | Pending |
+| DATA-01 | Phase 1 | Complete |
 | DATA-02 | Phase 1 | Complete |
-| DATA-03 | Phase 1 | Pending |
+| DATA-03 | Phase 1 | Complete |
 | DATA-04 | Phase 1 | Complete |
 | DATA-05 | Phase 1 | Complete |
 | SRCH-01 | Phase 1 | Pending |
