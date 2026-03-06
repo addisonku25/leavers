@@ -48,7 +48,7 @@ describe("groupMigrationsForCards", () => {
     ];
 
     const result = groupMigrationsForCards(migrations, "Dev");
-    expect(result.map((c) => c.company)).toEqual([
+    expect(result.map((c: CompanyCardData) => c.company)).toEqual([
       "Big Co",
       "Mid Co",
       "Small Co",
@@ -63,7 +63,7 @@ describe("groupMigrationsForCards", () => {
     ];
 
     const result = groupMigrationsForCards(migrations, "Dev");
-    expect(result[0].roles.map((r) => r.role)).toEqual([
+    expect(result[0].roles.map((r: { role: string; count: number; seniority: string }) => r.role)).toEqual([
       "Senior Dev",
       "Staff Dev",
       "Junior Dev",
