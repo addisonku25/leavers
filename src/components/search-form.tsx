@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Search } from "lucide-react";
+import Link from "next/link";
 import { searchSchema, type SearchInput } from "@/lib/validations/search";
 import { searchAction } from "@/actions/search";
 import { SearchSuggestions } from "@/components/search-suggestions";
@@ -13,10 +14,18 @@ import { Button } from "@/components/ui/button";
 import companies from "@/data/companies.json";
 import roles from "@/data/roles.json";
 
+type RateLimitError = {
+  type: "rate_limited_guest" | "rate_limited_auth";
+  resetAt: number;
+};
+
 export function SearchForm() {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [serverError, setServerError] = useState<string | null>(null);
+  const [rateLimitError, setRateLimitError] = useState<RateLimitError | null>(
+    null,
+  );
 
   const {
     setValue,
@@ -36,17 +45,28 @@ export function SearchForm() {
 
   const onSubmit = handleSubmit((data) => {
     setServerError(null);
+    setRateLimitError(null);
     startTransition(async () => {
       const formData = new FormData();
       formData.set("company", data.company);
       formData.set("role", data.role);
       const result = await searchAction(formData);
-      if (result?.error) {
-        setServerError(
-          typeof result.error === "string"
-            ? result.error
-            : "Validation failed. Please check your inputs.",
-        );
+      if (result && "error" in result) {
+        if (
+          result.error === "rate_limited_guest" ||
+          result.error === "rate_limited_auth"
+        ) {
+          setRateLimitError({
+            type: result.error,
+            resetAt: (result as { error: string; resetAt: number }).resetAt,
+          });
+        } else {
+          setServerError(
+            typeof result.error === "string"
+              ? result.error
+              : "Validation failed. Please check your inputs.",
+          );
+        }
       } else if (result?.searchId) {
         router.push(`/results/${result.searchId}`);
       }
@@ -98,6 +118,31 @@ export function SearchForm() {
           error={errors.role?.message}
         />
       </div>
+
+      {rateLimitError?.type === "rate_limited_guest" && (
+        <div className="rounded-md border border-amber-200 bg-amber-50 p-3 text-sm text-amber-800 dark:border-amber-800 dark:bg-amber-950 dark:text-amber-200">
+          <p>
+            You&apos;ve used your 3 daily searches.{" "}
+            <Link href="/signup" className="font-medium underline">
+              Sign up for free
+            </Link>{" "}
+            to get 50 searches per hour.
+          </p>
+        </div>
+      )}
+
+      {rateLimitError?.type === "rate_limited_auth" && (
+        <div className="rounded-md border border-amber-200 bg-amber-50 p-3 text-sm text-amber-800 dark:border-amber-800 dark:bg-amber-950 dark:text-amber-200">
+          <p>
+            Slow down -- try again in{" "}
+            {Math.max(
+              1,
+              Math.ceil((rateLimitError.resetAt - Date.now()) / 60000),
+            )}{" "}
+            minutes.
+          </p>
+        </div>
+      )}
 
       {serverError && (
         <p className="text-sm text-destructive">{serverError}</p>

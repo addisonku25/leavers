@@ -54,6 +54,27 @@ vi.mock("@/lib/data/provider-factory", () => ({
   })),
 }));
 
+// Mock next/headers
+const mockHeaders = new Headers();
+vi.mock("next/headers", () => ({
+  headers: vi.fn(async () => mockHeaders),
+}));
+
+// Mock auth - return null session (guest) by default
+vi.mock("@/lib/auth", () => ({
+  auth: {
+    api: {
+      getSession: vi.fn(async () => null),
+    },
+  },
+}));
+
+// Mock rate limiters - disabled (null) for tests by default
+vi.mock("@/lib/rate-limit", () => ({
+  searchGuestLimiter: null,
+  searchAuthLimiter: null,
+}));
+
 describe("searchAction", () => {
   beforeEach(() => {
     vi.clearAllMocks();

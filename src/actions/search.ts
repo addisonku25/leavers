@@ -2,15 +2,40 @@
 
 import { nanoid } from "nanoid";
 import { eq } from "drizzle-orm";
+import { headers } from "next/headers";
 import { db } from "@/lib/db";
 import { migrations as migrationsTable, searches } from "@/lib/db/schema";
 import { searchSchema } from "@/lib/validations/search";
 import { buildCacheKey, getCachedOrFetch } from "@/lib/cache/cache-manager";
 import { getProvider } from "@/lib/data/provider-factory";
+import { auth } from "@/lib/auth";
+import {
+  searchGuestLimiter,
+  searchAuthLimiter,
+} from "@/lib/rate-limit";
 
 const CACHE_TTL_DAYS = 30;
 
 export async function searchAction(formData: FormData) {
+  // Rate limit check before any processing
+  const reqHeaders = await headers();
+  const session = await auth.api.getSession({ headers: reqHeaders });
+
+  const limiter = session ? searchAuthLimiter : searchGuestLimiter;
+  const identifier = session
+    ? session.user.id
+    : (reqHeaders.get("x-forwarded-for") ?? "anonymous");
+
+  if (limiter) {
+    const { success, reset } = await limiter.limit(identifier);
+    if (!success) {
+      if (session) {
+        return { error: "rate_limited_auth" as const, resetAt: reset };
+      }
+      return { error: "rate_limited_guest" as const, resetAt: reset };
+    }
+  }
+
   // Validate input
   const parsed = searchSchema.safeParse({
     company: formData.get("company"),
