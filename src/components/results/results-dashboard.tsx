@@ -3,10 +3,13 @@
 import { useMemo } from "react";
 import {
   groupMigrationsForCards,
+  buildSankeyData,
   type MigrationRecord,
 } from "@/lib/sankey-data";
 import { ResultsHeader } from "./results-header";
 import { CompanyGrid } from "./company-grid";
+import { SankeyDiagram } from "./sankey-diagram";
+import { SankeyErrorBoundary } from "./sankey-error-boundary";
 
 interface ResultsDashboardProps {
   search: { company: string; role: string };
@@ -19,6 +22,11 @@ export function ResultsDashboard({
 }: ResultsDashboardProps) {
   const companies = useMemo(
     () => groupMigrationsForCards(migrations, search.role),
+    [migrations, search.role],
+  );
+
+  const sankeyData = useMemo(
+    () => buildSankeyData(migrations, search.role),
     [migrations, search.role],
   );
 
@@ -37,7 +45,13 @@ export function ResultsDashboard({
         totalRoles={totalRoles}
       />
 
-      {/* Sankey diagram will be inserted here by Plan 03 */}
+      {migrations.length > 0 && (
+        <SankeyErrorBoundary>
+          <SankeyDiagram data={sankeyData} />
+        </SankeyErrorBoundary>
+      )}
+
+      <div className="border-b" />
 
       <CompanyGrid companies={companies} />
     </div>
