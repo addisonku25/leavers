@@ -1,7 +1,7 @@
 # Requirements: Leavers
 
 **Defined:** 2026-03-06
-**Core Value:** Show users concrete evidence of where people like them ended up — turning career anxiety into actionable intelligence.
+**Core Value:** Show users concrete evidence of where people like them ended up -- turning career anxiety into actionable intelligence.
 
 ## v1 Requirements
 
@@ -44,7 +44,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Privacy & Compliance
 
-- [ ] **PRIV-01**: App displays only aggregated/anonymized data — no individual names or identifiable profiles
+- [ ] **PRIV-01**: App displays only aggregated/anonymized data -- no individual names or identifiable profiles
 - [ ] **PRIV-02**: App rate-limits searches to prevent abuse
 - [ ] **PRIV-03**: App includes terms of service and privacy policy pages
 
@@ -73,8 +73,8 @@ Requirements for initial release. Each maps to roadmap phases.
 
 | Feature | Reason |
 |---------|--------|
-| Individual profile display | Privacy/legal risk — aggregated data is both safer and more useful |
-| Real-time chat/networking | Not a social tool — focused on data discovery |
+| Individual profile display | Privacy/legal risk -- aggregated data is both safer and more useful |
+| Real-time chat/networking | Not a social tool -- focused on data discovery |
 | Job application tracking | Focused on discovery, not workflow management |
 | Mobile native app | Web-first; responsive design handles mobile |
 | LinkedIn OAuth login | Adds complexity and LinkedIn dependency for minimal gain |
@@ -86,35 +86,35 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| DATA-01 | — | Pending |
-| DATA-02 | — | Pending |
-| DATA-03 | — | Pending |
-| DATA-04 | — | Pending |
-| DATA-05 | — | Pending |
-| SRCH-01 | — | Pending |
-| SRCH-02 | — | Pending |
-| SRCH-03 | — | Pending |
-| SRCH-04 | — | Pending |
-| SRCH-05 | — | Pending |
-| SRCH-06 | — | Pending |
-| INSI-01 | — | Pending |
-| INSI-02 | — | Pending |
-| INSI-03 | — | Pending |
-| AUTH-01 | — | Pending |
-| AUTH-02 | — | Pending |
-| AUTH-03 | — | Pending |
-| SAVE-01 | — | Pending |
-| SAVE-02 | — | Pending |
-| SAVE-03 | — | Pending |
-| PRIV-01 | — | Pending |
-| PRIV-02 | — | Pending |
-| PRIV-03 | — | Pending |
+| DATA-01 | Phase 1 | Pending |
+| DATA-02 | Phase 1 | Pending |
+| DATA-03 | Phase 1 | Pending |
+| DATA-04 | Phase 1 | Pending |
+| DATA-05 | Phase 1 | Pending |
+| SRCH-01 | Phase 1 | Pending |
+| SRCH-02 | Phase 2 | Pending |
+| SRCH-03 | Phase 2 | Pending |
+| SRCH-04 | Phase 1 | Pending |
+| SRCH-05 | Phase 2 | Pending |
+| SRCH-06 | Phase 2 | Pending |
+| INSI-01 | Phase 3 | Pending |
+| INSI-02 | Phase 3 | Pending |
+| INSI-03 | Phase 3 | Pending |
+| AUTH-01 | Phase 4 | Pending |
+| AUTH-02 | Phase 4 | Pending |
+| AUTH-03 | Phase 4 | Pending |
+| SAVE-01 | Phase 4 | Pending |
+| SAVE-02 | Phase 4 | Pending |
+| SAVE-03 | Phase 4 | Pending |
+| PRIV-01 | Phase 2 | Pending |
+| PRIV-02 | Phase 4 | Pending |
+| PRIV-03 | Phase 4 | Pending |
 
 **Coverage:**
 - v1 requirements: 23 total
-- Mapped to phases: 0
-- Unmapped: 23 ⚠️
+- Mapped to phases: 23
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-03-06*
-*Last updated: 2026-03-06 after initial definition*
+*Last updated: 2026-03-06 after roadmap creation*
