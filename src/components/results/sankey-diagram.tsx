@@ -49,6 +49,19 @@ function SankeySVG({
       .nodeWidth(NODE_WIDTH)
       .nodePadding(NODE_PADDING)
       .nodeAlign(sankeyJustify)
+      .nodeSort((a, b) => {
+        const catA = (a as unknown as SankeyNode).category;
+        const catB = (b as unknown as SankeyNode).category;
+        if (catA !== catB) return 0; // don't cross-sort categories
+        if (catA === "source") return 0;
+        const nameA = (a as unknown as SankeyNode).name;
+        const nameB = (b as unknown as SankeyNode).name;
+        // "Other" variants always last
+        const aIsOther = nameA.startsWith("Other");
+        const bIsOther = nameB.startsWith("Other");
+        if (aIsOther !== bIsOther) return aIsOther ? 1 : -1;
+        return nameA.localeCompare(nameB);
+      })
       .extent([
         [MARGIN + 140, MARGIN],
         [width - MARGIN - 140, height - MARGIN],
