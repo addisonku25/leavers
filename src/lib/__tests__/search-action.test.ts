@@ -5,12 +5,6 @@ vi.mock("nanoid", () => ({
   nanoid: vi.fn(() => "test-search-id"),
 }));
 
-// Mock next/navigation redirect
-const mockRedirect = vi.fn();
-vi.mock("next/navigation", () => ({
-  redirect: mockRedirect,
-}));
-
 // Mock the database
 const mockInsertValues = vi.fn().mockResolvedValue(undefined);
 const mockUpdateSetWhere = vi.fn().mockResolvedValue(undefined);
@@ -53,12 +47,6 @@ vi.mock("@/lib/data/provider-factory", () => ({
 describe("searchAction", () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    // Reset redirect mock -- Next.js redirect throws NEXT_REDIRECT
-    mockRedirect.mockImplementation(() => {
-      const error = new Error("NEXT_REDIRECT");
-      (error as any).digest = "NEXT_REDIRECT;replace;/results/test-search-id;303;";
-      throw error;
-    });
   });
 
   it("returns validation error for empty company", async () => {
@@ -103,9 +91,9 @@ describe("searchAction", () => {
     formData.set("company", "Google");
     formData.set("role", "Software Engineer");
 
-    // searchAction will throw NEXT_REDIRECT on success
-    await expect(searchAction(formData)).rejects.toThrow("NEXT_REDIRECT");
+    const result = await searchAction(formData);
 
+    expect(result).toEqual({ searchId: "test-search-id" });
     // Should have created a search record
     expect(db.insert).toHaveBeenCalled();
     // Should have called the cache pipeline
@@ -130,8 +118,9 @@ describe("searchAction", () => {
     formData.set("company", "Google");
     formData.set("role", "SWE");
 
-    await expect(searchAction(formData)).rejects.toThrow("NEXT_REDIRECT");
+    const result = await searchAction(formData);
 
+    expect(result).toEqual({ searchId: "test-search-id" });
     // Should update status to complete
     expect(db.update).toHaveBeenCalled();
     expect(mockUpdateSet).toHaveBeenCalledWith(
@@ -158,7 +147,7 @@ describe("searchAction", () => {
     );
   });
 
-  it("redirects to /results/[searchId] on success", async () => {
+  it("returns searchId on success for client-side navigation", async () => {
     const { searchAction } = await import("@/actions/search");
 
     mockGetCachedOrFetch.mockResolvedValueOnce([
@@ -175,8 +164,8 @@ describe("searchAction", () => {
     formData.set("company", "Google");
     formData.set("role", "SWE");
 
-    await expect(searchAction(formData)).rejects.toThrow("NEXT_REDIRECT");
+    const result = await searchAction(formData);
 
-    expect(mockRedirect).toHaveBeenCalledWith("/results/test-search-id");
+    expect(result).toEqual({ searchId: "test-search-id" });
   });
 });

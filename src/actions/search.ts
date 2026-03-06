@@ -1,7 +1,6 @@
 "use server";
 
 import { nanoid } from "nanoid";
-import { redirect } from "next/navigation";
 import { eq } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { migrations as migrationsTable, searches } from "@/lib/db/schema";
@@ -68,24 +67,8 @@ export async function searchAction(formData: FormData) {
       })
       .where(eq(searches.id, searchId));
 
-    // Redirect to results page (throws NEXT_REDIRECT -- do NOT catch this)
-    redirect(`/results/${searchId}`);
+    return { searchId };
   } catch (error: unknown) {
-    // Re-throw Next.js redirect -- it uses throw for navigation
-    if (error instanceof Error && error.message === "NEXT_REDIRECT") {
-      throw error;
-    }
-    // Check for NEXT_REDIRECT digest (production behavior)
-    if (
-      typeof error === "object" &&
-      error !== null &&
-      "digest" in error &&
-      typeof (error as { digest: unknown }).digest === "string" &&
-      (error as { digest: string }).digest.startsWith("NEXT_REDIRECT")
-    ) {
-      throw error;
-    }
-
     // Update search to "error"
     await db
       .update(searches)

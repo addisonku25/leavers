@@ -1,9 +1,10 @@
 "use client";
 
-import { useActionState, useRef, useState, useTransition } from "react";
+import { useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import { searchSchema, type SearchInput } from "@/lib/validations/search";
 import { searchAction } from "@/actions/search";
 import { SearchSuggestions } from "@/components/search-suggestions";
@@ -13,6 +14,7 @@ import companies from "@/data/companies.json";
 import roles from "@/data/roles.json";
 
 export function SearchForm() {
+  const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [serverError, setServerError] = useState<string | null>(null);
 
@@ -21,7 +23,6 @@ export function SearchForm() {
     watch,
     handleSubmit,
     formState: { errors },
-    trigger,
   } = useForm<SearchInput>({
     resolver: zodResolver(searchSchema),
     defaultValues: {
@@ -46,6 +47,8 @@ export function SearchForm() {
             ? result.error
             : "Validation failed. Please check your inputs.",
         );
+      } else if (result?.searchId) {
+        router.push(`/results/${result.searchId}`);
       }
     });
   });
