@@ -53,6 +53,7 @@ export async function searchAction(formData: FormData) {
           searchId,
           destinationCompany: migration.destinationCompany,
           destinationRole: migration.destinationRole,
+          sourceRole: migration.sourceRole,
           count: migration.count,
         });
       }

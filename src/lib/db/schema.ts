@@ -21,5 +21,6 @@ export const migrations = sqliteTable("migrations", {
     .references(() => searches.id),
   destinationCompany: text("destination_company").notNull(),
   destinationRole: text("destination_role").notNull(),
+  sourceRole: text("source_role"),
   count: integer("count").notNull().default(1),
 });
