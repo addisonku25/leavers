@@ -15,7 +15,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 1: Foundation & Data Pipeline** - Project scaffolding, data sourcing, fuzzy matching, caching, and a working search form
 - [x] **Phase 2: Results & Visualization** - Migration dashboard showing where people went, in what roles, with flow visualization (completed 2026-03-06)
 - [x] **Phase 3: Insights** - Pattern analysis layer that surfaces the "aha moment" from raw migration data (completed 2026-03-06)
-- [ ] **Phase 4: Auth, Saved Searches & Compliance** - User accounts, persistent saved searches, rate limiting, and legal pages
+- [x] **Phase 4: Auth, Saved Searches & Compliance** - User accounts, persistent saved searches, rate limiting, and legal pages (completed 2026-03-06)
 
 ## Phase Details
 
@@ -77,7 +77,7 @@ Plans:
   3. Authenticated user can save a search, view their saved searches, and delete a saved search
   4. Unauthenticated users are rate-limited to prevent abuse of the search API
   5. App includes accessible terms of service and privacy policy pages
-**Plans:** 3/5 plans executed
+**Plans:** 5/5 plans complete
 
 Plans:
 - [ ] 04-00-PLAN.md — Wave 0: Test stubs for all Phase 4 verification targets (Nyquist contract)
@@ -96,4 +96,4 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 | 1. Foundation & Data Pipeline | 3/3 | Complete | 2026-03-06 |
 | 2. Results & Visualization | 3/3 | Complete   | 2026-03-06 |
 | 3. Insights | 2/2 | Complete | 2026-03-06 |
-| 4. Auth, Saved Searches & Compliance | 3/5 | In Progress|  |
+| 4. Auth, Saved Searches & Compliance | 5/5 | Complete   | 2026-03-06 |
