@@ -26,9 +26,9 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Insights
 
-- [ ] **INSI-01**: User sees a ranked list of top destination companies
-- [ ] **INSI-02**: User sees common role transitions (what roles people moved into)
-- [ ] **INSI-03**: User sees pattern summaries (e.g. "People from your role tend to land at these 5 companies, especially in these roles")
+- [x] **INSI-01**: User sees a ranked list of top destination companies
+- [x] **INSI-02**: User sees common role transitions (what roles people moved into)
+- [x] **INSI-03**: User sees pattern summaries (e.g. "People from your role tend to land at these 5 companies, especially in these roles")
 
 ### Authentication
 
@@ -97,9 +97,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SRCH-04 | Phase 1 | Complete |
 | SRCH-05 | Phase 2 | Complete |
 | SRCH-06 | Phase 2 | Complete |
-| INSI-01 | Phase 3 | Pending |
-| INSI-02 | Phase 3 | Pending |
-| INSI-03 | Phase 3 | Pending |
+| INSI-01 | Phase 3 | Complete |
+| INSI-02 | Phase 3 | Complete |
+| INSI-03 | Phase 3 | Complete |
 | AUTH-01 | Phase 4 | Pending |
 | AUTH-02 | Phase 4 | Pending |
 | AUTH-03 | Phase 4 | Pending |

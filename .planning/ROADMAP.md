@@ -61,7 +61,7 @@ Plans:
   1. User sees a ranked list of top destination companies for their search
   2. User sees common role transitions showing what roles people moved into
   3. User sees natural-language pattern summaries (e.g. "People from your role tend to land at these 5 companies, especially in these roles")
-**Plans:** 2 plans
+**Plans:** 1/2 plans executed
 
 Plans:
 - [ ] 03-01-PLAN.md — Insights computation engine (TDD): top destinations, role classification, pattern summary generation
@@ -93,5 +93,5 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 |-------|----------------|--------|-----------|
 | 1. Foundation & Data Pipeline | 3/3 | Complete | 2026-03-06 |
 | 2. Results & Visualization | 3/3 | Complete   | 2026-03-06 |
-| 3. Insights | 0/2 | Not started | - |
+| 3. Insights | 1/2 | In Progress|  |
 | 4. Auth, Saved Searches & Compliance | 0/3 | Not started | - |
