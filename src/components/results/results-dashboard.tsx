@@ -6,7 +6,9 @@ import {
   buildSankeyData,
   type MigrationRecord,
 } from "@/lib/sankey-data";
+import { computeInsights } from "@/lib/insights";
 import { ResultsHeader } from "./results-header";
+import { InsightsCard } from "./insights-card";
 import { CompanyGrid } from "./company-grid";
 import { SankeyDiagram } from "./sankey-diagram";
 import { SankeyErrorBoundary } from "./sankey-error-boundary";
@@ -30,6 +32,11 @@ export function ResultsDashboard({
     [migrations, search.role],
   );
 
+  const insights = useMemo(
+    () => computeInsights(migrations, search.role),
+    [migrations, search.role],
+  );
+
   const totalPeople = migrations.reduce((sum, m) => sum + m.count, 0);
   const totalCompanies = new Set(migrations.map((m) => m.destinationCompany))
     .size;
@@ -44,6 +51,8 @@ export function ResultsDashboard({
         totalCompanies={totalCompanies}
         totalRoles={totalRoles}
       />
+
+      {migrations.length > 0 && <InsightsCard insights={insights} />}
 
       {migrations.length > 0 && (
         <SankeyErrorBoundary>
