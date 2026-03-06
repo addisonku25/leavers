@@ -18,10 +18,10 @@ interface SankeyDiagramProps {
 type LayoutNode = D3SankeyNode<SankeyNode, SankeyLink>;
 type LayoutLink = D3SankeyLink<SankeyNode, SankeyLink>;
 
-const MARGIN = 24;
+const MARGIN = 16;
 const NODE_WIDTH = 15;
-const NODE_PADDING = 10;
-const FIXED_HEIGHT = 400;
+const NODE_PADDING = 18;
+const FIXED_HEIGHT = 500;
 
 const CATEGORY_COLORS: Record<string, string> = {
   source: "hsl(221, 83%, 53%)",     // blue-600
@@ -29,7 +29,7 @@ const CATEGORY_COLORS: Record<string, string> = {
   destination: "hsl(160, 60%, 45%)", // emerald-ish
 };
 
-function truncateLabel(text: string, maxLen = 20): string {
+function truncateLabel(text: string, maxLen = 24): string {
   return text.length > maxLen ? `${text.slice(0, maxLen - 1)}…` : text;
 }
 
@@ -50,8 +50,8 @@ function SankeySVG({
       .nodePadding(NODE_PADDING)
       .nodeAlign(sankeyJustify)
       .extent([
-        [MARGIN, MARGIN],
-        [width - MARGIN, height - MARGIN],
+        [MARGIN + 140, MARGIN],
+        [width - MARGIN - 140, height - MARGIN],
       ]);
 
     // Deep-copy data so d3-sankey can mutate without affecting React props
@@ -111,10 +111,10 @@ function SankeySVG({
     const x1 = node.x1 ?? 0;
 
     if (category === "source") {
-      return { x: x1 + 6, anchor: "start" };
+      return { x: x0 - 6, anchor: "end" };
     }
     if (category === "destination") {
-      return { x: x0 - 6, anchor: "end" };
+      return { x: x1 + 6, anchor: "start" };
     }
     // company: centered above
     return { x: (x0 + x1) / 2, anchor: "middle" };
