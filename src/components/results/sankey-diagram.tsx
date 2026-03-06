@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback, useMemo } from "react";
+import { useEffect, useRef, useState, useMemo, useCallback } from "react";
 import {
   sankey,
   sankeyJustify,
@@ -42,12 +42,7 @@ function SankeySVG({
   width: number;
   height: number;
 }) {
-  const [hoveredLink, setHoveredLink] = useState<number | null>(null);
-  const [tooltipInfo, setTooltipInfo] = useState<{
-    x: number;
-    y: number;
-    text: string;
-  } | null>(null);
+  const [hoveredNode, setHoveredNode] = useState<number | null>(null);
 
   const layout = useMemo(() => {
     const generator = sankey<SankeyNode, SankeyLink>()
@@ -70,76 +65,39 @@ function SankeySVG({
 
   const linkPathGenerator = sankeyLinkHorizontal();
 
+  // Build set of node indices connected to the hovered node
+  const connectedNodes = useMemo(() => {
+    if (hoveredNode === null) return null;
+    const connected = new Set<number>([hoveredNode]);
+    for (const link of layout.links) {
+      const srcIdx = typeof link.source === "object" ? (link.source as LayoutNode).index! : link.source;
+      const tgtIdx = typeof link.target === "object" ? (link.target as LayoutNode).index! : link.target;
+      if (srcIdx === hoveredNode || tgtIdx === hoveredNode) {
+        connected.add(srcIdx);
+        connected.add(tgtIdx);
+      }
+    }
+    return connected;
+  }, [hoveredNode, layout.links]);
+
   const getLinkOpacity = useCallback(
-    (linkIndex: number): number => {
-      if (hoveredLink === null) return 0.3;
-      if (linkIndex === hoveredLink) return 0.7;
-
-      const hovered = layout.links[hoveredLink];
-      const current = layout.links[linkIndex];
-      if (!hovered || !current) return 0.1;
-
-      const hoveredSourceIdx =
-        typeof hovered.source === "object"
-          ? (hovered.source as LayoutNode).index
-          : hovered.source;
-      const hoveredTargetIdx =
-        typeof hovered.target === "object"
-          ? (hovered.target as LayoutNode).index
-          : hovered.target;
-      const currentSourceIdx =
-        typeof current.source === "object"
-          ? (current.source as LayoutNode).index
-          : current.source;
-      const currentTargetIdx =
-        typeof current.target === "object"
-          ? (current.target as LayoutNode).index
-          : current.target;
-
-      if (
-        hoveredSourceIdx === currentSourceIdx ||
-        hoveredTargetIdx === currentTargetIdx
-      ) {
-        return 0.5;
-      }
-
-      return 0.1;
+    (link: (typeof layout.links)[number]): number => {
+      if (hoveredNode === null) return 0.3;
+      const srcIdx = typeof link.source === "object" ? (link.source as LayoutNode).index! : link.source;
+      const tgtIdx = typeof link.target === "object" ? (link.target as LayoutNode).index! : link.target;
+      if (srcIdx === hoveredNode || tgtIdx === hoveredNode) return 0.7;
+      return 0.08;
     },
-    [hoveredLink, layout.links],
+    [hoveredNode],
   );
 
-  const handleLinkEnter = useCallback(
-    (linkIndex: number, event: React.MouseEvent) => {
-      setHoveredLink(linkIndex);
-      const link = layout.links[linkIndex];
-      if (!link) return;
-
-      const source =
-        typeof link.source === "object" ? (link.source as LayoutNode) : null;
-      const target =
-        typeof link.target === "object" ? (link.target as LayoutNode) : null;
-
-      const label = [source?.name, target?.name].filter(Boolean).join(" → ");
-      const count = link.value ?? 0;
-
-      const rect = (event.currentTarget as SVGElement)
-        .closest("svg")
-        ?.getBoundingClientRect();
-      if (rect) {
-        setTooltipInfo({
-          x: event.clientX - rect.left,
-          y: event.clientY - rect.top - 28,
-          text: `${label}: ${count}`,
-        });
-      }
+  const getNodeOpacity = useCallback(
+    (nodeIndex: number): number => {
+      if (connectedNodes === null) return 1;
+      return connectedNodes.has(nodeIndex) ? 1 : 0.2;
     },
-    [layout.links],
+    [connectedNodes],
   );
-
-  const handleLinkLeave = useCallback(() => {
-    setHoveredLink(null);
-    setTooltipInfo(null);
-  }, []);
 
   const getNodeColor = (node: LayoutNode): string =>
     CATEGORY_COLORS[(node as unknown as SankeyNode).category] ??
@@ -163,99 +121,96 @@ function SankeySVG({
   };
 
   return (
-    <div className="relative">
-      <svg
-        width={width}
-        height={height}
-        data-testid="sankey-svg"
-        className="overflow-visible"
-      >
-        {/* Links */}
-        <g>
-          {layout.links.map((link, i) => {
-            const d = linkPathGenerator(link as never);
-            if (!d) return null;
-            const sourceNode =
-              typeof link.source === "object"
-                ? (link.source as LayoutNode)
-                : null;
-            const strokeColor = sourceNode
-              ? getNodeColor(sourceNode)
-              : CATEGORY_COLORS.company;
+    <svg
+      width={width}
+      height={height}
+      data-testid="sankey-svg"
+      className="overflow-visible"
+      onMouseLeave={() => setHoveredNode(null)}
+    >
+      {/* Links */}
+      <g>
+        {layout.links.map((link, i) => {
+          const d = linkPathGenerator(link as never);
+          if (!d) return null;
+          const sourceNode =
+            typeof link.source === "object"
+              ? (link.source as LayoutNode)
+              : null;
+          const strokeColor = sourceNode
+            ? getNodeColor(sourceNode)
+            : CATEGORY_COLORS.company;
 
-            return (
-              <path
-                key={i}
-                d={d}
-                fill="none"
-                stroke={strokeColor}
-                strokeWidth={Math.max((link.width ?? 1), 1)}
-                opacity={getLinkOpacity(i)}
-                className="transition-opacity duration-200"
-                onMouseEnter={(e) => handleLinkEnter(i, e)}
-                onMouseLeave={handleLinkLeave}
+          return (
+            <path
+              key={i}
+              d={d}
+              fill="none"
+              stroke={strokeColor}
+              strokeWidth={Math.max((link.width ?? 1), 1)}
+              opacity={getLinkOpacity(link)}
+              className="pointer-events-none transition-opacity duration-200"
+            />
+          );
+        })}
+      </g>
+
+      {/* Nodes */}
+      <g>
+        {layout.nodes.map((node, i) => {
+          const x0 = node.x0 ?? 0;
+          const y0 = node.y0 ?? 0;
+          const x1 = node.x1 ?? 0;
+          const y1 = node.y1 ?? 0;
+          const color = getNodeColor(node);
+          const label = getLabelAnchor(node);
+          const category = (node as unknown as SankeyNode).category;
+          const nodeOpacity = getNodeOpacity(i);
+
+          return (
+            <g
+              key={i}
+              opacity={nodeOpacity}
+              className="cursor-pointer transition-opacity duration-200"
+              onMouseEnter={() => setHoveredNode(i)}
+            >
+              <rect
+                x={x0}
+                y={y0}
+                width={x1 - x0}
+                height={Math.max(y1 - y0, 1)}
+                fill={color}
+                rx={2}
               />
-            );
-          })}
-        </g>
-
-        {/* Nodes */}
-        <g>
-          {layout.nodes.map((node, i) => {
-            const x0 = node.x0 ?? 0;
-            const y0 = node.y0 ?? 0;
-            const x1 = node.x1 ?? 0;
-            const y1 = node.y1 ?? 0;
-            const color = getNodeColor(node);
-            const label = getLabelAnchor(node);
-            const category = (node as unknown as SankeyNode).category;
-
-            return (
-              <g key={i}>
-                <rect
-                  x={x0}
-                  y={y0}
-                  width={x1 - x0}
-                  height={Math.max(y1 - y0, 1)}
-                  fill={color}
-                  rx={2}
-                />
-                <text
-                  x={label.x}
-                  y={
-                    category === "company"
-                      ? y0 - 4
-                      : (y0 + y1) / 2
-                  }
-                  textAnchor={label.anchor}
-                  dominantBaseline={
-                    category === "company" ? "auto" : "central"
-                  }
-                  className="fill-foreground text-xs"
-                  fontSize={11}
-                >
-                  {truncateLabel(node.name)}
-                </text>
-              </g>
-            );
-          })}
-        </g>
-      </svg>
-
-      {/* Tooltip */}
-      {tooltipInfo && (
-        <div
-          className="pointer-events-none absolute rounded bg-popover px-2 py-1 text-xs text-popover-foreground shadow-md"
-          style={{
-            left: tooltipInfo.x,
-            top: tooltipInfo.y,
-            transform: "translateX(-50%)",
-          }}
-        >
-          {tooltipInfo.text}
-        </div>
-      )}
-    </div>
+              {/* Invisible wider hit area for easier hover */}
+              <rect
+                x={x0 - 4}
+                y={y0 - 2}
+                width={x1 - x0 + 8}
+                height={Math.max(y1 - y0, 1) + 4}
+                fill="transparent"
+              />
+              <text
+                x={label.x}
+                y={
+                  category === "company"
+                    ? y0 - 4
+                    : (y0 + y1) / 2
+                }
+                textAnchor={label.anchor}
+                dominantBaseline={
+                  category === "company" ? "auto" : "central"
+                }
+                className="fill-foreground text-xs"
+                fontSize={11}
+              >
+                {truncateLabel(node.name)}
+              </text>
+            </g>
+          );
+        })}
+      </g>
+    </svg>
   );
 }
 

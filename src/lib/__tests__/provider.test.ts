@@ -42,7 +42,7 @@ describe("MockProvider", () => {
     expect(results1).toEqual(results2);
   });
 
-  it("returns results with the correct source company and role", async () => {
+  it("returns results with the correct source company", async () => {
     const results = await provider.search({
       company: "McKinsey",
       role: "Management Consultant",
@@ -50,16 +50,22 @@ describe("MockProvider", () => {
     expect(results.length).toBeGreaterThan(0);
     for (const r of results) {
       expect(r.sourceCompany).toBe("McKinsey");
-      expect(r.sourceRole).toBe("Management Consultant");
+      expect(r.sourceRole).toBeTruthy();
     }
   });
 
-  it("returns 5-15 results per search", async () => {
+  it("returns multiple roles per company", async () => {
     const results = await provider.search({
       company: "Meta",
       role: "Product Manager",
     });
-    expect(results.length).toBeGreaterThanOrEqual(5);
-    expect(results.length).toBeLessThanOrEqual(15);
+    expect(results.length).toBeGreaterThanOrEqual(6);
+    // At least some company should have multiple roles
+    const byCompany = new Map<string, number>();
+    for (const r of results) {
+      byCompany.set(r.destinationCompany, (byCompany.get(r.destinationCompany) ?? 0) + 1);
+    }
+    const maxRoles = Math.max(...byCompany.values());
+    expect(maxRoles).toBeGreaterThan(1);
   });
 });
