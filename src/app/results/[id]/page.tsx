@@ -7,6 +7,7 @@ import { migrations, searches } from "@/lib/db/schema";
 import { Button } from "@/components/ui/button";
 import { ResultsDashboard } from "@/components/results/results-dashboard";
 import { EmptyState } from "@/components/results/empty-state";
+import { isSearchSaved } from "@/actions/saved-searches";
 
 interface ResultsPageProps {
   params: Promise<{ id: string }>;
@@ -83,11 +84,16 @@ export default async function ResultsPage({ params }: ResultsPageProps) {
     count: r.count,
   }));
 
+  // Check if the current user has saved this search
+  const savedResult = await isSearchSaved(id);
+
   return (
     <ResultsLayout>
       <ResultsDashboard
         search={{ company: search.company, role: search.role }}
         migrations={migrationData}
+        searchId={id}
+        initialSaved={savedResult.saved}
       />
     </ResultsLayout>
   );

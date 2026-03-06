@@ -12,15 +12,20 @@ import { InsightsCard } from "./insights-card";
 import { CompanyGrid } from "./company-grid";
 import { SankeyDiagram } from "./sankey-diagram";
 import { SankeyErrorBoundary } from "./sankey-error-boundary";
+import { SaveSearchButton } from "@/components/save-search-button";
 
 interface ResultsDashboardProps {
   search: { company: string; role: string };
   migrations: MigrationRecord[];
+  searchId: string;
+  initialSaved?: boolean;
 }
 
 export function ResultsDashboard({
   search,
   migrations,
+  searchId,
+  initialSaved = false,
 }: ResultsDashboardProps) {
   const companies = useMemo(
     () => groupMigrationsForCards(migrations, search.role),
@@ -50,15 +55,18 @@ export function ResultsDashboard({
         totalPeople={totalPeople}
         totalCompanies={totalCompanies}
         totalRoles={totalRoles}
+        saveButton={
+          <SaveSearchButton searchId={searchId} initialSaved={initialSaved} />
+        }
       />
-
-      {migrations.length > 0 && <InsightsCard insights={insights} />}
 
       {migrations.length > 0 && (
         <SankeyErrorBoundary>
           <SankeyDiagram data={sankeyData} sourceCompany={search.company} />
         </SankeyErrorBoundary>
       )}
+
+      {migrations.length > 0 && <InsightsCard insights={insights} />}
 
       <div className="border-b" />
 

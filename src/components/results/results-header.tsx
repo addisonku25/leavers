@@ -7,6 +7,7 @@ interface ResultsHeaderProps {
   totalPeople: number;
   totalCompanies: number;
   totalRoles: number;
+  saveButton?: React.ReactNode;
 }
 
 export function ResultsHeader({
@@ -15,6 +16,7 @@ export function ResultsHeader({
   totalPeople,
   totalCompanies,
   totalRoles,
+  saveButton,
 }: ResultsHeaderProps) {
   return (
     <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
@@ -27,9 +29,12 @@ export function ResultsHeader({
           {totalRoles} roles
         </p>
       </div>
-      <Button asChild>
-        <Link href="/">New Search</Link>
-      </Button>
+      <div className="flex gap-2">
+        {saveButton}
+        <Button asChild>
+          <Link href="/">New Search</Link>
+        </Button>
+      </div>
     </div>
   );
 }
