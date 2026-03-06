@@ -32,20 +32,20 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Authentication
 
-- [ ] **AUTH-01**: User can sign up with email and password
+- [x] **AUTH-01**: User can sign up with email and password
 - [ ] **AUTH-02**: User can log in and stay logged in across sessions
-- [ ] **AUTH-03**: User can log out
+- [x] **AUTH-03**: User can log out
 
 ### Saved Searches
 
-- [ ] **SAVE-01**: Authenticated user can save a search for later
-- [ ] **SAVE-02**: Authenticated user can view their saved searches
-- [ ] **SAVE-03**: Authenticated user can delete a saved search
+- [x] **SAVE-01**: Authenticated user can save a search for later
+- [x] **SAVE-02**: Authenticated user can view their saved searches
+- [x] **SAVE-03**: Authenticated user can delete a saved search
 
 ### Privacy & Compliance
 
 - [x] **PRIV-01**: App displays only aggregated/anonymized data -- no individual names or identifiable profiles
-- [ ] **PRIV-02**: App rate-limits searches to prevent abuse
+- [x] **PRIV-02**: App rate-limits searches to prevent abuse
 - [x] **PRIV-03**: App includes terms of service and privacy policy pages
 
 ## v2 Requirements
@@ -100,14 +100,14 @@ Which phases cover which requirements. Updated during roadmap creation.
 | INSI-01 | Phase 3 | Complete |
 | INSI-02 | Phase 3 | Complete |
 | INSI-03 | Phase 3 | Complete |
-| AUTH-01 | Phase 4 | Pending |
+| AUTH-01 | Phase 4 | Complete |
 | AUTH-02 | Phase 4 | Pending |
-| AUTH-03 | Phase 4 | Pending |
-| SAVE-01 | Phase 4 | Pending |
-| SAVE-02 | Phase 4 | Pending |
-| SAVE-03 | Phase 4 | Pending |
+| AUTH-03 | Phase 4 | Complete |
+| SAVE-01 | Phase 4 | Complete |
+| SAVE-02 | Phase 4 | Complete |
+| SAVE-03 | Phase 4 | Complete |
 | PRIV-01 | Phase 2 | Complete |
-| PRIV-02 | Phase 4 | Pending |
+| PRIV-02 | Phase 4 | Complete |
 | PRIV-03 | Phase 4 | Complete |
 
 **Coverage:**
