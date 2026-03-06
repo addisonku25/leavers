@@ -46,7 +46,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [x] **PRIV-01**: App displays only aggregated/anonymized data -- no individual names or identifiable profiles
 - [ ] **PRIV-02**: App rate-limits searches to prevent abuse
-- [ ] **PRIV-03**: App includes terms of service and privacy policy pages
+- [x] **PRIV-03**: App includes terms of service and privacy policy pages
 
 ## v2 Requirements
 
@@ -108,7 +108,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SAVE-03 | Phase 4 | Pending |
 | PRIV-01 | Phase 2 | Complete |
 | PRIV-02 | Phase 4 | Pending |
-| PRIV-03 | Phase 4 | Pending |
+| PRIV-03 | Phase 4 | Complete |
 
 **Coverage:**
 - v1 requirements: 23 total
