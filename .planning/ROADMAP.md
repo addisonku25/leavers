@@ -12,7 +12,7 @@ Leavers delivers career migration intelligence by first proving the data pipelin
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Foundation & Data Pipeline** - Project scaffolding, data sourcing, fuzzy matching, caching, and a working search form
+- [x] **Phase 1: Foundation & Data Pipeline** - Project scaffolding, data sourcing, fuzzy matching, caching, and a working search form
 - [ ] **Phase 2: Results & Visualization** - Migration dashboard showing where people went, in what roles, with flow visualization
 - [ ] **Phase 3: Insights** - Pattern analysis layer that surfaces the "aha moment" from raw migration data
 - [ ] **Phase 4: Auth, Saved Searches & Compliance** - User accounts, persistent saved searches, rate limiting, and legal pages
@@ -34,7 +34,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 Plans:
 - [x] 01-01-PLAN.md — Scaffold project, build data pipeline core (types, providers, cache, fuzzy matching)
 - [x] 01-02-PLAN.md — Validate ScrapIn API, implement BrightData+ScrapIn providers, wire search server action
-- [ ] 01-03-PLAN.md — Build search UI (landing page, form, suggestions, results page, loading/error states)
+- [x] 01-03-PLAN.md — Build search UI (landing page, form, suggestions, results page, loading/error states)
 
 ### Phase 2: Results & Visualization
 **Goal**: User sees a clear, anonymized dashboard of where former employees went and what roles they took
@@ -89,7 +89,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation & Data Pipeline | 2/3 | In progress | - |
+| 1. Foundation & Data Pipeline | 3/3 | Complete | 2026-03-06 |
 | 2. Results & Visualization | 0/2 | Not started | - |
 | 3. Insights | 0/1 | Not started | - |
 | 4. Auth, Saved Searches & Compliance | 0/3 | Not started | - |
