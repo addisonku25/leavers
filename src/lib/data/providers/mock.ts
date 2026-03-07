@@ -1,4 +1,11 @@
-import type { CareerMigration, DataProvider, MigrationSearchParams } from "../types";
+import type {
+  CareerMigration,
+  DataProvider,
+  DetailedLeaver,
+  DetailedSearchResult,
+  LeaverPosition,
+  MigrationSearchParams,
+} from "../types";
 
 // Deterministic destination data based on input hash
 const DESTINATION_COMPANIES = [
@@ -93,7 +100,76 @@ export class MockProvider implements DataProvider {
     return migrations;
   }
 
+  async searchDetailed(params: MigrationSearchParams): Promise<DetailedSearchResult> {
+    const migrations = await this.search(params);
+    const seed = simpleHash(`${params.company}:${params.role}`);
+    const leavers: DetailedLeaver[] = [];
+
+    for (let migIdx = 0; migIdx < migrations.length; migIdx++) {
+      const migration = migrations[migIdx];
+      const migLeavers = generateMockLeavers(migration, migIdx, seed);
+      leavers.push(...migLeavers);
+    }
+
+    return { migrations, leavers };
+  }
+
   async healthCheck(): Promise<boolean> {
     return true;
   }
+}
+
+/**
+ * Generate deterministic mock leavers for a single migration.
+ * Returns 5-10 leavers, each with 2-4 career positions.
+ */
+function generateMockLeavers(
+  migration: CareerMigration,
+  migrationIndex: number,
+  seed: number,
+): DetailedLeaver[] {
+  const leaverCount = 5 + ((seed + migrationIndex * 17) % 6);
+  const leavers: DetailedLeaver[] = [];
+  const baseYear = 2018;
+
+  for (let i = 0; i < leaverCount; i++) {
+    const leaverSeed = seed + migrationIndex * 1000 + i * 31;
+    const positionCount = 2 + (leaverSeed % 3);
+    const userId = migrationIndex * 100 + i + 1;
+
+    const positions: LeaverPosition[] = [];
+    for (let j = 0; j < positionCount; j++) {
+      if (j === 0) {
+        // First position = current role at destination company
+        positions.push({
+          company: migration.destinationCompany,
+          title: migration.destinationRole,
+          startDate: `${baseYear + j * 2}-01`,
+          endDate: undefined, // current position
+        });
+      } else {
+        const companyIdx = (leaverSeed + j * 7) % DESTINATION_COMPANIES.length;
+        const roleIdx = (leaverSeed + j * 11) % DESTINATION_ROLES.length;
+        positions.push({
+          company: DESTINATION_COMPANIES[companyIdx],
+          title: DESTINATION_ROLES[roleIdx],
+          startDate: `${baseYear + j * 2}-01`,
+          endDate: `${baseYear + j * 2 + 1}-12`,
+        });
+      }
+    }
+
+    leavers.push({
+      name: `Test User ${userId}`,
+      linkedinUrl: `https://linkedin.com/in/test-user-${userId}`,
+      currentTitle: migration.destinationRole,
+      currentCompany: migration.destinationCompany,
+      transitionDate: `${baseYear}-06`,
+      positions,
+      destinationCompany: migration.destinationCompany,
+      destinationRole: migration.destinationRole,
+    });
+  }
+
+  return leavers;
 }
