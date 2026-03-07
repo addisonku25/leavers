@@ -8,25 +8,40 @@ A web app that shows users where people with similar roles at their company have
 
 Show users concrete evidence of where people like them ended up — turning career anxiety into actionable intelligence.
 
+## Current Milestone: v1.1 Deep Dive
+
+**Goal:** Add interactive drill-down from Sankey diagram and company cards into individual leaver details, turning aggregate patterns into auditable evidence.
+
+**Target features:**
+- Sankey node click interactions (scroll, highlight, promote)
+- Clickable roles in company cards opening leaver detail modal
+- Individual leaver data: transition date, career history, name & LinkedIn (auth-gated)
+
 ## Requirements
 
 ### Validated
 
-(None yet — ship to validate)
+- User can input current role and company to search for career migration patterns
+- App fuzzy-matches role titles (e.g. "Senior Solution Engineer" matches "Solutions Engineer", "Sr. SE", etc.)
+- App finds individuals who previously held similar roles at the specified company
+- Dashboard displays destination companies grouped with counts (e.g. "5 people went to Salesforce")
+- Dashboard shows what roles former employees moved into at each destination company
+- Insights layer surfaces patterns (e.g. "People from your role tend to land at these 5 companies, especially in these roles")
+- On-demand data fetching — first search runs live, results are cached for subsequent users
+- Basic search works without an account
+- Accounts unlock saved searches and future premium features
+- Data sourced from LinkedIn/Indeed via APIs where available, scraping as fallback
+- Hosted on Vercel with GitHub, Turso, and Cloudflare as needed
 
 ### Active
 
-- [ ] User can input current role and company to search for career migration patterns
-- [ ] App fuzzy-matches role titles (e.g. "Senior Solution Engineer" matches "Solutions Engineer", "Sr. SE", etc.)
-- [ ] App finds individuals who previously held similar roles at the specified company
-- [ ] Dashboard displays destination companies grouped with counts (e.g. "5 people went to Salesforce")
-- [ ] Dashboard shows what roles former employees moved into at each destination company
-- [ ] Insights layer surfaces patterns (e.g. "People from your role tend to land at these 5 companies, especially in these roles")
-- [ ] On-demand data fetching — first search runs live, results are cached for subsequent users
-- [ ] Basic search works without an account
-- [ ] Accounts unlock saved searches and future premium features
-- [ ] Data sourced from LinkedIn/Indeed via APIs where available, scraping as fallback
-- [ ] Hosted on Vercel with GitHub, Turso, and Cloudflare as needed
+- [ ] Sankey company node click scrolls to cards, highlights and promotes matching card to top
+- [ ] Sankey role node click filters/highlights cards containing that role, promotes them to top
+- [ ] Roles in company cards are visually clickable (button/link style)
+- [ ] Clicking a role opens a modal with individual leaver details
+- [ ] Leaver detail shows transition date and full career history
+- [ ] Leaver detail shows name and LinkedIn link for authenticated users only
+- [ ] Data model expanded to store individual leaver details (career history, dates, LinkedIn URL)
 
 ### Out of Scope
 
@@ -60,4 +75,4 @@ Show users concrete evidence of where people like them ended up — turning care
 | v2 for resume AI | Core value is the migration data/insights — resume comparison adds complexity without validating the premise | — Pending |
 
 ---
-*Last updated: 2026-03-06 after initialization*
+*Last updated: 2026-03-07 after v1.1 milestone start*

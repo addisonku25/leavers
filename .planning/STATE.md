@@ -1,36 +1,34 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.0
-milestone_name: milestone
-status: executing
-stopped_at: Completed 04-04-PLAN.md
-last_updated: "2026-03-06T22:24:09.287Z"
-last_activity: 2026-03-06 -- Plan 04-04 complete (Saved searches CRUD and /saved page)
+milestone: v1.1
+milestone_name: Deep Dive
+status: defining
+stopped_at: null
+last_updated: "2026-03-07"
+last_activity: 2026-03-07 -- Milestone v1.1 started
 progress:
-  total_phases: 4
-  completed_phases: 4
-  total_plans: 13
-  completed_plans: 13
-  percent: 100
+  total_phases: 0
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 0
+  percent: 0
 ---
 
 # Project State
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-03-06)
+See: .planning/PROJECT.md (updated 2026-03-07)
 
 **Core value:** Show users concrete evidence of where people like them ended up -- turning career anxiety into actionable intelligence.
-**Current focus:** Phase 4: Auth, Saved Searches & Compliance -- in progress.
+**Current focus:** Defining requirements for v1.1 Deep Dive
 
 ## Current Position
 
-Phase: 4 of 4 (Auth, Saved Searches & Compliance)
-Plan: 5 of 5 in current phase (04-04 complete)
-Status: In Progress
-Last activity: 2026-03-06 -- Plan 04-04 complete (Saved searches CRUD and /saved page)
-
-Progress: [██████████] 100%
+Phase: Not started (defining requirements)
+Plan: --
+Status: Defining requirements
+Last activity: 2026-03-07 -- Milestone v1.1 started
 
 ## Performance Metrics
 
