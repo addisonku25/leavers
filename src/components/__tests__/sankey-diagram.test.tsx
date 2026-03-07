@@ -2,6 +2,7 @@ import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { SankeyDiagram } from "../results/sankey-diagram";
 import { SankeyErrorBoundary } from "../results/sankey-error-boundary";
+import { DrillDownProvider } from "../results/drill-down-provider";
 import type { SankeyData } from "@/lib/sankey-data";
 
 // Mock ResizeObserver for jsdom
@@ -56,7 +57,7 @@ const emptyData: SankeyData = {
 
 describe("SankeyDiagram", () => {
   it("renders an SVG element when given valid data", () => {
-    render(<SankeyDiagram data={validData} />);
+    render(<DrillDownProvider><SankeyDiagram data={validData} /></DrillDownProvider>);
     const svg = screen.getByTestId("sankey-svg");
     expect(svg).toBeDefined();
     expect(svg.tagName).toBe("svg");
@@ -68,7 +69,7 @@ describe("SankeyDiagram", () => {
   });
 
   it("renders node labels", () => {
-    render(<SankeyDiagram data={validData} />);
+    render(<DrillDownProvider><SankeyDiagram data={validData} /></DrillDownProvider>);
     expect(screen.getByText("Software Engineer")).toBeDefined();
     expect(screen.getByText("Google")).toBeDefined();
     expect(screen.getByText("Meta")).toBeDefined();

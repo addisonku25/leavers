@@ -13,6 +13,7 @@ import { CompanyGrid } from "./company-grid";
 import { SankeyDiagram } from "./sankey-diagram";
 import { SankeyErrorBoundary } from "./sankey-error-boundary";
 import { SaveSearchButton } from "@/components/save-search-button";
+import { DrillDownProvider } from "./drill-down-provider";
 
 interface ResultsDashboardProps {
   search: { company: string; role: string };
@@ -48,6 +49,7 @@ export function ResultsDashboard({
   const totalRoles = new Set(migrations.map((m) => m.destinationRole)).size;
 
   return (
+    <DrillDownProvider>
     <div className="space-y-8">
       <ResultsHeader
         company={search.company}
@@ -72,5 +74,6 @@ export function ResultsDashboard({
 
       <CompanyGrid companies={companies} />
     </div>
+    </DrillDownProvider>
   );
 }

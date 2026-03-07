@@ -10,6 +10,7 @@ import {
   type SankeyLink as D3SankeyLink,
 } from "d3-sankey";
 import type { SankeyData, SankeyNode, SankeyLink } from "@/lib/sankey-data";
+import { useDrillDown } from "./drill-down-provider";
 
 interface SankeyDiagramProps {
   data: SankeyData;
@@ -62,6 +63,8 @@ function SankeySVG({
   sourceCompany?: string;
 }) {
   const [hoveredNode, setHoveredNode] = useState<number | null>(null);
+  const { state: drillDown, dispatch } = useDrillDown();
+  const selectedNode = drillDown.nodeIndex;
 
   const layout = useMemo(() => {
     const generator = sankey<SankeyNode, SankeyLink>()
@@ -110,30 +113,54 @@ function SankeySVG({
 
   const linkPathGenerator = sankeyLinkHorizontal();
 
-  // Build set of node indices connected to the hovered node
+  // Active highlight node: hover takes priority, then selection
+  const activeHighlightNode = hoveredNode ?? selectedNode ?? null;
+
+  // Build set of node indices connected to the active highlight node
   const connectedNodes = useMemo(() => {
-    if (hoveredNode === null) return null;
-    const connected = new Set<number>([hoveredNode]);
+    if (activeHighlightNode === null) return null;
+    const connected = new Set<number>([activeHighlightNode]);
     for (const link of layout.links) {
       const srcIdx = typeof link.source === "object" ? (link.source as LayoutNode).index! : link.source;
       const tgtIdx = typeof link.target === "object" ? (link.target as LayoutNode).index! : link.target;
-      if (srcIdx === hoveredNode || tgtIdx === hoveredNode) {
+      if (srcIdx === activeHighlightNode || tgtIdx === activeHighlightNode) {
         connected.add(srcIdx);
         connected.add(tgtIdx);
       }
     }
     return connected;
-  }, [hoveredNode, layout.links]);
+  }, [activeHighlightNode, layout.links]);
+
+  const handleNodeClick = useCallback(
+    (nodeIndex: number, node: SankeyNode) => {
+      if (node.category === "source") {
+        dispatch({ type: "CLEAR" });
+      } else if (node.category === "company") {
+        if (drillDown.type === "company" && drillDown.value === node.name) {
+          dispatch({ type: "CLEAR" });
+        } else {
+          dispatch({ type: "SELECT_COMPANY", company: node.name, nodeIndex });
+        }
+      } else if (node.category === "destination") {
+        if (drillDown.type === "role" && drillDown.value === node.name) {
+          dispatch({ type: "CLEAR" });
+        } else {
+          dispatch({ type: "SELECT_ROLE", role: node.name, nodeIndex });
+        }
+      }
+    },
+    [dispatch, drillDown.type, drillDown.value],
+  );
 
   const getLinkOpacity = useCallback(
     (link: (typeof layout.links)[number]): number => {
-      if (hoveredNode === null) return 0.3;
+      if (activeHighlightNode === null) return 0.3;
       const srcIdx = typeof link.source === "object" ? (link.source as LayoutNode).index! : link.source;
       const tgtIdx = typeof link.target === "object" ? (link.target as LayoutNode).index! : link.target;
-      if (srcIdx === hoveredNode || tgtIdx === hoveredNode) return 0.7;
+      if (srcIdx === activeHighlightNode || tgtIdx === activeHighlightNode) return 0.7;
       return 0.08;
     },
-    [hoveredNode],
+    [activeHighlightNode],
   );
 
   const getNodeOpacity = useCallback(
@@ -218,6 +245,7 @@ function SankeySVG({
               opacity={nodeOpacity}
               className="cursor-pointer transition-opacity duration-200"
               onMouseEnter={() => setHoveredNode(i)}
+              onClick={() => handleNodeClick(i, node as unknown as SankeyNode)}
             >
               <rect
                 x={x0}
@@ -226,6 +254,9 @@ function SankeySVG({
                 height={Math.max(y1 - y0, 1)}
                 fill={color}
                 rx={2}
+                stroke={selectedNode === i ? "hsl(221, 83%, 40%)" : "none"}
+                strokeWidth={selectedNode === i ? 2 : 0}
+                className="transition-[stroke] duration-200"
               />
               {/* Invisible wider hit area for easier hover */}
               <rect
