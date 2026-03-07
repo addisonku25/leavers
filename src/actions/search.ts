@@ -4,7 +4,12 @@ import { nanoid } from "nanoid";
 import { eq } from "drizzle-orm";
 import { headers } from "next/headers";
 import { db } from "@/lib/db";
-import { migrations as migrationsTable, searches } from "@/lib/db/schema";
+import {
+  migrations as migrationsTable,
+  searches,
+  leavers as leaversTable,
+  leaverPositions as leaverPositionsTable,
+} from "@/lib/db/schema";
 import { searchSchema } from "@/lib/validations/search";
 import { buildCacheKey, getCachedOrFetch } from "@/lib/cache/cache-manager";
 import { getProvider } from "@/lib/data/provider-factory";
@@ -85,20 +90,86 @@ export async function searchAction(formData: FormData) {
   });
 
   try {
-    // Fetch data through cache-aside pipeline
-    const results = await getCachedOrFetch({ company, role }, provider);
+    // Use searchDetailed when available for leaver data, otherwise fall back to cache pipeline
+    const hasDetailed = typeof provider.searchDetailed === "function";
+    let results: Awaited<ReturnType<typeof getCachedOrFetch>>;
+    let detailedLeavers: import("@/lib/data/types").DetailedLeaver[] | undefined;
 
-    // Store migration results linked to this search
+    if (hasDetailed) {
+      const detailed = await provider.searchDetailed!({ company, role });
+      results = detailed.migrations;
+      detailedLeavers = detailed.leavers;
+
+      // Still cache aggregate migrations in Redis for the existing cache path
+      const { redis } = await import("@/lib/cache/redis");
+      if (redis) {
+        const cacheKeyForRedis = buildCacheKey({ company, role });
+        try {
+          await redis.set(cacheKeyForRedis, results, { ex: 86400 });
+        } catch {
+          // Redis failure should not block the request
+        }
+      }
+    } else {
+      results = await getCachedOrFetch({ company, role }, provider);
+    }
+
+    // Store migration results linked to this search, tracking IDs for leaver linkage
+    const migrationIdMap = new Map<string, string>();
     if (results.length > 0) {
       for (const migration of results) {
+        const migrationId = nanoid();
         await db.insert(migrationsTable).values({
-          id: nanoid(),
+          id: migrationId,
           searchId,
           destinationCompany: migration.destinationCompany,
           destinationRole: migration.destinationRole,
           sourceRole: migration.sourceRole,
           count: migration.count,
         });
+        const key = `${migration.destinationCompany.toLowerCase()}:${migration.destinationRole.toLowerCase()}`;
+        migrationIdMap.set(key, migrationId);
+      }
+    }
+
+    // Store leaver records when available
+    if (detailedLeavers && detailedLeavers.length > 0) {
+      const leaverCountPerMigration = new Map<string, number>();
+
+      for (const leaver of detailedLeavers) {
+        const key = `${leaver.destinationCompany.toLowerCase()}:${leaver.destinationRole.toLowerCase()}`;
+        const migrationId = migrationIdMap.get(key);
+        if (!migrationId) continue;
+
+        // Cap at 10 leavers per migration
+        const currentCount = leaverCountPerMigration.get(migrationId) ?? 0;
+        if (currentCount >= 10) continue;
+        leaverCountPerMigration.set(migrationId, currentCount + 1);
+
+        const leaverId = nanoid();
+        await db.insert(leaversTable).values({
+          id: leaverId,
+          migrationId,
+          name: leaver.name,
+          linkedinUrl: leaver.linkedinUrl ?? null,
+          currentTitle: leaver.currentTitle ?? null,
+          currentCompany: leaver.currentCompany ?? null,
+          transitionDate: leaver.transitionDate ?? null,
+          createdAt: now,
+        });
+
+        for (let posIdx = 0; posIdx < leaver.positions.length; posIdx++) {
+          const pos = leaver.positions[posIdx];
+          await db.insert(leaverPositionsTable).values({
+            id: nanoid(),
+            leaverId,
+            company: pos.company,
+            title: pos.title,
+            startDate: pos.startDate ?? null,
+            endDate: pos.endDate ?? null,
+            sortOrder: posIdx,
+          });
+        }
       }
     }
 
