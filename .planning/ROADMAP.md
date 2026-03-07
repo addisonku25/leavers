@@ -110,7 +110,11 @@ Plans:
   2. Leaver records include structured career history (positions with company, title, and dates)
   3. DataProvider interface has an optional searchDetailed method that returns individual leaver data alongside aggregated results
   4. Mock provider returns deterministic individual leaver data for any search query in development
-**Plans**: TBD
+**Plans:** 2 plans
+
+Plans:
+- [ ] 05-01-PLAN.md — Type contracts (DetailedLeaver, LeaverPosition, extended DataProvider) and schema (leavers + leaver_positions tables)
+- [ ] 05-02-PLAN.md — Mock provider searchDetailed implementation and search action wiring to store leaver records
 
 ### Phase 6: Sankey Click Interactions
 **Goal**: Users can click Sankey diagram nodes to navigate, filter, and highlight the company card grid
@@ -155,7 +159,7 @@ Phases execute in numeric order: 5 -> 6 -> 7 -> 8
 | 2. Results & Visualization | v1.0 | 3/3 | Complete | 2026-03-06 |
 | 3. Insights | v1.0 | 2/2 | Complete | 2026-03-06 |
 | 4. Auth, Saved Searches & Compliance | v1.0 | 5/5 | Complete | 2026-03-06 |
-| 5. Data Model Expansion | v1.1 | 0/0 | Not started | - |
+| 5. Data Model Expansion | v1.1 | 0/2 | Planning complete | - |
 | 6. Sankey Click Interactions | v1.1 | 0/0 | Not started | - |
 | 7. Leaver Detail Modal | v1.1 | 0/0 | Not started | - |
 | 8. Polish & Bidirectional Sync | v1.1 | 0/0 | Not started | - |
