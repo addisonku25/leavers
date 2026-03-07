@@ -67,7 +67,7 @@ Requirements for Deep Dive milestone. Continues from v1 numbering.
 - [ ] **LVRD-03**: Leaver modal shows transition date and full career history for each leaver
 - [ ] **LVRD-04**: Leaver modal shows name and LinkedIn profile link for authenticated users only
 - [ ] **LVRD-05**: Unauthenticated users see blurred name/LinkedIn with sign-up CTA overlay
-- [ ] **LVRD-06**: Individual leaver data is lazy-loaded when the modal opens (not during initial search)
+- [ ] **LVRD-06**: Individual leaver data is stored during initial search (BrightData already returns it)
 
 ### Data Model
 
