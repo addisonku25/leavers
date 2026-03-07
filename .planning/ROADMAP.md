@@ -95,7 +95,7 @@ Plans:
 **Milestone Goal:** Add interactive drill-down from Sankey diagram and company cards into individual leaver details, turning aggregate patterns into auditable evidence.
 
 - [ ] **Phase 5: Data Model Expansion** - New leavers table, extended types, and mock provider for individual career data
-- [ ] **Phase 6: Sankey Click Interactions** - Click-to-scroll, highlight, filter, and toggle between Sankey diagram and company cards
+- [x] **Phase 6: Sankey Click Interactions** - Click-to-scroll, highlight, filter, and toggle between Sankey diagram and company cards (completed 2026-03-07)
 - [ ] **Phase 7: Leaver Detail Modal** - Clickable roles opening auth-gated modal with individual career histories
 - [ ] **Phase 8: Polish & Bidirectional Sync** - Card-to-Sankey highlighting and interaction refinements
 
@@ -125,11 +125,11 @@ Plans:
   2. User can click a role node in the Sankey diagram and company cards containing that role filter to the top with the role highlighted
   3. Promoted and filtered cards animate smoothly to their new positions (no layout jumps)
   4. User can click the same node again to reset the filter/highlight state back to default
-**Plans:** 2 plans
+**Plans:** 2/2 plans complete
 
 Plans:
-- [ ] 06-01-PLAN.md — DrillDownProvider context (React Context + useReducer) and Sankey click handlers with layered hover+selection visuals
-- [ ] 06-02-PLAN.md — Card reordering, highlight/dim styling, role pill highlights, motion layout animations, and visual verification
+- [x] 06-01-PLAN.md — DrillDownProvider context (React Context + useReducer) and Sankey click handlers with layered hover+selection visuals
+- [x] 06-02-PLAN.md — Card reordering, highlight/dim styling, role pill highlights, motion layout animations, and visual verification
 
 ### Phase 7: Leaver Detail Modal
 **Goal**: Users can drill from role names into individual leaver details, with personal information gated behind authentication
@@ -163,7 +163,7 @@ Phases execute in numeric order: 5 -> 6 -> 7 -> 8
 | 2. Results & Visualization | v1.0 | 3/3 | Complete | 2026-03-06 |
 | 3. Insights | v1.0 | 2/2 | Complete | 2026-03-06 |
 | 4. Auth, Saved Searches & Compliance | v1.0 | 5/5 | Complete | 2026-03-06 |
-| 5. Data Model Expansion | v1.1 | 0/2 | Planning complete | - |
-| 6. Sankey Click Interactions | v1.1 | 0/2 | Planning complete | - |
+| 5. Data Model Expansion | v1.1 | 2/2 | Complete | 2026-03-07 |
+| 6. Sankey Click Interactions | v1.1 | 2/2 | Complete | 2026-03-07 |
 | 7. Leaver Detail Modal | v1.1 | 0/0 | Not started | - |
 | 8. Polish & Bidirectional Sync | v1.1 | 0/0 | Not started | - |

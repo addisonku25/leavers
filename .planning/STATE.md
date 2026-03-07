@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Deep Dive
 status: executing
-stopped_at: Completed 06-01-PLAN.md
-last_updated: "2026-03-07T17:47:57.236Z"
-last_activity: 2026-03-07 -- Completed 06-01 Sankey Click & Selection State
+stopped_at: Completed 06-02-PLAN.md
+last_updated: "2026-03-07T21:59:41.760Z"
+last_activity: 2026-03-07 -- Completed 06-02 Card Response to Sankey Selection
 progress:
   total_phases: 8
-  completed_phases: 5
+  completed_phases: 6
   total_plans: 17
-  completed_plans: 16
-  percent: 94
+  completed_plans: 17
+  percent: 100
 ---
 
 # Project State
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-07)
 
 **Core value:** Show users concrete evidence of where people like them ended up -- turning career anxiety into actionable intelligence.
-**Current focus:** Phase 6 - Sankey Click Interactions (IN PROGRESS)
+**Current focus:** Phase 6 - Sankey Click Interactions (COMPLETE)
 
 ## Current Position
 
-Phase: 6 of 8 (Sankey Click Interactions) -- IN PROGRESS
-Plan: 1 of 2 (Sankey Click & Selection State) -- COMPLETE
+Phase: 6 of 8 (Sankey Click Interactions) -- COMPLETE
+Plan: 2 of 2 (Card Response to Sankey Selection) -- COMPLETE
 Status: Executing
-Last activity: 2026-03-07 -- Completed 06-01 Sankey Click & Selection State
+Last activity: 2026-03-07 -- Completed 06-02 Card Response to Sankey Selection
 
-Progress: [█████████░] 94% (16/17 plans across all milestones)
+Progress: [██████████] 100% (17/17 plans across all milestones)
 
 ## Performance Metrics
 
@@ -56,6 +56,7 @@ Progress: [█████████░] 94% (16/17 plans across all milestone
 | Phase 05 P01 | 2min | 2 tasks | 4 files |
 | Phase 05 P02 | 3min | 2 tasks | 4 files |
 | Phase 06 P01 | 3min | 2 tasks | 5 files |
+| Phase 06 P02 | 15min | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -79,6 +80,9 @@ Recent decisions affecting current work:
 - [Phase 06]: Layered activeHighlightNode: hover takes priority over selection, no extra state needed
 - [Phase 06]: Toggle logic in reducer (pure function) for testability
 - [Phase 06]: Selection state excluded from Sankey layout useMemo deps to prevent layout recalculation
+- [Phase 06]: Pure reorderCards function extracted for unit testability outside React rendering
+- [Phase 06]: motion/react layout prop for card position animations instead of manual CSS transitions
+- [Phase 06]: mergeRolesByExactName replaces mergeRolesByNormalizedTitle -- roles must not collapse by seniority prefix
 
 ### Pending Todos
 
@@ -92,6 +96,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-07T17:47:57.233Z
-Stopped at: Completed 06-01-PLAN.md
+Last session: 2026-03-07T22:00:00.000Z
+Stopped at: Completed 06-02-PLAN.md
 Resume file: None
