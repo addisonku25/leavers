@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Deep Dive
 status: executing
-stopped_at: Completed 05-01-PLAN.md
-last_updated: "2026-03-07T17:08:44.281Z"
+stopped_at: Completed 05-02-PLAN.md
+last_updated: "2026-03-07T17:14:14.871Z"
 last_activity: 2026-03-07 -- Completed 05-01 Schema & Types
 progress:
   total_phases: 8
-  completed_phases: 4
+  completed_phases: 5
   total_plans: 15
-  completed_plans: 14
+  completed_plans: 15
   percent: 50
 ---
 
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-07)
 
 **Core value:** Show users concrete evidence of where people like them ended up -- turning career anxiety into actionable intelligence.
-**Current focus:** Phase 5 - Data Model Expansion (ready to plan)
+**Current focus:** Phase 5 - Data Model Expansion (COMPLETE)
 
 ## Current Position
 
-Phase: 5 of 8 (Data Model Expansion)
-Plan: 1 of 2 (Schema & Types) -- COMPLETE
+Phase: 5 of 8 (Data Model Expansion) -- COMPLETE
+Plan: 2 of 2 (Mock Provider & Search Action) -- COMPLETE
 Status: Executing
-Last activity: 2026-03-07 -- Completed 05-01 Schema & Types
+Last activity: 2026-03-07 -- Completed 05-02 Mock Provider & Search Action
 
-Progress: [##########..........] 50% (4/8 phases across all milestones)
+Progress: [##########..........] 63% (5/8 phases across all milestones)
 
 ## Performance Metrics
 
@@ -54,6 +54,7 @@ Progress: [##########..........] 50% (4/8 phases across all milestones)
 
 *Updated after each plan completion*
 | Phase 05 P01 | 2min | 2 tasks | 4 files |
+| Phase 05 P02 | 3min | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -72,6 +73,8 @@ Recent decisions affecting current work:
 - [Phase 05]: FK to migrations (not searches) -- modal maps 1:1 to migration record
 - [Phase 05]: Text columns for dates -- LinkedIn dates are fuzzy, not precise timestamps
 - [Phase 05]: sortOrder column for position ordering -- SQLite has no insertion order guarantee
+- [Phase 05]: Redis caches only aggregate CareerMigration[] -- leaver PII stays in Turso only
+- [Phase 05]: Migration-to-leaver FK linkage via lowercase company:role Map lookup
 
 ### Pending Todos
 
@@ -85,6 +88,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-07T17:08:44.279Z
-Stopped at: Completed 05-01-PLAN.md
+Last session: 2026-03-07T17:14:14.869Z
+Stopped at: Completed 05-02-PLAN.md
 Resume file: None
