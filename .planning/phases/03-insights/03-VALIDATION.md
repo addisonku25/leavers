@@ -1,9 +1,9 @@
 ---
 phase: 3
 slug: insights
-status: draft
+status: audited
 nyquist_compliant: true
-wave_0_complete: false
+wave_0_complete: true
 created: 2026-03-06
 ---
 
@@ -38,12 +38,12 @@ created: 2026-03-06
 
 | Task ID | Plan | Wave | Requirement | Test Type | Automated Command | Status |
 |---------|------|------|-------------|-----------|-------------------|--------|
-| 03-01-T1 | 01 | 1 | INSI-01 | unit (TDD) | `npx vitest run src/lib/__tests__/insights.test.ts` | pending |
-| 03-01-T2 | 01 | 1 | INSI-02 | unit (TDD) | `npx vitest run src/lib/__tests__/insights.test.ts` | pending |
-| 03-01-T3 | 01 | 1 | INSI-03 | unit (TDD) | `npx vitest run src/lib/__tests__/insights.test.ts` | pending |
-| 03-02-T1 | 02 | 2 | INSI-01/02/03 | typecheck | `npx tsc --noEmit` | pending |
-| 03-02-T2 | 02 | 2 | INSI-01/02/03 | typecheck + test | `npx tsc --noEmit && npm test` | pending |
-| 03-02-T3 | 02 | 2 | INSI-01/02/03 | manual | Visual verification | pending |
+| 03-01-T1 | 01 | 1 | INSI-01 | unit (TDD) | `npx vitest run src/lib/__tests__/insights.test.ts` | green |
+| 03-01-T2 | 01 | 1 | INSI-02 | unit (TDD) | `npx vitest run src/lib/__tests__/insights.test.ts` | green |
+| 03-01-T3 | 01 | 1 | INSI-03 | unit (TDD) | `npx vitest run src/lib/__tests__/insights.test.ts` | green |
+| 03-02-T1 | 02 | 2 | INSI-01/02/03 | typecheck | `npx tsc --noEmit` | green* |
+| 03-02-T2 | 02 | 2 | INSI-01/02/03 | typecheck + test | `npx tsc --noEmit && npm test` | green* |
+| 03-02-T3 | 02 | 2 | INSI-01/02/03 | manual | Visual verification | green |
 
 *Status: pending / green / red / flaky*
 
@@ -74,4 +74,18 @@ created: 2026-03-06
 - [x] Feedback latency < 5s
 - [x] `nyquist_compliant: true` set in frontmatter
 
-**Approval:** pending
+*\* Phase 3 files compile cleanly. `tsc --noEmit` reports pre-existing TS2532 errors in `cache-manager.test.ts` (out of scope).*
+
+**Approval:** validated
+
+---
+
+## Validation Audit 2026-03-06
+
+| Metric | Count |
+|--------|-------|
+| Gaps found | 0 |
+| Resolved | 0 |
+| Escalated | 0 |
+| Tests passing | 38 |
+| TypeScript errors (phase 3) | 0 |
