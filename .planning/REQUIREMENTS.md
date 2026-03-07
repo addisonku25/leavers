@@ -71,9 +71,9 @@ Requirements for Deep Dive milestone. Continues from v1 numbering.
 
 ### Data Model
 
-- [ ] **DMOD-01**: New leavers table stores individual leaver records linked to migrations
-- [ ] **DMOD-02**: Leaver records include career history (positions with company, title, dates)
-- [ ] **DMOD-03**: DataProvider interface extended with optional searchDetailed method for per-person data
+- [x] **DMOD-01**: New leavers table stores individual leaver records linked to migrations
+- [x] **DMOD-02**: Leaver records include career history (positions with company, title, dates)
+- [x] **DMOD-03**: DataProvider interface extended with optional searchDetailed method for per-person data
 - [ ] **DMOD-04**: Mock provider returns deterministic individual leaver data for development
 
 ### Privacy Update
@@ -153,9 +153,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | LVRD-04 | Phase 7 | Pending |
 | LVRD-05 | Phase 7 | Pending |
 | LVRD-06 | Phase 7 | Pending |
-| DMOD-01 | Phase 5 | Pending |
-| DMOD-02 | Phase 5 | Pending |
-| DMOD-03 | Phase 5 | Pending |
+| DMOD-01 | Phase 5 | Complete |
+| DMOD-02 | Phase 5 | Complete |
+| DMOD-03 | Phase 5 | Complete |
 | DMOD-04 | Phase 5 | Pending |
 | PRIV-04 | Phase 7 | Pending |
 | PRIV-05 | Phase 7 | Pending |

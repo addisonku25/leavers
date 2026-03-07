@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Deep Dive
-status: planning
-stopped_at: Phase 5 context gathered
-last_updated: "2026-03-07T16:54:05.647Z"
-last_activity: 2026-03-07 -- Roadmap created for v1.1 Deep Dive
+status: executing
+stopped_at: Completed 05-01-PLAN.md
+last_updated: "2026-03-07T17:08:44.281Z"
+last_activity: 2026-03-07 -- Completed 05-01 Schema & Types
 progress:
   total_phases: 8
   completed_phases: 4
-  total_plans: 13
-  completed_plans: 13
+  total_plans: 15
+  completed_plans: 14
   percent: 50
 ---
 
@@ -26,9 +26,9 @@ See: .planning/PROJECT.md (updated 2026-03-07)
 ## Current Position
 
 Phase: 5 of 8 (Data Model Expansion)
-Plan: --
-Status: Ready to plan
-Last activity: 2026-03-07 -- Roadmap created for v1.1 Deep Dive
+Plan: 1 of 2 (Schema & Types) -- COMPLETE
+Status: Executing
+Last activity: 2026-03-07 -- Completed 05-01 Schema & Types
 
 Progress: [##########..........] 50% (4/8 phases across all milestones)
 
@@ -53,6 +53,7 @@ Progress: [##########..........] 50% (4/8 phases across all milestones)
 - Trend: Stable -- well-scoped plans execute quickly
 
 *Updated after each plan completion*
+| Phase 05 P01 | 2min | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -68,6 +69,9 @@ Recent decisions affecting current work:
 - [Research]: No new libraries needed -- existing stack handles all v1.1 requirements
 - [Research]: DrillDownProvider (React Context + useReducer) for cross-component selection state
 - [Research]: Server-side PII stripping -- never send name/LinkedIn to unauthenticated clients
+- [Phase 05]: FK to migrations (not searches) -- modal maps 1:1 to migration record
+- [Phase 05]: Text columns for dates -- LinkedIn dates are fuzzy, not precise timestamps
+- [Phase 05]: sortOrder column for position ordering -- SQLite has no insertion order guarantee
 
 ### Pending Todos
 
@@ -81,6 +85,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-07T16:54:05.644Z
-Stopped at: Phase 5 context gathered
-Resume file: .planning/phases/05-data-model-expansion/05-CONTEXT.md
+Last session: 2026-03-07T17:08:44.279Z
+Stopped at: Completed 05-01-PLAN.md
+Resume file: None
