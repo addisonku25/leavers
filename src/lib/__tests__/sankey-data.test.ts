@@ -194,7 +194,7 @@ describe("buildSankeyData", () => {
     expect(totalValue).toBe(8);
   });
 
-  it("merges roles with same base title (e.g. Senior SWE + SWE)", () => {
+  it("keeps distinct seniority-level roles as separate nodes", () => {
     const migrations = [
       migration("Google", "Software Engineer", 10),
       migration("Google", "Senior Software Engineer", 8),
@@ -207,18 +207,15 @@ describe("buildSankeyData", () => {
       (n: SankeyNode) => n.category === "destination",
     );
 
-    // All four should merge into one "Software Engineer" node
-    expect(destNodes).toHaveLength(1);
-    expect(destNodes[0].name).toBe("Software Engineer");
-
-    // Total value should be 10+8+3+2 = 23
-    const googleIdx = result.nodes.findIndex(
-      (n: SankeyNode) => n.name === "Google" && n.category === "company",
-    );
-    const link = result.links.find(
-      (l: SankeyLink) => l.source === googleIdx,
-    );
-    expect(link!.value).toBe(23);
+    // Each seniority level is its own node
+    expect(destNodes).toHaveLength(4);
+    const names = destNodes.map((n: SankeyNode) => n.name).sort();
+    expect(names).toEqual([
+      "Junior Software Engineer",
+      "Senior Software Engineer",
+      "Software Engineer",
+      "Staff Software Engineer",
+    ]);
   });
 
   it("shares destination role nodes across companies", () => {

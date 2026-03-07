@@ -1,4 +1,4 @@
-import { compareSeniority, normalizeRoleTitle, type SeniorityComparison } from "./seniority";
+import { compareSeniority, type SeniorityComparison } from "./seniority";
 
 /** Migration record shape expected by data transformation functions. */
 export interface MigrationRecord {
@@ -164,28 +164,18 @@ export function buildSankeyData(
   return { nodes, links };
 }
 
-/** Merge roles with the same normalized title, using the highest-count variant as display name. */
-function mergeRolesByNormalizedTitle(
+/** Merge roles with the same exact name, summing counts. */
+function mergeRolesByExactName(
   roles: { role: string; count: number }[],
 ): { role: string; count: number }[] {
-  const groups = new Map<string, { displayName: string; maxCount: number; totalCount: number }>();
+  const groups = new Map<string, number>();
 
   for (const { role, count } of roles) {
-    const key = normalizeRoleTitle(role).toLowerCase();
-    const existing = groups.get(key);
-    if (existing) {
-      existing.totalCount += count;
-      if (count > existing.maxCount) {
-        existing.displayName = role;
-        existing.maxCount = count;
-      }
-    } else {
-      groups.set(key, { displayName: role, maxCount: count, totalCount: count });
-    }
+    groups.set(role, (groups.get(role) ?? 0) + count);
   }
 
-  return [...groups.values()]
-    .map((g) => ({ role: g.displayName, count: g.totalCount }))
+  return [...groups.entries()]
+    .map(([role, count]) => ({ role, count }))
     .sort((a, b) => b.count - a.count);
 }
 
@@ -197,12 +187,12 @@ function addRoleNodes(
   links: SankeyLink[],
   destNodeIndex: Map<string, number>,
 ): void {
-  const merged = mergeRolesByNormalizedTitle(roles);
+  const merged = mergeRolesByExactName(roles);
   const topRoles = merged.slice(0, MAX_ROLES_PER_COMPANY);
   const otherRoles = merged.slice(MAX_ROLES_PER_COMPANY);
 
   for (const { role, count } of topRoles) {
-    const key = normalizeRoleTitle(role).toLowerCase();
+    const key = role.toLowerCase();
     let roleIdx = destNodeIndex.get(key);
     if (roleIdx === undefined) {
       roleIdx = nodes.length;
