@@ -34,6 +34,22 @@ function truncateLabel(text: string, maxLen = 24): string {
   return text.length > maxLen ? `${text.slice(0, maxLen - 1)}…` : text;
 }
 
+/** Weighted average of source-company values for a destination node.
+ *  Higher score → node's traffic comes from higher-value (top-positioned) companies. */
+function weightedSourceValue(node: D3SankeyNode<SankeyNode, SankeyLink>): number {
+  const links = (node as unknown as { targetLinks: Array<{ value: number; source: { value: number } }> }).targetLinks;
+  if (!links || links.length === 0) return 0;
+  let total = 0;
+  let weighted = 0;
+  for (const link of links) {
+    const w = link.value ?? 0;
+    const srcVal = link.source?.value ?? 0;
+    total += w;
+    weighted += w * srcVal;
+  }
+  return total > 0 ? weighted / total : 0;
+}
+
 function SankeySVG({
   data,
   width,
@@ -55,14 +71,27 @@ function SankeySVG({
       .nodeSort((a, b) => {
         const catA = (a as unknown as SankeyNode).category;
         const catB = (b as unknown as SankeyNode).category;
-        if (catA !== catB) return 0; // don't cross-sort categories
+        if (catA !== catB) return 0;
         if (catA === "source") return 0;
         const nameA = (a as unknown as SankeyNode).name;
         const nameB = (b as unknown as SankeyNode).name;
-        // "Other" variants always last
         const aIsOther = nameA.startsWith("Other");
         const bIsOther = nameB.startsWith("Other");
         if (aIsOther !== bIsOther) return aIsOther ? 1 : -1;
+
+        if (catA === "company") {
+          // Companies: value descending (largest at top) — keeps left side clean
+          const valA = (a as { value?: number }).value ?? 0;
+          const valB = (b as { value?: number }).value ?? 0;
+          if (valA !== valB) return valB - valA;
+          return nameA.localeCompare(nameB);
+        }
+
+        // Destinations: sort by weighted avg source company value (descending).
+        // This aligns each role near the companies that feed it, minimizing crossings.
+        const scoreA = weightedSourceValue(a);
+        const scoreB = weightedSourceValue(b);
+        if (scoreA !== scoreB) return scoreB - scoreA;
         return nameA.localeCompare(nameB);
       })
       .extent([
