@@ -142,12 +142,28 @@ Which phases cover which requirements. Updated during roadmap creation.
 | PRIV-01 | Phase 2 | Complete |
 | PRIV-02 | Phase 4 | Complete |
 | PRIV-03 | Phase 4 | Complete |
+| SANK-01 | Phase 6 | Pending |
+| SANK-02 | Phase 6 | Pending |
+| SANK-03 | Phase 6 | Pending |
+| SANK-04 | Phase 6 | Pending |
+| SANK-05 | Phase 8 | Pending |
+| LVRD-01 | Phase 7 | Pending |
+| LVRD-02 | Phase 7 | Pending |
+| LVRD-03 | Phase 7 | Pending |
+| LVRD-04 | Phase 7 | Pending |
+| LVRD-05 | Phase 7 | Pending |
+| LVRD-06 | Phase 7 | Pending |
+| DMOD-01 | Phase 5 | Pending |
+| DMOD-02 | Phase 5 | Pending |
+| DMOD-03 | Phase 5 | Pending |
+| DMOD-04 | Phase 5 | Pending |
+| PRIV-04 | Phase 7 | Pending |
+| PRIV-05 | Phase 7 | Pending |
 
 **Coverage:**
-- v1 requirements: 23 total
-- Mapped to phases: 23
-- Unmapped: 0
+- v1 requirements: 23 total, 23 mapped, 0 unmapped
+- v1.1 requirements: 17 total, 17 mapped, 0 unmapped
 
 ---
 *Requirements defined: 2026-03-06*
-*Last updated: 2026-03-07 after v1.1 milestone requirements*
+*Last updated: 2026-03-07 after v1.1 roadmap creation*
