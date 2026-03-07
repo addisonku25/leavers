@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import type { SeniorityComparison } from "@/lib/seniority";
+import { cn } from "@/lib/utils";
 import { SeniorityDot } from "./seniority-dot";
 
 interface RoleEntry {
@@ -13,22 +14,51 @@ interface RoleEntry {
 interface RoleListProps {
   roles: RoleEntry[];
   maxVisible?: number;
+  highlightedRole?: string | null;
 }
 
-export function RoleList({ roles, maxVisible = 3 }: RoleListProps) {
+export function RoleList({
+  roles,
+  maxVisible = 3,
+  highlightedRole = null,
+}: RoleListProps) {
   const [expanded, setExpanded] = useState(false);
+  const autoExpandedRef = useRef(false);
 
   const showExpandButton = roles.length >= 5 && roles.length > maxVisible;
   const visibleRoles =
     expanded || !showExpandButton ? roles : roles.slice(0, maxVisible);
   const hiddenCount = roles.length - maxVisible;
 
+  useEffect(() => {
+    if (highlightedRole) {
+      // Check if highlighted role is in the hidden portion
+      const isHidden =
+        showExpandButton &&
+        roles.slice(maxVisible).some((r) => r.role === highlightedRole);
+      if (isHidden) {
+        setExpanded(true);
+        autoExpandedRef.current = true;
+      }
+    } else {
+      // Clear selection: collapse only if we auto-expanded
+      if (autoExpandedRef.current) {
+        setExpanded(false);
+        autoExpandedRef.current = false;
+      }
+    }
+  }, [highlightedRole, roles, maxVisible, showExpandButton]);
+
   return (
     <div className="space-y-2">
       {visibleRoles.map((entry) => (
         <div
           key={entry.role}
-          className="flex items-center justify-between gap-2"
+          className={cn(
+            "flex items-center justify-between gap-2",
+            entry.role === highlightedRole &&
+              "bg-blue-50 dark:bg-blue-950/30 rounded-md px-1 -mx-1 transition-colors duration-300",
+          )}
         >
           <div className="flex items-center gap-2 min-w-0">
             <SeniorityDot level={entry.seniority} />

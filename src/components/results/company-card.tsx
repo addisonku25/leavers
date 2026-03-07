@@ -1,4 +1,5 @@
 import type { CompanyCardData } from "@/lib/sankey-data";
+import { cn } from "@/lib/utils";
 import {
   Card,
   CardHeader,
@@ -10,11 +11,25 @@ import { RoleList } from "./role-list";
 
 interface CompanyCardProps {
   data: CompanyCardData;
+  isPromoted?: boolean;
+  isDimmed?: boolean;
+  highlightedRole?: string | null;
 }
 
-export function CompanyCard({ data }: CompanyCardProps) {
+export function CompanyCard({
+  data,
+  isPromoted = false,
+  isDimmed = false,
+  highlightedRole = null,
+}: CompanyCardProps) {
   return (
-    <Card>
+    <Card
+      className={cn(
+        "transition-all duration-400",
+        isPromoted && "ring-2 ring-blue-500 shadow-md",
+        isDimmed && "opacity-50",
+      )}
+    >
       <CardHeader>
         <CardTitle>{data.company}</CardTitle>
         <CardAction>
@@ -24,7 +39,7 @@ export function CompanyCard({ data }: CompanyCardProps) {
         </CardAction>
       </CardHeader>
       <CardContent>
-        <RoleList roles={data.roles} />
+        <RoleList roles={data.roles} highlightedRole={highlightedRole} />
       </CardContent>
     </Card>
   );
