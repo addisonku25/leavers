@@ -54,10 +54,10 @@ Requirements for Deep Dive milestone. Continues from v1 numbering.
 
 ### Sankey Interactions
 
-- [ ] **SANK-01**: User can click a company node in the Sankey diagram to scroll to and highlight the matching company card, promoted to top
+- [x] **SANK-01**: User can click a company node in the Sankey diagram to scroll to and highlight the matching company card, promoted to top
 - [ ] **SANK-02**: User can click a role node in the Sankey diagram to filter company cards to those containing that role, promoted to top with role highlighted
 - [ ] **SANK-03**: Promoted/filtered cards animate smoothly to their new positions (CSS transitions)
-- [ ] **SANK-04**: User can click again to reset the filter/highlight state
+- [x] **SANK-04**: User can click again to reset the filter/highlight state
 - [ ] **SANK-05**: Clicking a company card highlights the corresponding node in the Sankey diagram (bidirectional sync)
 
 ### Leaver Details
@@ -142,10 +142,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | PRIV-01 | Phase 2 | Complete |
 | PRIV-02 | Phase 4 | Complete |
 | PRIV-03 | Phase 4 | Complete |
-| SANK-01 | Phase 6 | Pending |
+| SANK-01 | Phase 6 | Complete |
 | SANK-02 | Phase 6 | Pending |
 | SANK-03 | Phase 6 | Pending |
-| SANK-04 | Phase 6 | Pending |
+| SANK-04 | Phase 6 | Complete |
 | SANK-05 | Phase 8 | Pending |
 | LVRD-01 | Phase 7 | Pending |
 | LVRD-02 | Phase 7 | Pending |

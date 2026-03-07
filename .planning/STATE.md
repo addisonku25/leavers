@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Deep Dive
 status: executing
-stopped_at: Phase 6 context gathered
-last_updated: "2026-03-07T17:28:12.710Z"
-last_activity: 2026-03-07 -- Completed 05-02 Mock Provider & Search Action
+stopped_at: Completed 06-01-PLAN.md
+last_updated: "2026-03-07T17:47:57.236Z"
+last_activity: 2026-03-07 -- Completed 06-01 Sankey Click & Selection State
 progress:
   total_phases: 8
   completed_phases: 5
-  total_plans: 15
-  completed_plans: 15
-  percent: 63
+  total_plans: 17
+  completed_plans: 16
+  percent: 94
 ---
 
 # Project State
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-07)
 
 **Core value:** Show users concrete evidence of where people like them ended up -- turning career anxiety into actionable intelligence.
-**Current focus:** Phase 5 - Data Model Expansion (COMPLETE)
+**Current focus:** Phase 6 - Sankey Click Interactions (IN PROGRESS)
 
 ## Current Position
 
-Phase: 5 of 8 (Data Model Expansion) -- COMPLETE
-Plan: 2 of 2 (Mock Provider & Search Action) -- COMPLETE
+Phase: 6 of 8 (Sankey Click Interactions) -- IN PROGRESS
+Plan: 1 of 2 (Sankey Click & Selection State) -- COMPLETE
 Status: Executing
-Last activity: 2026-03-07 -- Completed 05-02 Mock Provider & Search Action
+Last activity: 2026-03-07 -- Completed 06-01 Sankey Click & Selection State
 
-Progress: [##########..........] 63% (5/8 phases across all milestones)
+Progress: [█████████░] 94% (16/17 plans across all milestones)
 
 ## Performance Metrics
 
@@ -55,6 +55,7 @@ Progress: [##########..........] 63% (5/8 phases across all milestones)
 *Updated after each plan completion*
 | Phase 05 P01 | 2min | 2 tasks | 4 files |
 | Phase 05 P02 | 3min | 2 tasks | 4 files |
+| Phase 06 P01 | 3min | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -75,6 +76,9 @@ Recent decisions affecting current work:
 - [Phase 05]: sortOrder column for position ordering -- SQLite has no insertion order guarantee
 - [Phase 05]: Redis caches only aggregate CareerMigration[] -- leaver PII stays in Turso only
 - [Phase 05]: Migration-to-leaver FK linkage via lowercase company:role Map lookup
+- [Phase 06]: Layered activeHighlightNode: hover takes priority over selection, no extra state needed
+- [Phase 06]: Toggle logic in reducer (pure function) for testability
+- [Phase 06]: Selection state excluded from Sankey layout useMemo deps to prevent layout recalculation
 
 ### Pending Todos
 
@@ -88,6 +92,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-07T17:28:12.707Z
-Stopped at: Phase 6 context gathered
-Resume file: .planning/phases/06-sankey-click-interactions/06-CONTEXT.md
+Last session: 2026-03-07T17:47:57.233Z
+Stopped at: Completed 06-01-PLAN.md
+Resume file: None
