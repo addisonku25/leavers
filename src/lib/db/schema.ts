@@ -28,6 +28,37 @@ export const migrations = sqliteTable("migrations", {
   count: integer("count").notNull().default(1),
 });
 
+// ---------- Leaver detail tables ----------
+
+export const leavers = sqliteTable("leavers", {
+  id: text("id").primaryKey(),
+  migrationId: text("migration_id")
+    .notNull()
+    .references(() => migrations.id, { onDelete: "cascade" }),
+  name: text("name").notNull(),
+  linkedinUrl: text("linkedin_url"),
+  currentTitle: text("current_title"),
+  currentCompany: text("current_company"),
+  transitionDate: text("transition_date"),
+  createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
+});
+
+export const leaverPositions = sqliteTable(
+  "leaver_positions",
+  {
+    id: text("id").primaryKey(),
+    leaverId: text("leaver_id")
+      .notNull()
+      .references(() => leavers.id, { onDelete: "cascade" }),
+    company: text("company").notNull(),
+    title: text("title").notNull(),
+    startDate: text("start_date"),
+    endDate: text("end_date"),
+    sortOrder: integer("sort_order").notNull().default(0),
+  },
+  (table) => [index("leaver_positions_leaverId_idx").on(table.leaverId)],
+);
+
 // ---------- Better Auth tables ----------
 
 export const user = sqliteTable("user", {
