@@ -1,136 +1,187 @@
-# Technology Stack
+# Technology Stack: v1.1 Deep Dive Features
 
-**Project:** Leavers - Career Migration Intelligence
-**Researched:** 2026-03-06
+**Project:** Leavers
+**Researched:** 2026-03-07
+**Focus:** Stack additions for Sankey drill-down, leaver detail modal, career history data model
 
-## Recommended Stack
+## Verdict: No New Libraries Needed
 
-### Core Framework
+The existing stack handles every v1.1 requirement. This is a feature implementation milestone, not a stack expansion milestone. Adding libraries would introduce unnecessary complexity and bundle size.
 
-| Technology | Version | Purpose | Why | Confidence |
-|------------|---------|---------|-----|------------|
-| Next.js | 15.x (stable) | Full-stack React framework | First-class Vercel deployment, App Router + Server Actions eliminate need for separate API layer. v15 is the safe production choice; v16 is too fresh for a greenfield project where stability matters. | HIGH |
-| React | 19.x | UI library | Ships with Next.js 15, concurrent features and Server Components are mature | HIGH |
-| TypeScript | 5.5+ | Type safety | Non-negotiable for any serious project in 2026; catches data shape issues early, which matters when dealing with scraped data of unpredictable structure | HIGH |
+## Capability Mapping
 
-### Database
+### 1. Smooth Scroll + Animated Card Reordering (Sankey Click Interactions)
 
-| Technology | Version | Purpose | Why | Confidence |
-|------------|---------|---------|-----|------------|
-| Turso | Latest | Primary database (libSQL/SQLite) | Already in Addison's account, edge-ready, generous free tier, native Vercel marketplace integration. SQLite semantics are simple for a solo dev. Career migration data is relational (people, companies, roles, transitions) and fits SQL perfectly. | HIGH |
-| Drizzle ORM | 1.0.0-beta.2+ | Database ORM | Type-safe SQL, native Turso/libSQL driver, schema-as-code with migration tooling, validator packages now built-in (drizzle-zod). Lighter than Prisma, better DX for SQLite. | HIGH |
-| Upstash Redis | Latest | Caching layer | Serverless Redis with HTTP API -- no connection pooling issues on Vercel. Pay-per-request pricing ($0.20/100K commands, 500K/month free). Perfect for caching scraped results with TTL. | HIGH |
+| Capability | Solution | Already Available |
+|------------|----------|-------------------|
+| Scroll to card on Sankey click | `Element.scrollIntoView({ behavior: 'smooth' })` | Browser API |
+| Highlight matching card | Tailwind CSS conditional classes (`ring-2 ring-primary`) | Tailwind v4 |
+| Promote card to top of grid | React state-driven sort order + CSS transitions | React 19 + Tailwind |
+| Animated reorder | CSS `transition` on grid items + `order` property | Tailwind v4 |
 
-### Authentication
+**Why no animation library (Framer Motion, AutoAnimate, etc.):**
+- The reordering animation is a single interaction: click Sankey node, matching cards move to the top of the grid. This is a CSS `order` property change with `transition: transform 300ms ease`.
+- Framer Motion adds ~33kB minified to the bundle for layout animations. That cost is unjustifiable for one transition effect.
+- `tw-animate-css` is already in devDependencies and provides keyframe utilities if needed, though CSS transitions are sufficient here.
+- If the reorder feels janky with pure CSS (cards snap rather than slide), the fallback is `key`-based remounting with entry animations -- still no library needed.
 
-| Technology | Version | Purpose | Why | Confidence |
-|------------|---------|---------|-----|------------|
-| Better Auth | Latest | Authentication | Auth.js (NextAuth) team now recommends Better Auth for new projects. First-class SQLite/Turso support (not just community adapters). Built-in rate limiting, MFA, magic links. Plugin architecture for future premium features. Same DB as app data = simpler infra. | MEDIUM |
+**Implementation pattern:**
+```typescript
+// State in ResultsDashboard
+const [highlightedCompany, setHighlightedCompany] = useState<string | null>(null);
 
-### Data Sourcing
+// Pass callback to SankeyDiagram
+<SankeyDiagram onNodeClick={(node) => {
+  setHighlightedCompany(node.name);
+  // scrollIntoView handled by CompanyGrid via ref
+}} />
 
-| Technology | Version | Purpose | Why | Confidence |
-|------------|---------|---------|-----|------------|
-| ScrapIn API | Latest | LinkedIn career data extraction | Pay-as-you-go ($1/1,000 records), real-time data (not stale database), GDPR/CCPA compliant, developer-focused API. Much cheaper than Bright Data ($0.05/profile). Best fit for on-demand scraping model. | MEDIUM |
-| Bright Data | Latest | Fallback LinkedIn data source | More mature platform, $0.05/profile, handles proxies/CAPTCHAs automatically. Use as fallback if ScrapIn quality or uptime is insufficient. | LOW |
+// CompanyGrid sorts highlighted to top, applies ring highlight
+// CSS: transition-all duration-300 on each card wrapper
+```
 
-### UI & Styling
+**Confidence:** HIGH -- `scrollIntoView` with smooth behavior is supported in all modern browsers. CSS transitions on `order`/`transform` are standard. React state-driven reordering is a fundamental pattern.
 
-| Technology | Version | Purpose | Why | Confidence |
-|------------|---------|---------|-----|------------|
-| Tailwind CSS | 4.x | Utility-first CSS | Industry standard for Next.js apps, zero runtime cost, v4 stable with @theme directive | HIGH |
-| shadcn/ui | Latest | Component library | Not a dependency -- components copied into project and owned. Built on Radix UI (accessible). 65K+ GitHub stars, used by Vercel itself. Tailwind v4 + React 19 support. | HIGH |
-| Recharts | 2.x | Data visualization | Simple API for bar/pie/sankey charts showing migration patterns. Better docs than Nivo, intuitive composable API. Dataset sizes for this app are small (dozens of companies, not thousands) so SVG rendering is fine. | MEDIUM |
+### 2. Leaver Detail Modal
 
-### Fuzzy Matching
+| Capability | Solution | Already Available |
+|------------|----------|-------------------|
+| Modal overlay | shadcn/ui `Dialog` component | Yes (`src/components/ui/dialog.tsx`) |
+| Accessible focus trap | Radix UI Dialog primitive | Yes (via `radix-ui` package) |
+| Animations | Built into existing Dialog (fade-in/zoom-in) | Yes |
+| Close on escape/overlay | Radix UI default behavior | Yes |
 
-| Technology | Version | Purpose | Why | Confidence |
-|------------|---------|---------|-----|------------|
-| Fuse.js | 7.x | Client-side fuzzy search for role titles | Zero dependencies, configurable thresholds and field weights. Job title matching needs typo tolerance + synonym-like matching ("Sr. SE" ~ "Senior Solution Engineer"). Set `ignoreFieldNorm: true` for better results. | HIGH |
+**Why the existing Dialog is correct:**
+- Already installed, styled, and consistent with the app's design system.
+- Radix UI Dialog handles accessibility (focus trap, `aria-modal`, escape key) correctly out of the box.
+- The `DialogContent` component already has `sm:max-w-lg` which is appropriate for a leaver detail view. Can be widened to `sm:max-w-xl` or `sm:max-w-2xl` for career history timeline if needed.
+- No need for a sheet/drawer variant -- modal is the right pattern for "inspect detail of an item in a list" interactions.
 
-### Validation & Forms
+**What NOT to add:**
+- Do NOT add a separate sheet component. Sheets are for forms/settings, not detail inspection.
+- Do NOT build a custom modal. The Radix primitive handles edge cases (scroll lock, nested modals, portal rendering) that custom implementations consistently get wrong.
 
-| Technology | Version | Purpose | Why | Confidence |
-|------------|---------|---------|-----|------------|
-| Zod | 4.x | Schema validation | 14x faster string parsing vs v3, 57% smaller core. Drizzle ORM has built-in Zod integration for schema-to-validator generation. Use @zod/mini (1.9KB) for client-side forms. | HIGH |
-| React Hook Form | Latest | Form management | Pairs with Zod resolver, minimal re-renders, standard for Next.js apps | HIGH |
+**Confidence:** HIGH -- the component is already installed and verified in the codebase.
 
-### Infrastructure
+### 3. Data Model Expansion (Individual Leaver Career Histories)
 
-| Technology | Version | Purpose | Why | Confidence |
-|------------|---------|---------|-----|------------|
-| Vercel | N/A | Hosting & deployment | Already has account, zero-config Next.js deployment, preview deployments, generous free tier (100GB bandwidth, 6K build minutes). Owns the Next.js runtime. | HIGH |
-| Cloudflare | N/A | DNS + CDN layer | Already has account. Use as DNS provider with proxy for DDoS protection and edge caching of static assets. Do NOT use Cloudflare Workers/Pages -- keep compute on Vercel. | HIGH |
-| GitHub | N/A | Source control + CI/CD | Already has account, Vercel auto-deploys from GitHub pushes | HIGH |
+| Capability | Solution | Already Available |
+|------------|----------|-------------------|
+| Schema changes | Drizzle ORM + `drizzle-kit push` | Yes |
+| New tables | `sqliteTable` definitions in `schema.ts` | Yes |
+| Foreign key relationships | Drizzle `references()` | Yes |
+| ID generation | `nanoid` package | Yes |
 
-### Developer Tooling
+**Schema design recommendation -- use two new relational tables:**
 
-| Technology | Version | Purpose | Why | Confidence |
-|------------|---------|---------|-----|------------|
-| Biome | Latest | Linting + formatting | Replaces ESLint + Prettier with single tool, 100x faster, zero config. Next.js is deprecating `next lint` in favor of community tools. | MEDIUM |
-| Turbopack | Bundled with Next.js | Dev server bundler | Ships with Next.js 15, dramatically faster HMR than webpack. No separate install needed. | HIGH |
+```
+leavers
+  id (text PK)
+  search_id (FK -> searches)
+  migration_id (FK -> migrations)  -- links to aggregate record
+  name (text, nullable)
+  linkedin_url (text, nullable)
+  transition_date (text, nullable)  -- ISO date string
 
-## Alternatives Considered
+leaver_positions
+  id (text PK)
+  leaver_id (FK -> leavers)
+  company (text)
+  role (text)
+  start_date (text, nullable)
+  end_date (text, nullable)
+  is_current (integer/boolean)
+  sort_order (integer)  -- chronological position
+```
 
-| Category | Recommended | Alternative | Why Not |
-|----------|-------------|-------------|---------|
-| Framework | Next.js 15 | Next.js 16 | Too new (Dec 2025), fewer community examples for troubleshooting |
-| Framework | Next.js 15 | Remix/Astro | Vercel is already in the stack; Next.js has first-class Vercel support |
-| ORM | Drizzle | Prisma | Prisma's SQLite support is weaker, heavier bundle, slower cold starts on serverless |
-| Auth | Better Auth | Auth.js v5 | Auth.js team themselves recommends Better Auth for new projects |
-| Auth | Better Auth | Clerk | External dependency, paid service, overkill for MVP |
-| Cache | Upstash Redis | Vercel KV | Vercel KV is actually Upstash Redis underneath, but direct Upstash is cheaper and more flexible |
-| UI | shadcn/ui | Material UI (MUI) | MUI is heavy, opinionated styling, harder to customize |
-| Charts | Recharts | Nivo | Nivo has poor documentation; Recharts is simpler for the chart types needed here |
-| Fuzzy Search | Fuse.js | Typesense/Algolia | Server-side search services are overkill; role title matching is a small dataset problem |
-| Data Source | ScrapIn | Proxycurl | Proxycurl is defunct (founder moved to NinjaPear) |
-| Linting | Biome | ESLint + Prettier | Two tools where one suffices; ESLint configs are notoriously fiddly |
+**Why relational tables over JSON blob:**
+- Career history positions become queryable (future feature: "show all people who went through Company X")
+- Drizzle ORM works naturally with relational tables; JSON blobs require manual serialization and lose type safety at the DB boundary
+- SQLite handles small relational joins efficiently -- a leaver with 5-8 positions is trivial
+- The data is inherently relational (one leaver has many positions)
+- Consistent with the existing schema pattern (5 tables already defined this way)
 
-## Do NOT Use
+**Confidence:** HIGH -- Drizzle ORM schema additions are well-established in this codebase.
 
-| Technology | Why Not |
-|------------|---------|
-| Prisma | Heavier, slower cold starts, weaker SQLite story vs Drizzle |
-| Proxycurl | Service is discontinued |
-| MongoDB/Supabase | Career migration data is inherently relational; Turso is already in the stack |
-| Puppeteer/Playwright for scraping | Headless browser scraping of LinkedIn will get blocked immediately; use API services instead |
-| NextAuth/Auth.js | Even its own maintainers recommend Better Auth for new projects |
-| Vercel Postgres | You already have Turso; adding a second DB creates unnecessary complexity |
+### 4. DataProvider Interface Changes
+
+The `CareerMigration` interface currently returns aggregate data. It needs extension for individual leaver records.
+
+**Recommended approach -- extend with optional individual data:**
+```typescript
+interface LeaverDetail {
+  name?: string;          // null for unauthenticated display
+  linkedinUrl?: string;   // null for unauthenticated display
+  transitionDate?: string;
+  careerHistory: CareerPosition[];
+}
+
+interface CareerPosition {
+  company: string;
+  role: string;
+  startDate?: string;
+  endDate?: string;
+  isCurrent: boolean;
+}
+
+interface CareerMigration {
+  // ... existing fields unchanged ...
+  leavers?: LeaverDetail[];  // optional, backward-compatible
+}
+```
+
+**Why extend rather than separate endpoint:** The data flows through a single search action. Fetching individual details at search time (when the provider is called) is more efficient than a second round-trip. The `leavers` array is optional, so the mock provider can populate it while the interface remains backward-compatible with existing providers.
+
+**Confidence:** HIGH -- straightforward TypeScript interface extension with no library implications.
+
+## State Management for Cross-Component Communication
+
+The Sankey-to-Cards interaction requires shared state between `SankeyDiagram` and `CompanyGrid`.
+
+**Use lifted state in `ResultsDashboard` (recommended)** because:
+- `ResultsDashboard` already renders both `SankeyDiagram` and `CompanyGrid` as direct children
+- Only 2-3 pieces of state needed: `highlightedCompany`, `highlightedRole`, possibly `selectedLeaverRole` for modal
+- Prop drilling depth is 1 level (dashboard to child component)
+- No need for Context API, Zustand, Jotai, or any state management library for this scope
+
+## What NOT to Add
+
+| Library | Why It Might Seem Needed | Why It Is Not |
+|---------|-------------------------|---------------|
+| Framer Motion | Animated card reordering | CSS transitions handle this; ~33kB for one animation is wasteful |
+| AutoAnimate | Auto-animate list changes | Same reasoning; adds a dependency for a solvable CSS problem |
+| React Spring | Physics-based animations | Overkill; this is a business app, not a creative showcase |
+| Tanstack Virtual | Virtualized leaver lists | Maximum leaver count per role is bounded (tens, not thousands) |
+| Tanstack Query | Modal data fetching | Data is already loaded via server action; modal reads from existing props |
+| Zustand/Jotai | Cross-component state | React useState + prop drilling is sufficient for 2-3 components |
+| Vaul (drawer) | Mobile-friendly modal | Dialog works on mobile; drawer pattern is wrong for detail inspection |
+
+## Existing Stack -- All Sufficient, No Changes
+
+| Technology | Version | v1.1 Role |
+|------------|---------|-----------|
+| Next.js | 16.1.6 | Server actions for data fetching, App Router |
+| React | 19.2.3 | useState/useRef for click interactions, scrollIntoView |
+| TypeScript | ^5 | Interface extensions for leaver types |
+| Tailwind CSS v4 | ^4 | Transitions, ring highlights, conditional styling |
+| shadcn/ui Dialog | Installed | Leaver detail modal |
+| Radix UI | 1.4.3 | Accessible Dialog primitive |
+| Drizzle ORM | 0.45.1 | New table definitions (leavers, leaver_positions) |
+| Turso (@libsql/client) | 0.17.0 | Relational joins for career history |
+| d3-sankey | 0.12.3 | Click event handlers on SVG nodes |
+| lucide-react | 0.577.0 | Icons for modal UI elements |
+| nanoid | 5.1.6 | IDs for new leaver/position records |
 
 ## Installation
 
 ```bash
-# Create Next.js project
-npx create-next-app@latest leavers --typescript --tailwind --eslint --app --src-dir
-
-# Core dependencies
-npm install @libsql/client drizzle-orm better-auth @upstash/redis zod react-hook-form @hookform/resolvers fuse.js recharts
-
-# Dev dependencies
-npm install -D drizzle-kit @biomejs/biome
-
-# shadcn/ui (initialize, then add components as needed)
-npx shadcn@latest init
-npx shadcn@latest add button input card table dialog
+# No new packages to install.
+# All v1.1 features are buildable with the current dependency tree.
 ```
-
-## Key Configuration Notes
-
-- **Turso**: Set `TURSO_DATABASE_URL` and `TURSO_AUTH_TOKEN` env vars. Use local SQLite file for dev (`file:local.db`), Turso remote for production.
-- **Upstash Redis**: Set `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN`. Use `@upstash/redis` HTTP client (not `ioredis`).
-- **Fuse.js**: Configure with `ignoreFieldNorm: true`, threshold ~0.4, and weighted keys for role title fields.
-- **Better Auth**: Configure with Turso adapter, same DB as application data.
-- **Cloudflare**: DNS proxy mode only. Do not enable Workers or try to run Next.js on Cloudflare.
 
 ## Sources
 
-- [Next.js Blog](https://nextjs.org/blog) - v15/v16 release info
-- [Turso Documentation](https://docs.turso.tech/) - libSQL and edge features
-- [Drizzle ORM Turso Integration](https://orm.drizzle.team/docs/connect-turso)
-- [Better Auth Next.js Integration](https://better-auth.com/docs/integrations/next)
-- [ScrapIn API](https://www.scrapin.io/) - LinkedIn data API
-- [Upstash Redis Pricing](https://upstash.com/pricing/redis)
-- [shadcn/ui](https://ui.shadcn.com/) - Component library
-- [Fuse.js](https://www.fusejs.io/) - Fuzzy search
-- [Zod v4](https://zod.dev/) - Schema validation
-- [Recharts](https://recharts.org/) - Charting library
+- Codebase inspection: `package.json`, `src/components/ui/dialog.tsx`, `src/lib/db/schema.ts`, `src/lib/data/types.ts`, `src/components/results/sankey-diagram.tsx`, `src/components/results/results-dashboard.tsx`
+- MDN `Element.scrollIntoView()` -- `behavior: 'smooth'` is universally supported in modern browsers
+- CSS `transition` property -- standard for animating `order`, `transform`, `opacity` changes
+- Existing Radix UI Dialog in codebase -- verified accessible modal with focus trap, escape handling, portal rendering
