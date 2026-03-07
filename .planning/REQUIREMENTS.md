@@ -48,6 +48,39 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **PRIV-02**: App rate-limits searches to prevent abuse
 - [x] **PRIV-03**: App includes terms of service and privacy policy pages
 
+## v1.1 Requirements
+
+Requirements for Deep Dive milestone. Continues from v1 numbering.
+
+### Sankey Interactions
+
+- [ ] **SANK-01**: User can click a company node in the Sankey diagram to scroll to and highlight the matching company card, promoted to top
+- [ ] **SANK-02**: User can click a role node in the Sankey diagram to filter company cards to those containing that role, promoted to top with role highlighted
+- [ ] **SANK-03**: Promoted/filtered cards animate smoothly to their new positions (CSS transitions)
+- [ ] **SANK-04**: User can click again to reset the filter/highlight state
+- [ ] **SANK-05**: Clicking a company card highlights the corresponding node in the Sankey diagram (bidirectional sync)
+
+### Leaver Details
+
+- [ ] **LVRD-01**: Roles in company cards are visually clickable (button/link style)
+- [ ] **LVRD-02**: Clicking a role opens a modal showing individual leavers who made that transition
+- [ ] **LVRD-03**: Leaver modal shows transition date and full career history for each leaver
+- [ ] **LVRD-04**: Leaver modal shows name and LinkedIn profile link for authenticated users only
+- [ ] **LVRD-05**: Unauthenticated users see blurred name/LinkedIn with sign-up CTA overlay
+- [ ] **LVRD-06**: Individual leaver data is lazy-loaded when the modal opens (not during initial search)
+
+### Data Model
+
+- [ ] **DMOD-01**: New leavers table stores individual leaver records linked to migrations
+- [ ] **DMOD-02**: Leaver records include career history (positions with company, title, dates)
+- [ ] **DMOD-03**: DataProvider interface extended with optional searchDetailed method for per-person data
+- [ ] **DMOD-04**: Mock provider returns deterministic individual leaver data for development
+
+### Privacy Update
+
+- [ ] **PRIV-04**: Privacy policy updated to cover display of individual career data with auth-gating
+- [ ] **PRIV-05**: Auth-gated PII (name, LinkedIn URL) is stripped server-side before reaching unauthenticated clients
+
 ## v2 Requirements
 
 ### Resume AI
@@ -73,7 +106,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 | Feature | Reason |
 |---------|--------|
-| Individual profile display | Privacy/legal risk -- aggregated data is both safer and more useful |
+| Individual profile display (unauthenticated) | Auth-gated in v1.1 -- PII visible only to signed-in users |
 | Real-time chat/networking | Not a social tool -- focused on data discovery |
 | Job application tracking | Focused on discovery, not workflow management |
 | Mobile native app | Web-first; responsive design handles mobile |
@@ -117,4 +150,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2026-03-06*
-*Last updated: 2026-03-06 after roadmap creation*
+*Last updated: 2026-03-07 after v1.1 milestone requirements*
