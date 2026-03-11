@@ -7,7 +7,6 @@ import {
   sankeyLinkHorizontal,
   type SankeyGraph,
   type SankeyNode as D3SankeyNode,
-  type SankeyLink as D3SankeyLink,
 } from "d3-sankey";
 import type { SankeyData, SankeyNode, SankeyLink } from "@/lib/sankey-data";
 import { useDrillDown } from "./drill-down-provider";
@@ -18,7 +17,6 @@ interface SankeyDiagramProps {
 }
 
 type LayoutNode = D3SankeyNode<SankeyNode, SankeyLink>;
-type LayoutLink = D3SankeyLink<SankeyNode, SankeyLink>;
 
 const MARGIN = 16;
 const NODE_WIDTH = 15;
