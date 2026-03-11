@@ -8,6 +8,7 @@ import {
 } from "../sankey-data";
 
 // Helper to create migration records
+let nextId = 0;
 function migration(
   destCompany: string,
   destRole: string,
@@ -15,6 +16,7 @@ function migration(
   sourceRole = "",
 ) {
   return {
+    id: `test-${++nextId}`,
     destinationCompany: destCompany,
     destinationRole: destRole,
     sourceRole,
