@@ -46,16 +46,20 @@ export async function getLeaversForMigration(
   const session = await auth.api.getSession({ headers: await headers() });
   const isAuthenticated = !!session;
 
-  // Fetch all leavers for this migration
-  const leaverRows = await db.query.leavers.findMany({
-    where: eq(leavers.migrationId, migrationId),
-  });
+  let leaverRows: (typeof leavers.$inferSelect)[];
+  try {
+    leaverRows = await db.query.leavers.findMany({
+      where: eq(leavers.migrationId, migrationId),
+    });
+  } catch {
+    // Table may not exist yet in local dev
+    return { isAuthenticated, leavers: [], totalCount: 0 };
+  }
 
   // Build leaver objects with positions
   const result: (PublicLeaver | AuthenticatedLeaver)[] = [];
 
   for (const row of leaverRows) {
-    // Fetch positions ordered by sortOrder
     const positionRows = await db.query.leaverPositions.findMany({
       where: eq(leaverPositions.leaverId, row.id),
       orderBy: [asc(leaverPositions.sortOrder)],

@@ -114,6 +114,7 @@ export function ResultsDashboard({
         role={modalState?.role ?? ""}
         company={modalState?.company ?? ""}
         count={modalState?.count ?? 0}
+        sourceCompany={search.company}
         returnTo={pathname}
       />
     </div>

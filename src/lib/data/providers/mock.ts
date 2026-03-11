@@ -138,26 +138,31 @@ function generateMockLeavers(
     const userId = migrationIndex * 100 + i + 1;
 
     const positions: LeaverPosition[] = [];
-    for (let j = 0; j < positionCount; j++) {
-      if (j === 0) {
-        // First position = current role at destination company
-        positions.push({
-          company: migration.destinationCompany,
-          title: migration.destinationRole,
-          startDate: `${baseYear + j * 2}-01`,
-          endDate: undefined, // current position
-        });
-      } else {
-        const companyIdx = (leaverSeed + j * 7) % DESTINATION_COMPANIES.length;
-        const roleIdx = (leaverSeed + j * 11) % DESTINATION_ROLES.length;
-        positions.push({
-          company: DESTINATION_COMPANIES[companyIdx],
-          title: DESTINATION_ROLES[roleIdx],
-          startDate: `${baseYear + j * 2}-01`,
-          endDate: `${baseYear + j * 2 + 1}-12`,
-        });
-      }
+    // First position = current role at destination company
+    positions.push({
+      company: migration.destinationCompany,
+      title: migration.destinationRole,
+      startDate: `${baseYear + positionCount * 2}-01`,
+      endDate: undefined, // current position
+    });
+    // Middle positions = random career history
+    for (let j = 1; j < positionCount - 1; j++) {
+      const companyIdx = (leaverSeed + j * 7) % DESTINATION_COMPANIES.length;
+      const roleIdx = (leaverSeed + j * 11) % DESTINATION_ROLES.length;
+      positions.push({
+        company: DESTINATION_COMPANIES[companyIdx],
+        title: DESTINATION_ROLES[roleIdx],
+        startDate: `${baseYear + (positionCount - j) * 2}-01`,
+        endDate: `${baseYear + (positionCount - j) * 2 + 1}-12`,
+      });
     }
+    // Last position = source role at source company (the searched role)
+    positions.push({
+      company: migration.sourceCompany,
+      title: migration.sourceRole ?? "Unknown Role",
+      startDate: `${baseYear}-01`,
+      endDate: `${baseYear + 1}-12`,
+    });
 
     leavers.push({
       name: `Test User ${userId}`,

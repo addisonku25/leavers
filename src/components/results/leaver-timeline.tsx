@@ -3,9 +3,10 @@ import { cn } from "@/lib/utils";
 
 interface LeaverTimelineProps {
   positions: LeaverPositionData[];
+  sourceCompany: string;
 }
 
-export function LeaverTimeline({ positions }: LeaverTimelineProps) {
+export function LeaverTimeline({ positions, sourceCompany }: LeaverTimelineProps) {
   if (positions.length === 0) return null;
 
   return (
@@ -18,6 +19,7 @@ export function LeaverTimeline({ positions }: LeaverTimelineProps) {
       <div className="space-y-0">
         {positions.map((pos, index) => {
           const isCurrent = index === 0;
+          const isSourceCompany = pos.company.toLowerCase() === sourceCompany.toLowerCase();
           const dateRange =
             pos.startDate || pos.endDate
               ? `${pos.startDate ?? "?"} - ${pos.endDate ?? "Present"}`
@@ -28,13 +30,15 @@ export function LeaverTimeline({ positions }: LeaverTimelineProps) {
               key={`${pos.company}-${pos.title}-${index}`}
               className={cn("relative pl-6", index < positions.length - 1 ? "pb-4" : "pb-0")}
             >
-              {/* Timeline dot */}
+              {/* Timeline dot: black = current, blue = source company, open = other */}
               <div
                 className={cn(
                   "absolute left-0 top-[5px] size-3 rounded-full border-2",
                   isCurrent
                     ? "border-primary bg-primary"
-                    : "border-muted-foreground bg-background",
+                    : isSourceCompany
+                      ? "border-blue-500 bg-blue-500"
+                      : "border-muted-foreground bg-background",
                 )}
               />
 

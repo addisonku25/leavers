@@ -27,6 +27,7 @@ interface LeaverModalProps {
   role: string;
   company: string;
   count: number;
+  sourceCompany: string;
   returnTo: string;
 }
 
@@ -37,6 +38,7 @@ export function LeaverModal({
   role,
   company,
   count,
+  sourceCompany,
   returnTo,
 }: LeaverModalProps) {
   const [data, setData] = useState<LeaverModalData | null>(null);
@@ -115,6 +117,7 @@ export function LeaverModal({
               leaver={visibleLeavers[0]}
               isAuthenticated={isAuthenticated}
               showBlurredName={!isAuthenticated}
+              sourceCompany={sourceCompany}
             />
 
             {/* Remaining visible leavers */}
@@ -128,6 +131,7 @@ export function LeaverModal({
                         leaver={leaver}
                         isAuthenticated={isAuthenticated}
                         showBlurredName={false}
+                        sourceCompany={sourceCompany}
                       />
                     </div>
                   ))}
@@ -156,10 +160,12 @@ function LeaverCard({
   leaver,
   isAuthenticated,
   showBlurredName,
+  sourceCompany,
 }: {
   leaver: PublicLeaver | AuthenticatedLeaver;
   isAuthenticated: boolean;
   showBlurredName: boolean;
+  sourceCompany: string;
 }) {
   const hasName = "name" in leaver;
 
@@ -182,13 +188,14 @@ function LeaverCard({
             href={(leaver as AuthenticatedLeaver).linkedinUrl!}
             target="_blank"
             rel="noopener noreferrer"
-            className="shrink-0 text-muted-foreground hover:text-foreground transition-colors"
+            className="inline-flex items-center gap-1 shrink-0 text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
-            <ExternalLink className="size-4" />
+            LinkedIn
+            <ExternalLink className="size-3.5" />
           </a>
         )}
       </div>
-      <LeaverTimeline positions={leaver.positions} />
+      <LeaverTimeline positions={leaver.positions} sourceCompany={sourceCompany} />
     </div>
   );
 }
