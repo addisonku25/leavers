@@ -105,7 +105,37 @@ function SankeySVG({
       links: data.links.map((l) => ({ ...l })),
     };
 
-    return generator(graph);
+    const result = generator(graph);
+
+    // Post-process: reorder source node's outgoing link y0 positions
+    // so they match the top-to-bottom order of target company nodes.
+    // This eliminates left-side path crossings.
+    const sourceNode = result.nodes.find(
+      (n) => (n as unknown as SankeyNode).category === "source",
+    );
+    if (sourceNode) {
+      const outLinks = (
+        sourceNode as unknown as { sourceLinks: Array<typeof result.links[number]> }
+      ).sourceLinks;
+      if (outLinks && outLinks.length > 1) {
+        // Sort by target node's vertical center (top to bottom)
+        const sorted = [...outLinks].sort((a, b) => {
+          const tgtA = a.target as unknown as LayoutNode;
+          const tgtB = b.target as unknown as LayoutNode;
+          const yA = ((tgtA.y0 ?? 0) + (tgtA.y1 ?? 0)) / 2;
+          const yB = ((tgtB.y0 ?? 0) + (tgtB.y1 ?? 0)) / 2;
+          return yA - yB;
+        });
+        // Reassign y0 positions sequentially on the source node
+        let currentY0 = sourceNode.y0 ?? 0;
+        for (const link of sorted) {
+          (link as unknown as { y0: number }).y0 = currentY0 + (link.width ?? 0) / 2;
+          currentY0 += link.width ?? 0;
+        }
+      }
+    }
+
+    return result;
   }, [data, width, height]);
 
   // Resolve node index from layout when card-initiated (nodeIndex is null)
