@@ -14,6 +14,8 @@ interface CompanyCardProps {
   isPromoted?: boolean;
   isDimmed?: boolean;
   highlightedRole?: string | null;
+  onRoleClick?: (role: string, migrationId: string) => void;
+  migrationIds?: Map<string, string>;
 }
 
 export function CompanyCard({
@@ -21,6 +23,8 @@ export function CompanyCard({
   isPromoted = false,
   isDimmed = false,
   highlightedRole = null,
+  onRoleClick,
+  migrationIds,
 }: CompanyCardProps) {
   return (
     <Card
@@ -39,7 +43,12 @@ export function CompanyCard({
         </CardAction>
       </CardHeader>
       <CardContent>
-        <RoleList roles={data.roles} highlightedRole={highlightedRole} />
+        <RoleList
+          roles={data.roles}
+          highlightedRole={highlightedRole}
+          onRoleClick={onRoleClick}
+          migrationIds={migrationIds}
+        />
       </CardContent>
     </Card>
   );

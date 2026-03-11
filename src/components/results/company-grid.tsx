@@ -9,6 +9,8 @@ import { CompanyCard } from "./company-card";
 
 interface CompanyGridProps {
   companies: CompanyCardData[];
+  onRoleClick?: (role: string, migrationId: string, company: string, count: number) => void;
+  migrationsByCompany?: Map<string, Map<string, string>>;
 }
 
 export interface ReorderedCard {
@@ -91,7 +93,7 @@ export function reorderCards(
   ];
 }
 
-export function CompanyGrid({ companies }: CompanyGridProps) {
+export function CompanyGrid({ companies, onRoleClick, migrationsByCompany }: CompanyGridProps) {
   const { state } = useDrillDown();
   const sectionRef = useRef<HTMLDivElement>(null);
   const prevTypeRef = useRef<typeof state.type>(null);
@@ -132,6 +134,15 @@ export function CompanyGrid({ companies }: CompanyGridProps) {
                 isPromoted={isPromoted}
                 isDimmed={isDimmed}
                 highlightedRole={highlightedRole}
+                onRoleClick={
+                  onRoleClick
+                    ? (role, migrationId) => {
+                        const roleEntry = company.roles.find((r) => r.role === role);
+                        onRoleClick(role, migrationId, company.company, roleEntry?.count ?? 0);
+                      }
+                    : undefined
+                }
+                migrationIds={migrationsByCompany?.get(company.company)}
               />
             </motion.div>
           ))}

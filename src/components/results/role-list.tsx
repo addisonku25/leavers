@@ -15,12 +15,16 @@ interface RoleListProps {
   roles: RoleEntry[];
   maxVisible?: number;
   highlightedRole?: string | null;
+  onRoleClick?: (role: string, migrationId: string) => void;
+  migrationIds?: Map<string, string>;
 }
 
 export function RoleList({
   roles,
   maxVisible = 3,
   highlightedRole = null,
+  onRoleClick,
+  migrationIds,
 }: RoleListProps) {
   const [expanded, setExpanded] = useState(false);
   const autoExpandedRef = useRef(false);
@@ -54,8 +58,19 @@ export function RoleList({
       {visibleRoles.map((entry) => (
         <div
           key={entry.role}
+          role={onRoleClick ? "button" : undefined}
+          tabIndex={onRoleClick ? 0 : undefined}
+          onClick={() => onRoleClick?.(entry.role, migrationIds?.get(entry.role) ?? "")}
+          onKeyDown={(e) => {
+            if (onRoleClick && (e.key === "Enter" || e.key === " ")) {
+              e.preventDefault();
+              onRoleClick(entry.role, migrationIds?.get(entry.role) ?? "");
+            }
+          }}
           className={cn(
             "flex items-center justify-between gap-2",
+            onRoleClick &&
+              "cursor-pointer hover:underline decoration-muted-foreground/50 underline-offset-2",
             entry.role === highlightedRole &&
               "bg-blue-50 dark:bg-blue-950/30 rounded-md px-1 -mx-1 transition-colors duration-300",
           )}
