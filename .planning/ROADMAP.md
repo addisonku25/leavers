@@ -96,7 +96,7 @@ Plans:
 
 - [ ] **Phase 5: Data Model Expansion** - New leavers table, extended types, and mock provider for individual career data
 - [x] **Phase 6: Sankey Click Interactions** - Click-to-scroll, highlight, filter, and toggle between Sankey diagram and company cards (completed 2026-03-07)
-- [ ] **Phase 7: Leaver Detail Modal** - Clickable roles opening auth-gated modal with individual career histories
+- [x] **Phase 7: Leaver Detail Modal** - Clickable roles opening auth-gated modal with individual career histories (completed 2026-03-11)
 - [ ] **Phase 8: Polish & Bidirectional Sync** - Card-to-Sankey highlighting and interaction refinements
 
 ## Phase Details
@@ -141,7 +141,7 @@ Plans:
   3. Each leaver in the modal shows their transition date and full career history as a timeline
   4. Authenticated users see leaver names and LinkedIn profile links; unauthenticated users see blurred placeholders with a sign-up call-to-action
   5. Individual leaver data loads on modal open (not during initial search), and PII is stripped server-side before reaching unauthenticated clients
-**Plans:** 2 plans
+**Plans:** 2/2 plans complete
 
 Plans:
 - [x] 07-01-PLAN.md — Server action with auth-aware PII stripping, migration ID plumbing, privacy policy update
@@ -169,5 +169,5 @@ Phases execute in numeric order: 5 -> 6 -> 7 -> 8
 | 4. Auth, Saved Searches & Compliance | v1.0 | 5/5 | Complete | 2026-03-06 |
 | 5. Data Model Expansion | v1.1 | 2/2 | Complete | 2026-03-07 |
 | 6. Sankey Click Interactions | v1.1 | 2/2 | Complete | 2026-03-07 |
-| 7. Leaver Detail Modal | v1.1 | 1/2 | In progress | - |
+| 7. Leaver Detail Modal | 2/2 | Complete   | 2026-03-11 | - |
 | 8. Polish & Bidirectional Sync | v1.1 | 0/0 | Not started | - |

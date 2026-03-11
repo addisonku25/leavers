@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Deep Dive
 status: executing
-stopped_at: Completed 07-01 Leaver Data Layer
-last_updated: "2026-03-11T18:39:43Z"
+stopped_at: Completed 07-02 Modal UI
+last_updated: "2026-03-11T19:12:11.687Z"
 last_activity: 2026-03-11 -- Completed 07-01 Leaver Data Layer
 progress:
   total_phases: 8
-  completed_phases: 6
+  completed_phases: 7
   total_plans: 19
-  completed_plans: 18
-  percent: 95
+  completed_plans: 19
+  percent: 100
 ---
 
 # Project State
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-07)
 
 **Core value:** Show users concrete evidence of where people like them ended up -- turning career anxiety into actionable intelligence.
-**Current focus:** Phase 7 - Leaver Detail Modal (IN PROGRESS)
+**Current focus:** Phase 7 - Leaver Detail Modal (COMPLETE)
 
 ## Current Position
 
-Phase: 7 of 8 (Leaver Detail Modal) -- IN PROGRESS
-Plan: 2 of 2 (Modal UI) -- NEXT
-Status: Executing
-Last activity: 2026-03-11 -- Completed 07-01 Leaver Data Layer
+Phase: 7 of 8 (Leaver Detail Modal) -- COMPLETE
+Plan: 2 of 2 (Modal UI) -- DONE
+Status: Phase 7 complete, Phase 8 next
+Last activity: 2026-03-11 -- Completed 07-02 Modal UI
 
-Progress: [█████████░] 95% (18/19 plans across all milestones)
+Progress: [██████████] 100% (19/19 plans across all milestones)
 
 ## Performance Metrics
 
@@ -58,6 +58,7 @@ Progress: [█████████░] 95% (18/19 plans across all milestone
 | Phase 06 P01 | 3min | 2 tasks | 5 files |
 | Phase 06 P02 | 15min | 2 tasks | 5 files |
 | Phase 07 P01 | 3min | 2 tasks | 6 files |
+| Phase 07 P02 | 8min | 3 tasks | 10 files |
 
 ## Accumulated Context
 
@@ -86,6 +87,7 @@ Recent decisions affecting current work:
 - [Phase 06]: mergeRolesByExactName replaces mergeRolesByNormalizedTitle -- roles must not collapse by seniority prefix
 - [Phase 07]: PII fields omitted entirely (not nulled) from unauthenticated responses per PRIV-05
 - [Phase 07]: Response types exported for downstream modal UI consumption
+- [Phase 07]: sourceCompany prop threaded through modal/timeline for 3-color dot system
 
 ### Pending Todos
 
@@ -99,6 +101,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-11T18:39:43Z
-Stopped at: Completed 07-01 Leaver Data Layer
-Resume file: .planning/phases/07-leaver-detail-modal/07-02-PLAN.md
+Last session: 2026-03-11T19:12:11.684Z
+Stopped at: Completed 07-02 Modal UI
+Resume file: None

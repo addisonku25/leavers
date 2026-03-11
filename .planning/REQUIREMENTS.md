@@ -62,11 +62,11 @@ Requirements for Deep Dive milestone. Continues from v1 numbering.
 
 ### Leaver Details
 
-- [ ] **LVRD-01**: Roles in company cards are visually clickable (button/link style)
-- [ ] **LVRD-02**: Clicking a role opens a modal showing individual leavers who made that transition
-- [ ] **LVRD-03**: Leaver modal shows transition date and full career history for each leaver
+- [x] **LVRD-01**: Roles in company cards are visually clickable (button/link style)
+- [x] **LVRD-02**: Clicking a role opens a modal showing individual leavers who made that transition
+- [x] **LVRD-03**: Leaver modal shows transition date and full career history for each leaver
 - [x] **LVRD-04**: Leaver modal shows name and LinkedIn profile link for authenticated users only
-- [ ] **LVRD-05**: Unauthenticated users see blurred name/LinkedIn with sign-up CTA overlay
+- [x] **LVRD-05**: Unauthenticated users see blurred name/LinkedIn with sign-up CTA overlay
 - [x] **LVRD-06**: Individual leaver data is stored during initial search (BrightData already returns it)
 
 ### Data Model
@@ -147,11 +147,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SANK-03 | Phase 6 | Complete |
 | SANK-04 | Phase 6 | Complete |
 | SANK-05 | Phase 8 | Pending |
-| LVRD-01 | Phase 7 | Pending |
-| LVRD-02 | Phase 7 | Pending |
-| LVRD-03 | Phase 7 | Pending |
+| LVRD-01 | Phase 7 | Complete |
+| LVRD-02 | Phase 7 | Complete |
+| LVRD-03 | Phase 7 | Complete |
 | LVRD-04 | Phase 7 | Complete |
-| LVRD-05 | Phase 7 | Pending |
+| LVRD-05 | Phase 7 | Complete |
 | LVRD-06 | Phase 7 | Complete |
 | DMOD-01 | Phase 5 | Complete |
 | DMOD-02 | Phase 5 | Complete |
