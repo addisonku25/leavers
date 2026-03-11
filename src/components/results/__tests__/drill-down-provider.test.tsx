@@ -121,6 +121,54 @@ describe("drillDownReducer", () => {
       nodeIndex: 9,
     });
   });
+
+  it("SELECT_COMPANY with null nodeIndex sets state correctly", () => {
+    const action: DrillDownAction = {
+      type: "SELECT_COMPANY",
+      company: "Google",
+      nodeIndex: null,
+    };
+    const result = drillDownReducer(initialState, action);
+    expect(result).toEqual({
+      type: "company",
+      value: "Google",
+      nodeIndex: null,
+    });
+  });
+
+  it("SELECT_COMPANY with null nodeIndex toggles off when same company selected", () => {
+    const currentState: DrillDownState = {
+      type: "company",
+      value: "Google",
+      nodeIndex: null,
+    };
+    const action: DrillDownAction = {
+      type: "SELECT_COMPANY",
+      company: "Google",
+      nodeIndex: null,
+    };
+    const result = drillDownReducer(currentState, action);
+    expect(result).toEqual(initialState);
+  });
+
+  it("SELECT_COMPANY with null nodeIndex switches to different company", () => {
+    const currentState: DrillDownState = {
+      type: "company",
+      value: "Google",
+      nodeIndex: null,
+    };
+    const action: DrillDownAction = {
+      type: "SELECT_COMPANY",
+      company: "Meta",
+      nodeIndex: null,
+    };
+    const result = drillDownReducer(currentState, action);
+    expect(result).toEqual({
+      type: "company",
+      value: "Meta",
+      nodeIndex: null,
+    });
+  });
 });
 
 describe("useDrillDown", () => {
