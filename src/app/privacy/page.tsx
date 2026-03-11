@@ -8,7 +8,7 @@ export default function PrivacyPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-16">
       <h1 className="mb-2 text-3xl font-bold">Privacy Policy</h1>
-      <p className="mb-8 text-sm text-gray-500">Last updated: March 6, 2026</p>
+      <p className="mb-8 text-sm text-gray-500">Last updated: March 11, 2026</p>
 
       <section className="mb-8">
         <h2 className="mb-3 text-xl font-semibold">Information We Collect</h2>
@@ -51,11 +51,35 @@ export default function PrivacyPage() {
       <section className="mb-8">
         <h2 className="mb-3 text-xl font-semibold">Data Aggregation</h2>
         <p className="mb-4 text-gray-700">
-          All results displayed on Leavers are aggregated and anonymized. No
-          individual profiles are shown. Career migration patterns represent
-          statistical trends across groups of professionals, not the movements
-          of any specific person.
+          Leavers displays aggregated career migration patterns showing
+          statistical trends across groups of professionals. These aggregate
+          insights -- including destination companies, role breakdowns, and flow
+          visualizations -- are available to all users without requiring an
+          account.
         </p>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="mb-3 text-xl font-semibold">Individual Career Data</h2>
+        <p className="mb-2 text-gray-700">
+          For signed-in users, Leavers displays individual career transition
+          details including names and LinkedIn profile links. This data is
+          sourced from publicly available professional profiles.
+        </p>
+        <ul className="mb-4 list-disc space-y-1 pl-6 text-gray-700">
+          <li>
+            <strong>Career history data</strong> (companies, titles, dates) is
+            visible to all users
+          </li>
+          <li>
+            <strong>Personal identifiers</strong> (names, LinkedIn URLs) are
+            only shown to authenticated users with an active session
+          </li>
+          <li>
+            This auth-gating ensures that personally identifiable information is
+            not exposed to anonymous visitors
+          </li>
+        </ul>
       </section>
 
       <section className="mb-8">

@@ -78,6 +78,7 @@ export default async function ResultsPage({ params }: ResultsPageProps) {
 
   // Results state -- display grouped company cards with role breakdowns
   const migrationData = results.map((r) => ({
+    id: r.id,
     destinationCompany: r.destinationCompany,
     destinationRole: r.destinationRole,
     sourceRole: r.sourceRole,

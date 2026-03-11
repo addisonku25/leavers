@@ -18,9 +18,9 @@ describe("legal-pages", () => {
     expect(screen.getByText(/Data Sources/i)).toBeDefined();
   });
 
-  it("privacy page does not mention LinkedIn", () => {
-    const { container } = render(<PrivacyPage />);
-    const textContent = container.textContent ?? "";
-    expect(textContent.toLowerCase()).not.toContain("linkedin");
+  it("privacy page covers individual career data with auth-gating", () => {
+    render(<PrivacyPage />);
+    expect(screen.getByText("Individual Career Data")).toBeDefined();
+    expect(screen.getByText(/authenticated users/i)).toBeDefined();
   });
 });

@@ -2,6 +2,7 @@ import { compareSeniority, type SeniorityComparison } from "./seniority";
 
 /** Migration record shape expected by data transformation functions. */
 export interface MigrationRecord {
+  id: string;
   destinationCompany: string;
   destinationRole: string;
   sourceRole?: string | null;
