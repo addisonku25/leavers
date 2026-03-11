@@ -4,13 +4,13 @@ milestone: v1.1
 milestone_name: Deep Dive
 status: completed
 stopped_at: Phase 8 context gathered
-last_updated: "2026-03-11T19:23:14.799Z"
-last_activity: 2026-03-11 -- Completed 07-02 Modal UI
+last_updated: "2026-03-11T19:47:43.546Z"
+last_activity: 2026-03-11 -- Completed 08-01 Bidirectional Sync
 progress:
   total_phases: 8
-  completed_phases: 7
-  total_plans: 19
-  completed_plans: 19
+  completed_phases: 8
+  total_plans: 20
+  completed_plans: 20
   percent: 100
 ---
 
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-07)
 
 **Core value:** Show users concrete evidence of where people like them ended up -- turning career anxiety into actionable intelligence.
-**Current focus:** Phase 7 - Leaver Detail Modal (COMPLETE)
+**Current focus:** v1.1 Deep Dive milestone COMPLETE
 
 ## Current Position
 
-Phase: 7 of 8 (Leaver Detail Modal) -- COMPLETE
-Plan: 2 of 2 (Modal UI) -- DONE
-Status: Phase 7 complete, Phase 8 next
-Last activity: 2026-03-11 -- Completed 07-02 Modal UI
+Phase: 8 of 8 (Polish & Bidirectional Sync) -- COMPLETE
+Plan: 1 of 1 (Bidirectional Sync) -- DONE
+Status: v1.1 milestone complete -- all 20 plans across 8 phases done
+Last activity: 2026-03-11 -- Completed 08-01 Bidirectional Sync
 
-Progress: [██████████] 100% (19/19 plans across all milestones)
+Progress: [██████████] 100% (20/20 plans across all milestones)
 
 ## Performance Metrics
 
@@ -59,6 +59,7 @@ Progress: [██████████] 100% (19/19 plans across all mileston
 | Phase 06 P02 | 15min | 2 tasks | 5 files |
 | Phase 07 P01 | 3min | 2 tasks | 6 files |
 | Phase 07 P02 | 8min | 3 tasks | 10 files |
+| Phase 08 P01 | 15min | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -88,6 +89,9 @@ Recent decisions affecting current work:
 - [Phase 07]: PII fields omitted entirely (not nulled) from unauthenticated responses per PRIV-05
 - [Phase 07]: Response types exported for downstream modal UI consumption
 - [Phase 07]: sourceCompany prop threaded through modal/timeline for 3-color dot system
+- [Phase 08]: nodeIndex required in DrillDownState but optional in DrillDownAction -- cards dispatch without knowing node index
+- [Phase 08]: Sankey resolves nodeIndex via useMemo lookup on layout.nodes when action provides null
+- [Phase 08]: Scroll triggers on any selection change rather than gating on null-to-non-null transition
 
 ### Pending Todos
 
@@ -101,6 +105,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-11T19:23:14.791Z
-Stopped at: Phase 8 context gathered
-Resume file: .planning/phases/08-polish-bidirectional-sync/08-CONTEXT.md
+Last session: 2026-03-11
+Stopped at: Completed 08-01 Bidirectional Sync -- v1.1 milestone complete
+Resume file: .planning/phases/08-polish-bidirectional-sync/08-01-SUMMARY.md

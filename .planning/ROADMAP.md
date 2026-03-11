@@ -94,10 +94,10 @@ Plans:
 
 **Milestone Goal:** Add interactive drill-down from Sankey diagram and company cards into individual leaver details, turning aggregate patterns into auditable evidence.
 
-- [ ] **Phase 5: Data Model Expansion** - New leavers table, extended types, and mock provider for individual career data
+- [x] **Phase 5: Data Model Expansion** - New leavers table, extended types, and mock provider for individual career data
 - [x] **Phase 6: Sankey Click Interactions** - Click-to-scroll, highlight, filter, and toggle between Sankey diagram and company cards (completed 2026-03-07)
 - [x] **Phase 7: Leaver Detail Modal** - Clickable roles opening auth-gated modal with individual career histories (completed 2026-03-11)
-- [ ] **Phase 8: Polish & Bidirectional Sync** - Card-to-Sankey highlighting and interaction refinements
+- [x] **Phase 8: Polish & Bidirectional Sync** - Card-to-Sankey highlighting and interaction refinements (completed 2026-03-11)
 
 ## Phase Details
 
@@ -154,10 +154,10 @@ Plans:
 **Success Criteria** (what must be TRUE):
   1. Clicking a company card highlights the corresponding company node in the Sankey diagram
   2. The highlight syncs bidirectionally -- clicking either side updates the other, and clearing one clears both
-**Plans:** 1 plan
+**Plans:** 1/1 plans complete
 
 Plans:
-- [ ] 08-01-PLAN.md — Bidirectional card-to-Sankey sync (optional nodeIndex, company name click target, scroll gating, Sankey node resolution)
+- [x] 08-01-PLAN.md — Bidirectional card-to-Sankey sync (optional nodeIndex, company name click target, scroll gating, Sankey node resolution)
 
 ## Progress
 
@@ -173,4 +173,4 @@ Phases execute in numeric order: 5 -> 6 -> 7 -> 8
 | 5. Data Model Expansion | v1.1 | 2/2 | Complete | 2026-03-07 |
 | 6. Sankey Click Interactions | v1.1 | 2/2 | Complete | 2026-03-07 |
 | 7. Leaver Detail Modal | 2/2 | Complete   | 2026-03-11 | - |
-| 8. Polish & Bidirectional Sync | v1.1 | 0/1 | Not started | - |
+| 8. Polish & Bidirectional Sync | 1/1 | Complete   | 2026-03-11 | - |
