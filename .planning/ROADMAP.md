@@ -145,7 +145,7 @@ Plans:
 
 Plans:
 - [x] 07-01-PLAN.md — Server action with auth-aware PII stripping, migration ID plumbing, privacy policy update
-- [ ] 07-02-PLAN.md — Modal UI (timeline, auth gate overlay), clickable roles, component wiring, visual verification
+- [x] 07-02-PLAN.md — Modal UI (timeline, auth gate overlay), clickable roles, component wiring, visual verification
 
 ### Phase 8: Polish & Bidirectional Sync
 **Goal**: Company cards and Sankey diagram stay visually synced in both directions for a cohesive drill-down experience
@@ -154,7 +154,10 @@ Plans:
 **Success Criteria** (what must be TRUE):
   1. Clicking a company card highlights the corresponding company node in the Sankey diagram
   2. The highlight syncs bidirectionally -- clicking either side updates the other, and clearing one clears both
-**Plans**: TBD
+**Plans:** 1 plan
+
+Plans:
+- [ ] 08-01-PLAN.md — Bidirectional card-to-Sankey sync (optional nodeIndex, company name click target, scroll gating, Sankey node resolution)
 
 ## Progress
 
@@ -170,4 +173,4 @@ Phases execute in numeric order: 5 -> 6 -> 7 -> 8
 | 5. Data Model Expansion | v1.1 | 2/2 | Complete | 2026-03-07 |
 | 6. Sankey Click Interactions | v1.1 | 2/2 | Complete | 2026-03-07 |
 | 7. Leaver Detail Modal | 2/2 | Complete   | 2026-03-11 | - |
-| 8. Polish & Bidirectional Sync | v1.1 | 0/0 | Not started | - |
+| 8. Polish & Bidirectional Sync | v1.1 | 0/1 | Not started | - |
