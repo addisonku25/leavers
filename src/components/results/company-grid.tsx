@@ -96,7 +96,6 @@ export function reorderCards(
 export function CompanyGrid({ companies, onRoleClick, migrationsByCompany }: CompanyGridProps) {
   const { state, dispatch } = useDrillDown();
   const sectionRef = useRef<HTMLDivElement>(null);
-  const prevTypeRef = useRef<typeof state.type>(null);
 
   const orderedCards = useMemo(
     () => reorderCards(companies, state),
@@ -113,13 +112,10 @@ export function CompanyGrid({ companies, onRoleClick, migrationsByCompany }: Com
   );
 
   useEffect(() => {
-    // Scroll to section when selection goes from null to non-null
-    // Only scroll for Sankey-initiated selections (nodeIndex is a number)
-    if (prevTypeRef.current === null && state.type !== null && state.nodeIndex !== null) {
-      sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-    prevTypeRef.current = state.type;
-  }, [state.type, state.nodeIndex]);
+    if (state.type === null) return;
+    // Scroll immediately so the smooth scroll and card reorder animation run together
+    sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [state.type, state.value]);
 
   return (
     <div>
