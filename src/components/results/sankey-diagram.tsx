@@ -64,7 +64,6 @@ function SankeySVG({
 }) {
   const [hoveredNode, setHoveredNode] = useState<number | null>(null);
   const { state: drillDown, dispatch } = useDrillDown();
-  const selectedNode = drillDown.nodeIndex;
 
   const layout = useMemo(() => {
     const generator = sankey<SankeyNode, SankeyLink>()
@@ -110,6 +109,19 @@ function SankeySVG({
 
     return generator(graph);
   }, [data, width, height]);
+
+  // Resolve node index from layout when card-initiated (nodeIndex is null)
+  const selectedNode = useMemo(() => {
+    if (drillDown.nodeIndex !== null) return drillDown.nodeIndex;
+    if (drillDown.value === null) return null;
+    const targetCategory = drillDown.type === "company" ? "company" : "destination";
+    const idx = layout.nodes.findIndex(
+      (n) =>
+        (n as unknown as SankeyNode).name === drillDown.value &&
+        (n as unknown as SankeyNode).category === targetCategory,
+    );
+    return idx >= 0 ? idx : null;
+  }, [drillDown.nodeIndex, drillDown.value, drillDown.type, layout.nodes]);
 
   const linkPathGenerator = sankeyLinkHorizontal();
 

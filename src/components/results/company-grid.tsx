@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useEffect } from "react";
+import { useMemo, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import type { CompanyCardData } from "@/lib/sankey-data";
 import type { DrillDownState } from "./drill-down-provider";
@@ -94,7 +94,7 @@ export function reorderCards(
 }
 
 export function CompanyGrid({ companies, onRoleClick, migrationsByCompany }: CompanyGridProps) {
-  const { state } = useDrillDown();
+  const { state, dispatch } = useDrillDown();
   const sectionRef = useRef<HTMLDivElement>(null);
   const prevTypeRef = useRef<typeof state.type>(null);
 
@@ -105,13 +105,21 @@ export function CompanyGrid({ companies, onRoleClick, migrationsByCompany }: Com
 
   const highlightedRole = state.type === "role" ? state.value : null;
 
+  const handleCompanyClick = useCallback(
+    (company: string) => {
+      dispatch({ type: "SELECT_COMPANY", company, nodeIndex: null });
+    },
+    [dispatch],
+  );
+
   useEffect(() => {
     // Scroll to section when selection goes from null to non-null
-    if (prevTypeRef.current === null && state.type !== null) {
+    // Only scroll for Sankey-initiated selections (nodeIndex is a number)
+    if (prevTypeRef.current === null && state.type !== null && state.nodeIndex !== null) {
       sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     }
     prevTypeRef.current = state.type;
-  }, [state.type]);
+  }, [state.type, state.nodeIndex]);
 
   return (
     <div>
@@ -134,6 +142,7 @@ export function CompanyGrid({ companies, onRoleClick, migrationsByCompany }: Com
                 isPromoted={isPromoted}
                 isDimmed={isDimmed}
                 highlightedRole={highlightedRole}
+                onCompanyClick={handleCompanyClick}
                 onRoleClick={
                   onRoleClick
                     ? (role, migrationId) => {

@@ -15,6 +15,7 @@ interface CompanyCardProps {
   isDimmed?: boolean;
   highlightedRole?: string | null;
   onRoleClick?: (role: string, migrationId: string) => void;
+  onCompanyClick?: (company: string) => void;
   migrationIds?: Map<string, string>;
 }
 
@@ -24,6 +25,7 @@ export function CompanyCard({
   isDimmed = false,
   highlightedRole = null,
   onRoleClick,
+  onCompanyClick,
   migrationIds,
 }: CompanyCardProps) {
   return (
@@ -35,7 +37,19 @@ export function CompanyCard({
       )}
     >
       <CardHeader>
-        <CardTitle>{data.company}</CardTitle>
+        <CardTitle>
+          {onCompanyClick ? (
+            <button
+              type="button"
+              onClick={() => onCompanyClick(data.company)}
+              className="hover:underline decoration-muted-foreground/50 underline-offset-2 cursor-pointer transition-[text-decoration] duration-150"
+            >
+              {data.company}
+            </button>
+          ) : (
+            data.company
+          )}
+        </CardTitle>
         <CardAction>
           <span className="flex size-8 items-center justify-center rounded-full bg-primary/10 text-sm font-semibold text-primary">
             {data.totalCount}

@@ -11,8 +11,8 @@ export interface DrillDownState {
 }
 
 export type DrillDownAction =
-  | { type: "SELECT_COMPANY"; company: string; nodeIndex: number }
-  | { type: "SELECT_ROLE"; role: string; nodeIndex: number }
+  | { type: "SELECT_COMPANY"; company: string; nodeIndex?: number | null }
+  | { type: "SELECT_ROLE"; role: string; nodeIndex?: number | null }
   | { type: "CLEAR" };
 
 const INITIAL_STATE: DrillDownState = {
@@ -31,14 +31,14 @@ export function drillDownReducer(
       if (state.type === "company" && state.value === action.company) {
         return INITIAL_STATE;
       }
-      return { type: "company", value: action.company, nodeIndex: action.nodeIndex };
+      return { type: "company", value: action.company, nodeIndex: action.nodeIndex ?? null };
     }
     case "SELECT_ROLE": {
       // Toggle off if same role already selected
       if (state.type === "role" && state.value === action.role) {
         return INITIAL_STATE;
       }
-      return { type: "role", value: action.role, nodeIndex: action.nodeIndex };
+      return { type: "role", value: action.role, nodeIndex: action.nodeIndex ?? null };
     }
     case "CLEAR":
       return INITIAL_STATE;
