@@ -141,7 +141,11 @@ Plans:
   3. Each leaver in the modal shows their transition date and full career history as a timeline
   4. Authenticated users see leaver names and LinkedIn profile links; unauthenticated users see blurred placeholders with a sign-up call-to-action
   5. Individual leaver data loads on modal open (not during initial search), and PII is stripped server-side before reaching unauthenticated clients
-**Plans**: TBD
+**Plans:** 2 plans
+
+Plans:
+- [ ] 07-01-PLAN.md — Server action with auth-aware PII stripping, migration ID plumbing, privacy policy update
+- [ ] 07-02-PLAN.md — Modal UI (timeline, auth gate overlay), clickable roles, component wiring, visual verification
 
 ### Phase 8: Polish & Bidirectional Sync
 **Goal**: Company cards and Sankey diagram stay visually synced in both directions for a cohesive drill-down experience
@@ -165,5 +169,5 @@ Phases execute in numeric order: 5 -> 6 -> 7 -> 8
 | 4. Auth, Saved Searches & Compliance | v1.0 | 5/5 | Complete | 2026-03-06 |
 | 5. Data Model Expansion | v1.1 | 2/2 | Complete | 2026-03-07 |
 | 6. Sankey Click Interactions | v1.1 | 2/2 | Complete | 2026-03-07 |
-| 7. Leaver Detail Modal | v1.1 | 0/0 | Not started | - |
+| 7. Leaver Detail Modal | v1.1 | 0/2 | Planning complete | - |
 | 8. Polish & Bidirectional Sync | v1.1 | 0/0 | Not started | - |
