@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Deep Dive
 status: executing
-stopped_at: Phase 7 context gathered
-last_updated: "2026-03-11T18:21:02.973Z"
-last_activity: 2026-03-07 -- Completed 06-02 Card Response to Sankey Selection
+stopped_at: Completed 07-01 Leaver Data Layer
+last_updated: "2026-03-11T18:39:43Z"
+last_activity: 2026-03-11 -- Completed 07-01 Leaver Data Layer
 progress:
   total_phases: 8
   completed_phases: 6
-  total_plans: 17
-  completed_plans: 17
-  percent: 100
+  total_plans: 19
+  completed_plans: 18
+  percent: 95
 ---
 
 # Project State
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-07)
 
 **Core value:** Show users concrete evidence of where people like them ended up -- turning career anxiety into actionable intelligence.
-**Current focus:** Phase 6 - Sankey Click Interactions (COMPLETE)
+**Current focus:** Phase 7 - Leaver Detail Modal (IN PROGRESS)
 
 ## Current Position
 
-Phase: 6 of 8 (Sankey Click Interactions) -- COMPLETE
-Plan: 2 of 2 (Card Response to Sankey Selection) -- COMPLETE
+Phase: 7 of 8 (Leaver Detail Modal) -- IN PROGRESS
+Plan: 2 of 2 (Modal UI) -- NEXT
 Status: Executing
-Last activity: 2026-03-07 -- Completed 06-02 Card Response to Sankey Selection
+Last activity: 2026-03-11 -- Completed 07-01 Leaver Data Layer
 
-Progress: [██████████] 100% (17/17 plans across all milestones)
+Progress: [█████████░] 95% (18/19 plans across all milestones)
 
 ## Performance Metrics
 
@@ -57,6 +57,7 @@ Progress: [██████████] 100% (17/17 plans across all mileston
 | Phase 05 P02 | 3min | 2 tasks | 4 files |
 | Phase 06 P01 | 3min | 2 tasks | 5 files |
 | Phase 06 P02 | 15min | 2 tasks | 5 files |
+| Phase 07 P01 | 3min | 2 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -83,6 +84,8 @@ Recent decisions affecting current work:
 - [Phase 06]: Pure reorderCards function extracted for unit testability outside React rendering
 - [Phase 06]: motion/react layout prop for card position animations instead of manual CSS transitions
 - [Phase 06]: mergeRolesByExactName replaces mergeRolesByNormalizedTitle -- roles must not collapse by seniority prefix
+- [Phase 07]: PII fields omitted entirely (not nulled) from unauthenticated responses per PRIV-05
+- [Phase 07]: Response types exported for downstream modal UI consumption
 
 ### Pending Todos
 
@@ -96,6 +99,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-11T18:21:02.966Z
-Stopped at: Phase 7 context gathered
-Resume file: .planning/phases/07-leaver-detail-modal/07-CONTEXT.md
+Last session: 2026-03-11T18:39:43Z
+Stopped at: Completed 07-01 Leaver Data Layer
+Resume file: .planning/phases/07-leaver-detail-modal/07-02-PLAN.md

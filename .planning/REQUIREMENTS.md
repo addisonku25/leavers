@@ -65,9 +65,9 @@ Requirements for Deep Dive milestone. Continues from v1 numbering.
 - [ ] **LVRD-01**: Roles in company cards are visually clickable (button/link style)
 - [ ] **LVRD-02**: Clicking a role opens a modal showing individual leavers who made that transition
 - [ ] **LVRD-03**: Leaver modal shows transition date and full career history for each leaver
-- [ ] **LVRD-04**: Leaver modal shows name and LinkedIn profile link for authenticated users only
+- [x] **LVRD-04**: Leaver modal shows name and LinkedIn profile link for authenticated users only
 - [ ] **LVRD-05**: Unauthenticated users see blurred name/LinkedIn with sign-up CTA overlay
-- [ ] **LVRD-06**: Individual leaver data is stored during initial search (BrightData already returns it)
+- [x] **LVRD-06**: Individual leaver data is stored during initial search (BrightData already returns it)
 
 ### Data Model
 
@@ -78,8 +78,8 @@ Requirements for Deep Dive milestone. Continues from v1 numbering.
 
 ### Privacy Update
 
-- [ ] **PRIV-04**: Privacy policy updated to cover display of individual career data with auth-gating
-- [ ] **PRIV-05**: Auth-gated PII (name, LinkedIn URL) is stripped server-side before reaching unauthenticated clients
+- [x] **PRIV-04**: Privacy policy updated to cover display of individual career data with auth-gating
+- [x] **PRIV-05**: Auth-gated PII (name, LinkedIn URL) is stripped server-side before reaching unauthenticated clients
 
 ## v2 Requirements
 
@@ -150,15 +150,15 @@ Which phases cover which requirements. Updated during roadmap creation.
 | LVRD-01 | Phase 7 | Pending |
 | LVRD-02 | Phase 7 | Pending |
 | LVRD-03 | Phase 7 | Pending |
-| LVRD-04 | Phase 7 | Pending |
+| LVRD-04 | Phase 7 | Complete |
 | LVRD-05 | Phase 7 | Pending |
-| LVRD-06 | Phase 7 | Pending |
+| LVRD-06 | Phase 7 | Complete |
 | DMOD-01 | Phase 5 | Complete |
 | DMOD-02 | Phase 5 | Complete |
 | DMOD-03 | Phase 5 | Complete |
 | DMOD-04 | Phase 5 | Complete |
-| PRIV-04 | Phase 7 | Pending |
-| PRIV-05 | Phase 7 | Pending |
+| PRIV-04 | Phase 7 | Complete |
+| PRIV-05 | Phase 7 | Complete |
 
 **Coverage:**
 - v1 requirements: 23 total, 23 mapped, 0 unmapped
